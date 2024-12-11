@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function LongPage() {
     return (
       <div style={{display:"flex", padding: '2rem', flexDirection:"column", margin: "0 auto", padding: "10px" }}>
-        <img src="" height="100px" alt="temp" />
+        <img src="/applicare.png" height="100px" alt="temp" />
         <Link to="/"><button>Back</button></Link>
         <p>
           {`lorem ipsum`.repeat(10000)}

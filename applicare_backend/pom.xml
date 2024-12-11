@@ -12,7 +12,7 @@
 	<artifactId>applicare</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>applicare</name>
-	<description>Demo project for Spring Boot</description>
+	<description>AppliCare, THE Swiss website to manage your job applications.</description>
 	<url/>
 	<licenses>
 		<license/>

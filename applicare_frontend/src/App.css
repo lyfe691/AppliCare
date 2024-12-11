@@ -201,7 +201,7 @@
   }
 
   .nav-toggle.open span:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
+    transform: translateY(9.9px) rotate(45deg);
   }
 
   .nav-toggle.open span:nth-child(2) {
@@ -209,6 +209,6 @@
   }
 
   .nav-toggle.open span:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-8.9px) rotate(-45deg);
   }
 }

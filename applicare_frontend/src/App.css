@@ -1,3 +1,7 @@
+/******************
+ * ROOT VARIABLES *
+ ******************/
+
 :root {
   /* Navigation vars */
   --nav-bg-color: rgba(255, 255, 255, 0.8); 
@@ -22,9 +26,9 @@
   --footer-icon-color: #b2b2b292; 
 }
 
-/**************
- * LAYOUT CSS *
- **************/
+/**********
+ * LAYOUT *
+ **********/
 
 .layout {
   display: flex;
@@ -120,7 +124,7 @@
   height: 3px;
   background-color: var(--nav-underline-color);
   transition: width var(--transition-speed) ease, opacity var(--transition-speed) ease;
-  opacity: 0;
+  opacity: 0; 
 }
 
 .nav-link:hover,

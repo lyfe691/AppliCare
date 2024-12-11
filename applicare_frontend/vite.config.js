@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://localhost:8080' // conntect to the backend though the port. Although i have to make sure that i allow the origin. 
+      '/api': 'http://localhost:8080' // conntect to the backend through the port. Although i have to make sure that i allow the origin. 
     }
   }
 })

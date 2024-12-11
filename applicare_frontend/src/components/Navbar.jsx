@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { SettingsIcon } from "lucide-react";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,6 +73,15 @@ function Navbar() {
             >
               Long Page
             </Link>
+          </li>
+          <li className="nav-item" style={{ "--i:": 4}}>
+              <Link>
+                <button className="nav-auth-button"
+            
+                >
+                  Login
+                </button> 
+              </Link>
           </li>
         </ul>
       </nav>

@@ -15,7 +15,7 @@ function TestConnection() {
       const response = await fetch('/api/test-mongo');
       if (!response.ok) {
         const errorData = await response.text();
-        throw new Error(`HTTP error! status: ${response.status} - ${errorData}`);
+        throw new Error(`HTTP error! status: ${response.status} - ${errorData}, start the backend to resovle. `);
       }
       const jsonData = await response.json();
       setData(jsonData);

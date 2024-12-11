@@ -1,0 +1,25 @@
+{
+    // config file to start the apps faster in vscode.
+    // should work if cloned. 
+    "version": "0.2.0",
+    "configurations": [
+        {
+            
+            // run the frontend
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "pplicare_frontend",
+            "command": "npm run dev",
+            "cwd": "${workspaceFolder}/applicare_frontend"
+        },
+        {
+
+            // run the backend
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "applicare_backend",
+            "command": "mvn spring-boot:run",
+            "cwd": "${workspaceFolder}/applicare_backend" 
+        }
+    ]
+}

@@ -1,0 +1,214 @@
+:root {
+  --nav-bg-color: rgba(255, 255, 255, 0.2);
+  --blur-amount: 20px;
+  --border-color: rgba(143, 138, 138, 0.1);
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --nav-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  --nav-text-color: #ffffff;
+  --nav-text-hover-color: #dddddd;
+  --nav-underline-color: #ffffff;
+  --font-size: 1rem;
+  --font-weight: 600;
+  --transition-speed: 0.3s;
+  --brand-size: 2rem;
+}
+
+/**************
+ * NAVIGATION *
+ **************/
+ 
+.nav-bar {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1002;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  width: 95%;
+  max-width: 1200px;
+  background-color: var(--nav-bg-color);
+  backdrop-filter: blur(var(--blur-amount));
+  -webkit-backdrop-filter: blur(var(--blur-amount));
+  border: 3px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: var(--nav-shadow);
+}
+
+.nav-brand {
+  cursor: pointer;
+}
+
+.nav-logo-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--brand-size);
+  width: var(--brand-size);
+  text-decoration: none;
+}
+
+.nav-list {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
+  position: relative;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  color: var(--nav-text-color);
+  position: relative;
+  transition: color var(--transition-speed) ease;
+  padding: 0.5rem 0;
+  display: inline-block;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 3px;
+  background-color: var(--nav-underline-color);
+  transition: width var(--transition-speed) ease, opacity var(--transition-speed) ease;
+  opacity: 0;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--nav-text-hover-color);
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after {
+  width: 100%;
+  opacity: 1;
+}
+
+.nav-link.active {
+  color: var(--nav-text-hover-color);
+}
+
+.nav-link.active::after {
+  width: 100%;
+  opacity: 1;
+}
+
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--overlay-bg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-speed) ease;
+  z-index: 1001;
+}
+
+.nav-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .nav-list {
+    position: absolute;
+    top: calc(100% + 1rem);
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    flex-direction: column;
+    background-color: var(--nav-bg-color);
+    backdrop-filter: blur(var(--blur-amount));
+    -webkit-backdrop-filter: blur(var(--blur-amount));
+    border: 1px solid var(--border-color);
+    box-shadow: var(--nav-shadow);
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 320px;
+    padding: 2rem 0;
+    gap: 1.5rem;
+  }
+
+  .nav-list.is-open {
+    transform: translateX(-50%) translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-item {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: transform 0.3s ease var(--i, 0) * 0.05s, opacity 0.3s ease var(--i, 0) * 0.05s;
+  }
+
+  .nav-list.is-open .nav-item {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--i) * 0.05s);
+  }
+
+  .nav-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0.6rem;
+  position: relative;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 1.6rem;
+  height: 3px;
+  margin: 0.4rem auto;
+  background-color: var(--nav-text-color);
+  transition: all var(--transition-speed) ease;
+  transform-origin: center;
+}
+
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+    z-index: 1003;
+  }
+
+  .nav-toggle.open span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+  }
+
+  .nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.open span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+}

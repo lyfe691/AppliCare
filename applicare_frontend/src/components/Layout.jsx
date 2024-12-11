@@ -7,7 +7,9 @@ function Layout() {
     <div className="layout">
       <Navbar />
       <main className="layout-content">
-        <Outlet />
+        <div className="content-wrapper">
+          <Outlet />
+        </div>
       </main>
       <Footer />
     </div>

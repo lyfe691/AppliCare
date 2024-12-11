@@ -36,6 +36,13 @@
   min-height: 100vh;
 }
 
+.content-wrapper {
+  max-width: 1500px;
+  margin: 0 auto;   
+  padding: 1rem;     
+  background-color: transparent; 
+}
+
 .layout-content {
   flex: 1;
   padding: 2rem;
@@ -299,3 +306,5 @@
   font-size: 0.9rem;
   opacity: 0.8;
 }
+
+

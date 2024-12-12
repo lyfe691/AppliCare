@@ -1,18 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { X, Github, Globe } from "lucide-react"; // Importing icons
+import {Github } from "lucide-react"; 
 
 function AuthModal({ isOpen, onClose }) {
   const modalRef = useRef();
   const [isSignUp, setIsSignUp] = useState(false);
 
-  // Focus trap: keep focus inside the modal and handle Esc key
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
         onClose();
       }
 
-      // Trap focus inside modal
       const focusableElements = modalRef.current?.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
@@ -32,16 +30,15 @@ function AuthModal({ isOpen, onClose }) {
 
     if (isOpen) {
       document.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden"; // Prevent scrolling
+      document.body.style.overflow = "hidden"; 
     }
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "auto"; // Restore scrolling
+      document.body.style.overflow = "auto"; 
     };
   }, [isOpen, onClose]);
 
-  // Close modal if user clicks outside content
   const handleClickOutside = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       onClose();

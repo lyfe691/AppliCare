@@ -29,7 +29,7 @@ public class TestController {
             Map<String, String> response = new HashMap<>();
             response.put("message", "Document saved with ID: " + test.getId());
             response.put("status", "ok");
-            logger.info("Successfully saved document with ID: {}", test.getId());
+            logger.info("Successfully saved document with ID:" + test.getId());
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             logger.error("Error in testMongo: ", e);

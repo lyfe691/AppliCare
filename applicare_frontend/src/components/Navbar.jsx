@@ -1,16 +1,24 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { SettingsIcon } from "lucide-react";
-
+import AuthModal from "./AuthModal"; 
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false); 
   const location = useLocation();
 
   const toggleMenu = () => {
-    setIsOpen(prev => !prev);
+    setIsOpen((prev) => !prev);
   };
 
-  // close the menu when navigating to a new page.
+  const openAuthModal = () => {
+    setIsModalOpen(true); 
+  };
+
+  const closeAuthModal = () => {
+    setIsModalOpen(false); 
+  };
+
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
@@ -74,17 +82,17 @@ function Navbar() {
               Long Page
             </Link>
           </li>
-          <li className="nav-item" style={{ "--i:": 4}}>
-              <Link>
-                <button className="nav-auth-button"
-            
-                >
-                  Login
-                </button> 
-              </Link>
+          <li className="nav-item" style={{ "--i": 4 }}>
+            {/* Login Button Opens Modal */}
+            <button className="nav-auth-button" onClick={openAuthModal}>
+              Login
+            </button>
           </li>
         </ul>
       </nav>
+
+      {/* authmodal temp */}
+      <AuthModal isOpen={isModalOpen} onClose={closeAuthModal} />
     </>
   );
 }

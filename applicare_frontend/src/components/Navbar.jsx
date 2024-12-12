@@ -1,23 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { SettingsIcon } from "lucide-react";
-import AuthModal from "./AuthModal"; 
+import { auth } from "../context/AuthContext"; 
+
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(false); 
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const toggleMenu = () => {
-    setIsOpen((prev) => !prev);
-  };
-
-  const openAuthModal = () => {
-    setIsModalOpen(true); 
-  };
-
-  const closeAuthModal = () => {
-    setIsModalOpen(false); 
-  };
+  const toggleMenu = () => setIsOpen((prev) => !prev);
 
   useEffect(() => {
     setIsOpen(false);
@@ -25,6 +14,7 @@ function Navbar() {
 
   return (
     <>
+      {/* Overlay for mobile menu */}
       <div
         className={`nav-overlay ${isOpen ? "active" : ""}`}
         onClick={() => setIsOpen(false)}
@@ -34,23 +24,23 @@ function Navbar() {
       <nav className="nav-bar">
         <div className="nav-brand">
           <Link to="/" className="nav-logo-link" aria-label="Home">
-            {/* the AppliCare logo */}
             <img src="/applicare.png" height={40} alt="AppliCare Logo" />
           </Link>
         </div>
 
+        {/* Mobile menu toggle */}
         <button
           className={`nav-toggle ${isOpen ? "open" : ""}`}
           onClick={toggleMenu}
           aria-label="Toggle navigation menu"
           aria-expanded={isOpen}
-          aria-controls="nav-list"
         >
           <span></span>
           <span></span>
           <span></span>
         </button>
 
+        {/* Navigation Links */}
         <ul className={`nav-list ${isOpen ? "is-open" : ""}`} id="nav-list">
           <li className="nav-item" style={{ "--i": 1 }}>
             <Link
@@ -83,16 +73,19 @@ function Navbar() {
             </Link>
           </li>
           <li className="nav-item" style={{ "--i": 4 }}>
-            {/* Login Button Opens Modal */}
-            <button className="nav-auth-button" onClick={openAuthModal}>
-              Login
-            </button>
+            {/* Login/Logout Button */}
+            {auth.isAuthenticated ? (
+              <button className="nav-auth-button" onClick={auth.logout}>
+                Logout
+              </button>
+            ) : (
+              <button className="nav-auth-button" onClick={auth.openAuthModal}>
+                Login
+              </button>
+            )}
           </li>
         </ul>
       </nav>
-
-      {/* authmodal temp */}
-      <AuthModal isOpen={isModalOpen} onClose={closeAuthModal} />
     </>
   );
 }

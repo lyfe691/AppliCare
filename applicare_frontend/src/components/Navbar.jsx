@@ -1,16 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { auth } from "../context/AuthContext"; 
+import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  // call auth (now with useState for direct apporach and instant update..)
+  const { isAuthenticated, openAuthModal, logout } = useAuth();
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
   useEffect(() => {
-    setIsOpen(false);
+    setIsOpen(false); // close mobile menu when route changes
   }, [location]);
+
 
   return (
     <>
@@ -21,6 +24,7 @@ function Navbar() {
         aria-hidden={!isOpen}
       ></div>
 
+      {/* Navbar */}
       <nav className="nav-bar">
         <div className="nav-brand">
           <Link to="/" className="nav-logo-link" aria-label="Home">
@@ -74,12 +78,12 @@ function Navbar() {
           </li>
           <li className="nav-item" style={{ "--i": 4 }}>
             {/* Login/Logout Button */}
-            {auth.isAuthenticated ? (
-              <button className="nav-auth-button" onClick={auth.logout}>
+            {isAuthenticated ? (
+              <button className="nav-auth-button" onClick={logout}>
                 Logout
               </button>
             ) : (
-              <button className="nav-auth-button" onClick={auth.openAuthModal}>
+              <button className="nav-auth-button" onClick={openAuthModal}>
                 Login
               </button>
             )}

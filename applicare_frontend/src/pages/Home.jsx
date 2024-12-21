@@ -1,22 +1,26 @@
-import { useAuth } from "../context/AuthContext";
+// src/pages/Home.jsx
 
-function Home() {
-  const { isAuthenticated, username } = useAuth(); // now using state due to the status problems I had. 
+import { useAuth } from "../features/auth/AuthContext";
+import { Link } from "react-router-dom";
+
+export default function Home() {
+  const { user } = useAuth();
+
+
 
   return (
     <div>
-      <h1>
-        Welcome to AppliCare{isAuthenticated ? `, ${username}` : ""}
-      </h1>
-      <p>This is the home page of my application.</p>
-      <a href="/test-mongo">
-        <button>Test the API?</button>
-      </a>
-      <a href="/long-page">
-        <button>Long Page</button>
-      </a>
+      <h1>Welcome to AppliCare</h1>
+      {user ? (
+        <div>
+          <p>Hello, {user.username}!</p>
+          <button><Link to="/long-page">Test long page</Link></button>
+          <button><Link to="/test-mongo">Test the api?</Link></button>
+        </div>
+      ) : (
+        <p>You are not logged in.</p>
+      )}
+      <p>This is the home page of the application.</p>
     </div>
   );
 }
-
-export default Home;

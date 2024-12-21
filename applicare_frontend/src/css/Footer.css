@@ -1,0 +1,57 @@
+/**************
+ * FOOTER CSS *
+ **************/
+
+ :root {
+    --footer-bg-color: #f8f9fa; 
+    --footer-text-color: #2c3e50; 
+    --footer-link-color: #2980b9; 
+    --footer-link-hover-color: #4545c9aa; 
+    --footer-border-color: #dee2e6; 
+    --footer-icon-color: #b2b2b292; 
+  }
+  
+ .footer {
+    background-color: var(--footer-bg-color);
+    color: var(--footer-text-color);
+    padding: 1.5rem 0;
+    text-align: center;
+    border-top: 1px solid var(--footer-border-color);
+    margin-top: auto;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  
+  .footer-links a {
+    color: var(--footer-link-color);
+    transition: transform 0.2s ease, color 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .footer-links a:hover {
+    transform: scale(1.1);
+    color: var(--footer-link-hover-color);
+  }
+  
+  .footer-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: var(--footer-icon-color); /* if .svg, or lucide; should work too. */
+  }
+  
+  .footer-text {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+  

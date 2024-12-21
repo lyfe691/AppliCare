@@ -1,3 +1,5 @@
+// src/pages/LongPage.jsx
+
 import { Link } from "react-router-dom";
 
 // ! This is temporary.

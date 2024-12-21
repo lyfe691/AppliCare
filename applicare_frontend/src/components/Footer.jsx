@@ -1,4 +1,7 @@
+// src/components/Footer.jsx
+
 import { Github, Linkedin, Globe } from 'lucide-react';
+import '../css/Footer.css';
 
 function Footer() {
   return (

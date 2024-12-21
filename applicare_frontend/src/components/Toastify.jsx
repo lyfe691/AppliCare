@@ -1,5 +1,8 @@
+// src/components/Toastify.jsx
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../css/Toastify.css";
 
 // success notif
 export const notifySuccess = (message) => {

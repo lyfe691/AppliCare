@@ -1,19 +1,20 @@
+// src/components/Nav.jsx
+
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../features/auth/AuthContext"; 
+import "../css/Nav.css";
 
-function Navbar() {
+function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  // call auth (now with useState for direct apporach and instant update..)
-  const { isAuthenticated, openAuthModal, logout } = useAuth();
+  const { user, logout } = useAuth(); // access user + logout
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
   useEffect(() => {
     setIsOpen(false); // close mobile menu when route changes
   }, [location]);
-
 
   return (
     <>
@@ -76,16 +77,17 @@ function Navbar() {
               Long Page
             </Link>
           </li>
+
+          {/* Auth button logic */}
           <li className="nav-item" style={{ "--i": 4 }}>
-            {/* Login/Logout Button */}
-            {isAuthenticated ? (
+            {user ? (
               <button className="nav-auth-button" onClick={logout}>
                 Logout
               </button>
             ) : (
-              <button className="nav-auth-button" onClick={openAuthModal}>
-                Login
-              </button>
+              <Link to="/login" className="nav-btn">
+                <button className="nav-auth-button">Login</button>
+              </Link>
             )}
           </li>
         </ul>
@@ -94,4 +96,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Nav;

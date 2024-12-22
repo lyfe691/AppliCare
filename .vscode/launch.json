@@ -4,13 +4,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "ApplicareApplication",
-            "request": "launch",
-            "mainClass": "com.applicare.applicare.ApplicareApplication",
-            "projectName": "applicare"
-        },
-        {
             "type": "node-terminal",
             "request": "launch",
             "name": "pplicare_frontend",

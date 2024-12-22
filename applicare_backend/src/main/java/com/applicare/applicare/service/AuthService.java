@@ -6,6 +6,7 @@ import com.applicare.applicare.model.User;
 import com.applicare.applicare.repository.UserRepository;
 import com.applicare.applicare.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,24 +24,36 @@ public class AuthService {
     @Autowired
     private MailService mailService;
 
-    public String login(String username, String password) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
+    // LOGIN
+    public String login(String username, String rawPassword) {
         Optional<User> opt = userRepository.findByUsername(username);
-        if (opt.isEmpty()) throw new RuntimeException("Invalid username or password");
-
-        User user = opt.get();
-        if (!user.getPassword().equals(password)) {
+        if (opt.isEmpty()) {
             throw new RuntimeException("Invalid username or password");
         }
+
+        User user = opt.get();
+        // compare hashed
+        if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
+            throw new RuntimeException("Invalid username or password");
+        }
+
+        // generate JWT
         return jwtUtil.generateToken(username);
     }
+    
+    // REGISTER
+    public String register(String username, String email, String rawPassword) {
+        String hashed = passwordEncoder.encode(rawPassword);
 
-    public String register(String username, String email, String password) {
-        // check if username/email exist, etc
-        User user = new User(username, email, password);
-        userRepository.save(user);
+        User newUser = new User(username, email, hashed);
+        userRepository.save(newUser);
         return "User registered successfully";
     }
 
+    // FORGOT PASSWORD
     public String forgotPassword(String email) {
         Optional<User> opt = userRepository.findByEmail(email);
         if (opt.isEmpty()) {
@@ -54,17 +67,18 @@ public class AuthService {
 
         mailService.sendResetLink(email, token);
 
-        return "An email with a reset link has been sent to " + email;
+        return "A reset link has been emailed to " + email;
     }
-
-    public String resetPassword(String token, String newPassword) {
+    
+    // RESET PASSWORD
+    public String resetPassword(String token, String rawPassword) {
         Optional<User> opt = userRepository.findByPasswordResetToken(token);
         if (opt.isEmpty()) {
             throw new RuntimeException("Invalid or expired reset token");
         }
 
         User user = opt.get();
-        user.setPassword(newPassword);
+        user.setPassword(passwordEncoder.encode(rawPassword));
         user.setPasswordResetToken(null);
         userRepository.save(user);
 

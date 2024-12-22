@@ -1,4 +1,4 @@
-// src/main/java/com/applicare/applicare/model/User.java
+// com/applicare/applicare/model/User.java
 
 package com.applicare.applicare.model;
 
@@ -14,20 +14,16 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private String passwordResetToken;
 
-    // For forgot/reset password:
-    private String passwordResetToken;  
-
-    public User() { }
-
+    public User() {}
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
-        this.password = password; // TODO: use BCryptPasswordEncoder
+        this.password = password;
     }
 
     // getters & setters
-
     public String getId() {
         return id;
     }

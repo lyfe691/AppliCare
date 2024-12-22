@@ -16,25 +16,27 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // If you want to skip authentication for certain endpoints:
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                // Permit all requests to auth endpoints
                 .requestMatchers("/api/auth/**").permitAll()
-                // For demonstration, let other endpoints be open or .authenticated()
                 .requestMatchers(HttpMethod.GET, "/api/test-mongo").permitAll()
-                // everything else requires a login token
-                //.anyRequest().authenticated()
-                .anyRequest().permitAll() // or .authenticated()
+                .anyRequest().permitAll()
             )
-            // We are not configuring a real userDetailsService for now
+     
             .httpBasic(Customizer.withDefaults())
             .formLogin(Customizer.withDefaults());
 
         return http.build();
+    }
+
+    
+    // https://www.baeldung.com/spring-security-registration-password-encoding-bcrypt
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder(); 
     }
 
 

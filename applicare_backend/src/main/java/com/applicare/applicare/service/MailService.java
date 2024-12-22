@@ -7,16 +7,13 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-
-// TODO:  relevant mail properties in application.properties
-
 @Service
 public class MailService {
 
     private final JavaMailSender mailSender;
 
-    // e.g. "http://localhost:5173/reset-password"
-    @Value("${app.resetPasswordUrl}")
+    // declared in application properties
+    @Value("${app.reset-password-url}")
     private String resetPasswordUrl;
 
     public MailService(JavaMailSender mailSender) {

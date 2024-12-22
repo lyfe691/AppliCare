@@ -53,7 +53,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
- 
+
     // RESET PASSWORD
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(

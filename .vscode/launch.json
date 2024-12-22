@@ -4,8 +4,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            
-            // run the frontend
+            "type": "java",
+            "name": "ApplicareApplication",
+            "request": "launch",
+            "mainClass": "com.applicare.applicare.ApplicareApplication",
+            "projectName": "applicare"
+        },
+        {
             "type": "node-terminal",
             "request": "launch",
             "name": "pplicare_frontend",
@@ -13,13 +18,11 @@
             "cwd": "${workspaceFolder}/applicare_frontend"
         },
         {
-
-            // run the backend
             "type": "node-terminal",
             "request": "launch",
             "name": "applicare_backend",
             "command": "mvn spring-boot:run",
-            "cwd": "${workspaceFolder}/applicare_backend" 
+            "cwd": "${workspaceFolder}/applicare_backend"
         }
     ]
 }

@@ -8,6 +8,7 @@ export default function ForgotPassword() {
   const { forgotPassword } = useAuth();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -18,10 +19,13 @@ export default function ForgotPassword() {
     const email = formData.get("email");
 
     try {
+      setLoading(true);
       const msg = await forgotPassword(email);
       setSuccess(msg);
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -30,8 +34,15 @@ export default function ForgotPassword() {
       <div className="auth-container">
         <h2>Forgot Password</h2>
         <form onSubmit={handleSubmit}>
-          <input name="email" type="email" placeholder="Email" required />
-          <button type="submit">Send Reset Link</button>
+          <input
+            name="email"
+            type="email"
+            placeholder="Enter your email"
+            required
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? "Sending..." : "Send Reset Link"}
+          </button>
         </form>
         {error && (
           <div className="error-container">

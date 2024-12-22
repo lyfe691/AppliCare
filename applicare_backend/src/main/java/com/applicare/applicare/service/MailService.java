@@ -22,12 +22,13 @@ public class MailService {
 
     public void sendResetLink(String toEmail, String token) {
         String link = resetPasswordUrl + "?token=" + token;
-
+    
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(toEmail);
         message.setSubject("AppliCare - Password Reset");
-        message.setText("Click here to reset your password:\n" + link);
-
+        message.setText("Click the link below to reset your password:\n" + link);
+    
         mailSender.send(message);
-    }
+    }   
+     
 }

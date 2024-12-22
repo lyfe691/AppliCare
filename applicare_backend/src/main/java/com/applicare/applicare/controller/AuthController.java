@@ -57,14 +57,15 @@ public class AuthController {
     // RESET PASSWORD
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(
-            @RequestParam String token, 
+            @RequestParam String token,
             @RequestParam String password
     ) {
         try {
-            String msg = authService.resetPassword(token, password);
-            return ResponseEntity.ok(msg);
+            String message = authService.resetPassword(token, password);
+            return ResponseEntity.ok(message);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    
 }

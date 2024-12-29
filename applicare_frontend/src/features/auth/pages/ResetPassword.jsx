@@ -47,6 +47,7 @@ function ResetPassword() {
       error={error}
       success={success}
       buttonText={loading ? "Resetting..." : "Reset Password"}
+      disabled={loading}
     >
       <p>
         <a href="/login">Never mind, take me back</a>

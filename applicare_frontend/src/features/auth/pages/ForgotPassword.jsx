@@ -37,6 +37,7 @@ function ForgotPassword() {
       error={error}
       success={success}
       buttonText={loading ? "Sending..." : "Send Reset Link"}
+      disabled={loading} 
     >
       <p>
         <a href="/login">Back to Login</a>

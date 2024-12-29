@@ -31,7 +31,7 @@ function Login() {
       buttonText="Login"
     >
       <p>
-        Don&apos;t have an account? <a href="/register">Register</a>
+        Don't have an account? <a href="/register">Register</a>
       </p>
       <p>
         <a href="/forgot-password">Forgot Password?</a>

@@ -2,31 +2,33 @@
  * LAYOUT CSS *
  **************/
 
- .layout {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  .content-wrapper {
-    max-width: 1500px;
-    margin: 0 auto;   
-    padding: 1rem;     
-    background-color: transparent; 
-  }
-  
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.content-wrapper {
+  max-width: 1500px;
+  margin: 0 auto;   
+  padding: 1rem;     
+  background-color: transparent; 
+}
+
+.layout-content {
+  flex: 1;
+  padding: 2rem;
+  padding-top: 9rem; /* the space between the page content and the navigation*/
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+@media (max-width: 768px) {
   .layout-content {
-    flex: 1;
-    padding: 2rem;
-    padding-top: 9rem; /* the space between the page content and the navigation*/
-    background-color: #f5f5f5;
-    color: #333;
+    padding: 1rem;
+    padding-top: 10rem; /* the space between the page content and the navigation*/
   }
-  
-  @media (max-width: 768px) {
-    .layout-content {
-      padding: 1rem;
-      padding-top: 10rem; /* the space between the page content and the navigation*/
-    }
-  }
+}
   

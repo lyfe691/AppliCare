@@ -8,7 +8,7 @@ import "../css/Nav.css";
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const { user, logout } = useAuth(); // access user + logout
+  const { user, logout } = useAuth();
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
@@ -28,7 +28,7 @@ function Nav() {
       {/* Navbar */}
       <nav className="nav-bar">
         <div className="nav-brand">
-          <Link to="/" className="nav-logo-link" aria-label="Home">
+          <Link to="/dashboard" className="nav-logo-link" aria-label="Dashboard">
             <img src="/applicare.png" height={40} alt="AppliCare Logo" />
           </Link>
         </div>
@@ -49,37 +49,17 @@ function Nav() {
         <ul className={`nav-list ${isOpen ? "is-open" : ""}`} id="nav-list">
           <li className="nav-item" style={{ "--i": 1 }}>
             <Link
-              to="/"
+              to="/dashboard"
               className={`nav-link ${
-                location.pathname === "/" ? "active" : ""
+                location.pathname === "/dashboard" ? "active" : ""
               }`}
             >
-              Home
-            </Link>
-          </li>
-          <li className="nav-item" style={{ "--i": 2 }}>
-            <Link
-              to="/test-mongo"
-              className={`nav-link ${
-                location.pathname === "/test-mongo" ? "active" : ""
-              }`}
-            >
-              Test Mongo
-            </Link>
-          </li>
-          <li className="nav-item" style={{ "--i": 3 }}>
-            <Link
-              to="/long-page"
-              className={`nav-link ${
-                location.pathname === "/long-page" ? "active" : ""
-              }`}
-            >
-              Long Page
+              Dashboard
             </Link>
           </li>
 
           {/* Auth button logic */}
-          <li className="nav-item" style={{ "--i": 4 }}>
+          <li className="nav-item" style={{ "--i": 2 }}>
             {user ? (
               <button className="nav-auth-button" onClick={logout}>
                 Logout

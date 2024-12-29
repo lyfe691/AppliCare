@@ -9,7 +9,7 @@ function AuthForm({
   error,
   success,
   buttonText = "Submit",
-  disabled = false, // Default to false
+  disabled = false, 
   children,
 }) {
   async function handleSubmit(e) {
@@ -35,7 +35,7 @@ function AuthForm({
               placeholder={f.placeholder || ""}
               defaultValue={f.defaultValue || ""}
               required={f.required || false}
-              disabled={disabled} //  disable input fields
+              disabled={disabled} 
             />
           ))}
           <button type="submit" disabled={disabled}>

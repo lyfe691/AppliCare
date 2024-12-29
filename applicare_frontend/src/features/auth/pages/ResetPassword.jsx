@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import "../../../css/Auth.css";
 
-export default function ResetPassword() {
+function ResetPassword() {
   const { resetPassword } = useAuth();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -71,3 +71,5 @@ export default function ResetPassword() {
     </div>
   );
 }
+
+export default ResetPassword;

@@ -3,10 +3,8 @@
 import { useAuth } from "../features/auth/AuthContext";
 import { Link } from "react-router-dom";
 
-export default function Home() {
+ function Home() {
   const { user } = useAuth();
-
-
 
   return (
     <div>
@@ -24,3 +22,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

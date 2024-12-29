@@ -5,7 +5,7 @@ import { useAuth } from "../AuthContext";
 import "../../../css/Auth.css";
 import { useNavigate } from "react-router-dom";
 
-export default function Register() {
+function Register() {
   const { registerUser } = useAuth();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -56,3 +56,5 @@ export default function Register() {
     </div>
   );
 }
+
+export default Register;

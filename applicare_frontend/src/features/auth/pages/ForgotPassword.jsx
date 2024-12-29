@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useAuth } from "../AuthContext";
 import "../../../css/Auth.css";
 
-export default function ForgotPassword() {
+function ForgotPassword() {
   const { forgotPassword } = useAuth();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -61,3 +61,5 @@ export default function ForgotPassword() {
     </div>
   );
 }
+
+export default ForgotPassword;

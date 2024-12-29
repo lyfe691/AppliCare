@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useAuth } from "../AuthContext";
 import "../../../css/Auth.css";
 
-export default function Login() {
+function Login() {
   const { login } = useAuth();
   const [error, setError] = useState(null);
 
@@ -51,3 +51,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default Login;

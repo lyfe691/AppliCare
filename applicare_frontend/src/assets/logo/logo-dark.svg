@@ -1,0 +1,83 @@
+<svg
+    width="500"
+    height="200"
+    viewBox="0 0 500 200"
+    xmlns="http://www.w3.org/2000/svg"
+>
+    <!-- Define Gradients and Filters -->
+    <defs>
+        <!-- Icon Gradient (Adjusted for Dark Theme) -->
+        <linearGradient id="iconGradientDark" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#81D4FA"/> <!-- Light Blue -->
+            <stop offset="100%" stop-color="#A5D6A7"/> <!-- Light Green -->
+        </linearGradient>
+
+        <!-- Text Gradient (Light Colors for Dark Background) -->
+        <linearGradient id="textGradientDark" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#FFFFFF"/> <!-- White -->
+            <stop offset="100%" stop-color="#E0E0E0"/> <!-- Light Gray -->
+        </linearGradient>
+
+        <!-- Drop Shadow for Icon (Adjusted for Light Elements on Dark) -->
+        <filter id="dropShadowDark" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+            <feOffset dx="2" dy="4" result="offsetblur"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.3"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <!-- Icon and Text Integration -->
+    <g id="logoDark" transform="translate(50, 50)" filter="url(#dropShadowDark)">
+        <!-- Circle Background -->
+        <circle
+            cx="50"
+            cy="50"
+            r="45"
+            fill="url(#iconGradientDark)"
+            opacity="0.4"
+        />
+
+        <!-- Checkmark integrated with text -->
+        <path
+            d="M35,50 L50,65 L75,35"
+            stroke="url(#iconGradientDark)"
+            stroke-width="11"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
+
+        <!-- Integrated Text 'AppliCare' -->
+        <text
+            x="107"
+            y="37"
+            font-family="Montserrat, Helvetica, Arial, sans-serif"
+            font-size="36"
+            font-weight="700"
+            fill="url(#textGradientDark)"
+            text-anchor="start"
+            dominant-baseline="middle"
+        >
+            AppliCare
+        </text>
+    </g>
+
+    <!-- Slogan -->
+    <text
+        x="241"
+        y="127"
+        font-family="Montserrat, Helvetica, Arial, sans-serif"
+        font-size="14"
+        font-weight="500"
+        fill="url(#textGradientDark)"
+        text-anchor="middle"
+    >
+        Organize. Apply. Achieve.
+    </text>
+</svg>

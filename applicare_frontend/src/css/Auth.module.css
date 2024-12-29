@@ -1,12 +1,12 @@
-/************
- * AUTH CSS *
- ************/
+/*******************
+ * AUTH CSS MODULE *
+ *******************/
 
 /* 
-    -.auth-page (light mode by default)
-    - defines color variables here so only Auth pages use them.(atleast thats what i think but ill needs to look into it fruther due to some bugs)
+    -.authPage (light mode by default)
+    - defines color variables here so only Auth pages use them
 */
-.auth-page {
+.authPage {
     --primary-color: #6C63FF;
     --secondary-color: #3F3D56;
     --accent-color: #F50057;
@@ -26,29 +26,27 @@
     background-color: var(--background-color);
     margin: 0;
     padding: 1rem;
-  }
+}
   
 /* dark mode */
-  @media (prefers-color-scheme: dark) {
-    .auth-page {
-      --primary-color: #bb86fc;
-      --secondary-color: #1e1e1e;
-      --accent-color: #cf6679;
-      --background-color: #121212;
-      --text-color: #e1e1e1;
-      --light-text-color: #aaaaaa;
-      --border-color: #333;
-      --success-color: #00e676;
-      --error-color: #ff5252;
-      --gradient-start: #bb86fc;
-      --gradient-end: #ff6584;
-  
-      background-color: var(--background-color);
+@media (prefers-color-scheme: dark) {
+    .authPage {
+        --primary-color: #bb86fc;
+        --secondary-color: #1e1e1e;
+        --accent-color: #cf6679;
+        --background-color: #121212;
+        --text-color: #e1e1e1;
+        --light-text-color: #aaaaaa;
+        --border-color: #333;
+        --success-color: #00e676;
+        --error-color: #ff5252;
+        --gradient-start: #bb86fc;
+        --gradient-end: #ff6584;
+        background-color: var(--background-color);
     }
-  }
+}
   
-
-  .auth-container {
+.authContainer {
     width: 100%;
     max-width: 500px;
     background-color: #fff; 
@@ -59,64 +57,62 @@
     z-index: 1;
     padding: 20px 30px;
     margin: 0 auto;
-  }
+}
   
-  .auth-container::before,
-  .auth-container::after {
+.authContainer::before,
+.authContainer::after {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
-  }
+}
   
-  /* animated gradient ring thing */
-  .auth-container::before {
+/* animated gradient ring thing */
+.authContainer::before {
     background: conic-gradient(
-      from 0deg at 50% 50%, 
-      var(--gradient-start),
-      var(--gradient-end), 
-      var(--gradient-start)
+        from 0deg at 50% 50%, 
+        var(--gradient-start),
+        var(--gradient-end), 
+        var(--gradient-start)
     );
     animation: rotate 10s linear infinite;
-  }
+}
   
-  @keyframes rotate {
+@keyframes rotate {
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+}
   
-  .auth-container::after {
+.authContainer::after {
     background: #fff; 
     inset: 4px;
     border-radius: 18px;
-  }
+}
   
- 
-  @media (prefers-color-scheme: dark) {
-    .auth-page .auth-container {
-      background-color: #1e1e1e; 
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+@media (prefers-color-scheme: dark) {
+    .authPage .authContainer {
+        background-color: #1e1e1e; 
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
-    .auth-page .auth-container::after {
-      background-color: #1e1e1e;
+    .authPage .authContainer::after {
+        background-color: #1e1e1e;
     }
-  }
+}
   
-  .auth-container h2 {
+.authContainer h2 {
     font-size: 1.6rem;
     margin-bottom: 1rem;
     text-align: center;
     color: var(--text-color);
-  }
+}
   
-
-  .auth-container form {
+.authContainer form {
     display: flex;
     flex-direction: column;
-  }
+}
   
-  .auth-container input {
+.authContainer input {
     margin-bottom: 30px;
     padding: 18px;
     border: 2px solid var(--border-color);
@@ -125,21 +121,21 @@
     transition: all 0.3s ease;
     background-color: #F8F9FA; 
     color: var(--text-color);
-  }
+}
   
-  .auth-container input:focus {
+.authContainer input:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
     transform: translateY(-1px);
-  }
+}
   
-  .auth-container button {
+.authContainer button {
     padding: 18px;
     background: linear-gradient(
-      135deg, 
-      var(--gradient-start), 
-      var(--gradient-end)
+        135deg, 
+        var(--gradient-start), 
+        var(--gradient-end)
     );
     color: #fff;
     border: none;
@@ -152,9 +148,9 @@
     position: relative;
     overflow: hidden;
     margin-top: 1rem;
-  }
+}
   
-  .auth-container button::before {
+.authContainer button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -162,41 +158,40 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(
-      120deg,
-      transparent,
-      rgba(255, 255, 255, 0.3),
-      transparent
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
     );
     transition: all 0.6s;
-  }
+}
   
-  .auth-container button:hover::before {
+.authContainer button:hover::before {
     left: 100%;
-  }
+}
   
-  .auth-container button:hover {
+.authContainer button:hover {
     transform: translateY(-1px);
     box-shadow: 0 7px 14px rgba(108, 99, 255, 0.3);
-  }
+}
   
-
-  .auth-container p {
+.authContainer p {
     text-align: center;
     margin-top: 40px;
     color: var(--light-text-color);
     font-weight: 300;
     line-height: 1.8;
-  }
+}
   
-  .auth-container a {
+.authContainer a {
     color: var(--primary-color);
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
     position: relative;
-  }
+}
   
-  .auth-container a::after {
+.authContainer a::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -206,13 +201,13 @@
     background-color: var(--primary-color);
     transform: scaleX(0);
     transition: transform 0.3s ease;
-  }
+}
   
-  .auth-container a:hover::after {
+.authContainer a:hover::after {
     transform: scaleX(1);
-  }
+}
   
-  .error-container {
+.errorContainer {
     display: flex;
     align-items: center;
     background-color: rgba(244, 67, 54, 0.1);
@@ -222,23 +217,23 @@
     margin-top: 20px;
     backdrop-filter: blur(8px);
     transition: all 0.3s ease;
-  }
+}
   
-  .error-icon {
+.errorIcon {
     color: #f44336;
     font-size: 20px;
     margin-right: 12px;
-  }
+}
   
-  .error-message {
+.errorMessage {
     color: var(--error-color);
     font-size: 0.95rem;
     margin: 0;
     font-weight: 500;
     line-height: 1.5;
-  }
+}
   
-  .success-container {
+.successContainer {
     display: flex;
     align-items: center;
     background-color: rgba(0, 200, 83, 0.1);
@@ -248,52 +243,49 @@
     margin-top: 20px;
     backdrop-filter: blur(8px);
     transition: all 0.3s ease;
-  }
+}
   
-  .success-icon {
+.successIcon {
     color: var(--success-color);
     font-size: 20px;
     margin-right: 12px;
-  }
+}
   
-  .success-message {
+.successMessage {
     color: var(--success-color);
     font-size: 0.95rem;
     margin: 0;
     font-weight: 500;
     line-height: 1.5;
-  }
+}
   
-  /* 
-    Mobile
-  */
-  @media (max-width: 480px) {
-    .auth-container {
-      max-width: 100%;
-      border-radius: 20px;
-      padding: 20px;
+/* Mobile */
+@media (max-width: 480px) {
+    .authContainer {
+        max-width: 100%;
+        border-radius: 20px;
+        padding: 20px;
     }
   
-    .auth-container input,
-    .auth-container button {
-      font-size: 16px;
+    .authContainer input,
+    .authContainer button {
+        font-size: 16px;
     }
   
-    .auth-container p {
-      margin-top: 30px;
+    .authContainer p {
+        margin-top: 30px;
     }
-  }
+}
   
-
-  @media (prefers-color-scheme: dark) {
-    .auth-page .auth-container input {
-      background-color: #2a2a2a; 
-      border-color: var(--border-color);
-      color: var(--text-color);
+@media (prefers-color-scheme: dark) {
+    .authPage .authContainer input {
+        background-color: #2a2a2a; 
+        border-color: var(--border-color);
+        color: var(--text-color);
     }
   
-    .auth-page .auth-container input::placeholder {
-      color: #999;
+    .authPage .authContainer input::placeholder {
+        color: #999;
     }
-  }
+}
   

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useAuth } from "../AuthContext";
-import "../../../css/Auth.css";
 import { useNavigate } from "react-router-dom";
+import AuthForm from "../components/AuthForm";
 
 function Register() {
   const { registerUser } = useAuth();
@@ -11,49 +11,37 @@ function Register() {
   const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(data) {
     setError(null);
     setSuccess(null);
 
-    const formData = new FormData(e.target);
-    const username = formData.get("username");
-    const email = formData.get("email");
-    const password = formData.get("password");
-
     try {
-      const msg = await registerUser(username, email, password);
+      const msg = await registerUser(data.username, data.email, data.password);
       setSuccess(msg);
     } catch (err) {
       setError(err.message);
     }
   }
 
+  const fields = [
+    { name: "username", placeholder: "Username", required: true },
+    { name: "email", type: "email", placeholder: "Email", required: true },
+    { name: "password", type: "password", placeholder: "Password", required: true }
+  ];
+
   return (
-    <div className="auth-page">
-      <div className="auth-container">
-        <h2>Register for AppliCare</h2>
-        <form onSubmit={handleSubmit}>
-          <input name="username" placeholder="Username" required />
-          <input name="email" type="email" placeholder="Email" required />
-          <input name="password" type="password" placeholder="Password" required />
-          <button type="submit">Register</button>
-        </form>
-        {error && (
-          <div className="error-container">
-            <p className="error-message">{error}</p>
-          </div>
-        )}
-        {success && (
-          <div className="success-container">
-            <p className="success-message">{success}</p>
-          </div>
-        )}
-        <p>
-          Already have an account? <a href="/login">Login here</a>
-        </p>
-      </div>
-    </div>
+    <AuthForm
+      title="Register for AppliCare"
+      fields={fields}
+      onSubmit={handleSubmit}
+      error={error}
+      success={success}
+      buttonText="Register"
+    >
+      <p>
+        Already have an account? <a href="/login">Login here</a>
+      </p>
+    </AuthForm>
   );
 }
 

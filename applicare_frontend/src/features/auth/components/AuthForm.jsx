@@ -1,6 +1,6 @@
 // src/features/auth/components/AuthForm.jsx
 
-import "../../../css/Auth.css";
+import styles from "../../../css/Auth.module.css";
 
 function AuthForm({
   title,
@@ -22,8 +22,8 @@ function AuthForm({
   }
 
   return (
-    <div className="auth-page">
-      <div className="auth-container">
+    <div className={styles.authPage}>
+      <div className={styles.authContainer}>
         {title && <h2>{title}</h2>}
         <form onSubmit={handleSubmit}>
           {fields.map((f, i) => (
@@ -40,13 +40,13 @@ function AuthForm({
         </form>
         {children}
         {error && (
-          <div className="error-container">
-            <p className="error-message">{error}</p>
+          <div className={styles.errorContainer}>
+            <span className={styles.errorMessage}>{error}</span>
           </div>
         )}
         {success && (
-          <div className="success-container">
-            <p className="success-message">{success}</p>
+          <div className={styles.successContainer}>
+            <span className={styles.successMessage}>{success}</span>
           </div>
         )}
       </div>

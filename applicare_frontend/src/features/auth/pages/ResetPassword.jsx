@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useAuth } from "../AuthContext";
-import "../../../css/Auth.css";
+import AuthForm from "../components/AuthForm";
 
 function ResetPassword() {
   const { resetPassword } = useAuth();
@@ -15,13 +15,9 @@ function ResetPassword() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(data) {
     setError(null);
     setSuccess(null);
-
-    const formData = new FormData(e.target);
-    const password = formData.get("password");
 
     if (!token) {
       setError("Invalid or missing reset token.");
@@ -30,7 +26,7 @@ function ResetPassword() {
 
     try {
       setLoading(true);
-      const msg = await resetPassword(token, password);
+      const msg = await resetPassword(token, data.password);
       setSuccess(msg);
     } catch (err) {
       setError(err.message);
@@ -39,36 +35,23 @@ function ResetPassword() {
     }
   }
 
+  const fields = [
+    { name: "password", type: "password", placeholder: "New password", required: true }
+  ];
+
   return (
-    <div className="auth-page">
-      <div className="auth-container">
-        <h2>Reset Password</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            name="password"
-            type="password"
-            placeholder="New password"
-            required
-          />
-          <button type="submit" disabled={loading}>
-            {loading ? "Resetting..." : "Reset Password"}
-          </button>
-        </form>
-        {error && (
-          <div className="error-container">
-            <p className="error-message">{error}</p>
-          </div>
-        )}
-        {success && (
-          <div className="success-container">
-            <p className="success-message">{success}</p>
-          </div>
-        )}
-        <p>
-          <a href="/login">Never mind, take me back</a>
-        </p>
-      </div>
-    </div>
+    <AuthForm
+      title="Reset Password"
+      fields={fields}
+      onSubmit={handleSubmit}
+      error={error}
+      success={success}
+      buttonText={loading ? "Resetting..." : "Reset Password"}
+    >
+      <p>
+        <a href="/login">Never mind, take me back</a>
+      </p>
+    </AuthForm>
   );
 }
 

@@ -6,7 +6,17 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.dark {
+    background-color: #1a1f2d;
+    color: white;
+}
+
+.light {
     background-color: white;
+    color: #1a1f2d;
 }
 
 .nav {
@@ -14,25 +24,81 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 2rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     width: 100%;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo img {
+    height: 32px;
+    width: auto;
+}
+
+.logo span {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
 .navButtons {
     display: flex;
-    gap: 1rem;
+    align-items: center;
+    gap: 1.5rem;
 }
 
-.loginButton {
+.authButtons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.separator {
+    width: 1px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.light .separator {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.iconButtons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.githubLink, .themeToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 6px;
     background: transparent;
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
+    border: none;
+    cursor: pointer;
 }
 
-.registerButton {
-    background: var(--primary-color);
+.light .githubLink, 
+.light .themeToggle {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.githubLink:hover, 
+.themeToggle:hover {
     color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.light .githubLink:hover, 
+.light .themeToggle:hover {
+    color: black;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .main {
@@ -41,95 +107,386 @@
     flex-direction: column;
     align-items: center;
     padding: 4rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    gap: 4rem;
 }
 
-.hero {
+.heroContent {
     text-align: center;
     max-width: 800px;
-    margin-bottom: 4rem;
 }
 
-.hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, var(--primary-color), #4f46e5);
+.heroContent h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .subtitle {
-    font-size: 1.25rem;
-    color: var(--light-text);
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 2rem;
     line-height: 1.6;
 }
 
-.ctaButton {
-    font-size: 1.125rem;
-    padding: 1rem 2rem;
-    background: var(--primary-color);
+.light .subtitle {
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.loginButton {
+    background: transparent;
+    color: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.light .loginButton {
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.loginButton:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.light .loginButton:hover {
+    border-color: rgba(0, 0, 0, 0.4);
+}
+
+.registerButton {
+    background: #3b82f6;
     color: white;
     border: none;
-    border-radius: 8px;
-    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
 }
 
-.features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
+.registerButton:hover {
+    background: #2563eb;
+}
+
+.ctaButton {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.light .ctaButton {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.ctaButton:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.light .ctaButton:hover {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+.demoSection {
     width: 100%;
-    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    perspective: 1000px;
 }
 
-.feature {
-    text-align: center;
+.demoCard {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
     padding: 2rem;
-    background: white;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 900px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.light .demoCard {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.statsCard, .todoCard, .metricsCard {
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
-    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.feature h3 {
-    color: var(--primary-color);
+.light .statsCard, 
+.light .todoCard, 
+.light .metricsCard {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.date {
+    text-align: center;
+}
+
+.date span {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+}
+
+.light .date span {
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.date h2 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    color: #3b82f6;
+}
+
+.todoCard {
+    grid-column: 2;
+    grid-row: 1 / 3;
+}
+
+.todoCard h3 {
     margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.feature p {
-    color: var(--light-text);
+.light .todoCard h3 {
+    color: rgba(0, 0, 0, 0.95);
+}
+
+.todoCard ul {
+    list-style: none;
+    padding: 0;
+}
+
+.todoCard li {
+    padding: 0.75rem 0;
+    color: rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.light .todoCard li {
+    color: rgba(0, 0, 0, 0.85);
+    border-bottom-color: rgba(0, 0, 0, 0.15);
+}
+
+.todoCard li:last-child {
+    border-bottom: none;
+}
+
+.metricsCard {
+    grid-column: 1;
+}
+
+.graph h3 {
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.light .graph h3 {
+    color: rgba(0, 0, 0, 0.95);
+}
+
+.graphContent {
+    height: 100px;
+    background: linear-gradient(90deg, transparent, #3b82f6);
+    border-radius: 6px;
+    opacity: 0.5;
+}
+
+.light .graphContent {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), #3b82f6);
+    opacity: 0.7;
 }
 
 .footer {
-    padding: 2rem;
-    text-align: center;
-    border-top: 1px solid var(--border-color);
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.footerContent {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footerTop {
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.footerLogo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.light .footerLogo {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.footerLogo img {
+    height: 28px;
+    width: auto;
+}
+
+.footerLogo span {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: inherit;
+}
+
+.footerTop p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+}
+
+.light .footerTop p {
+    color: rgba(0, 0, 0, 0.85);
 }
 
 .footerLinks {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.footerSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footerSection h4 {
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.footerSection a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+}
+
+.footerSection a:hover {
+    color: white;
+}
+
+.footerBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.light .footerBottom {
+    border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+.footerBottom p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+}
+
+.light .footerBottom p {
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.socialLinks {
+    display: flex;
+    gap: 1rem;
+}
+
+.socialLinks a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.2s ease;
+}
+
+.light .socialLinks a {
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.socialLinks a:hover {
+    color: white;
+}
+
+.light .socialLinks a:hover {
+    color: rgba(0, 0, 0, 0.95);
+}
+
+.browserIcons {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    margin-top: 1rem;
+    opacity: 0.5;
 }
 
-.footerLinks a {
-    color: var(--light-text);
-    text-decoration: none;
+.light .footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.02);
 }
 
-.footerLinks a:hover {
-    color: var(--primary-color);
+.light .footerSection h4 {
+    color: #1a1f2d;
+}
+
+.light .footerSection a,
+.light .footerBottom p,
+.light .socialLinks a {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.light .footerSection a:hover,
+.light .socialLinks a:hover {
+    color: #1a1f2d;
 }
 
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.5rem;
+    .heroContent h1 {
+        font-size: 3rem;
     }
 
-    .features {
+    .demoCard {
         grid-template-columns: 1fr;
+    }
+
+    .todoCard {
+        grid-column: 1;
+        grid-row: auto;
     }
 
     .nav {
@@ -141,7 +498,36 @@
     }
 
     .footerLinks {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .footerBottom {
         flex-direction: column;
         gap: 1rem;
+        text-align: center;
+    }
+
+    .footerTop {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footerLinks {
+        grid-template-columns: 1fr;
+    }
+
+    .navButtons {
+        gap: 0.5rem;
+    }
+
+    .separator {
+        display: none;
+    }
+
+    .iconButtons {
+        margin-left: 0.5rem;
     }
 } 

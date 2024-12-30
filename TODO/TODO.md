@@ -16,8 +16,11 @@
 1. [X] create a logo!
 1. [X] if theres too much applications make sure to add something like next page eg 1 2 3 etc
 1. [X] use mui material for the dashboard page cause ive seen it be useful especially for forms.
+1. [X] better looking landing page with a good base.
 1. [ ] create statistics page.
 1. [ ] move the statisitcs in the dashbopard page to a new statistics page.
-1. [ ] IMPORTANT: CREATE A SETTINGS PAGE
+2. [ ] IMPORTANT: CREATE A SETTINGS PAGE
 2. [ ] dark mode
 2. [ ] AppliCare text in the authform -> link to /
+2. [ ] use toasitfy for notifs.
+2. [ ] make landing page more mobile friendly.

@@ -85,6 +85,8 @@ button:hover {
 }
 
 button:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--primary-color);
+  transition: box-shadow 0.2s ease;
 }
+          

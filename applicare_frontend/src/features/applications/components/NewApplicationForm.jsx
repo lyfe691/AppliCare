@@ -2,8 +2,12 @@
 
 import { useState } from 'react';
 import { useAuth } from '../../auth/AuthContext';
+import { TextField, Select, MenuItem, FormControl, InputLabel, Grid, Button, Typography,
+    Box, Alert, FormHelperText } from '@mui/material';
+
 import styles from './NewApplicationForm.module.css';
 
+// the statuses
 const APPLICATION_STATUSES = [
     'APPLIED',
     'SCREENING',
@@ -13,7 +17,14 @@ const APPLICATION_STATUSES = [
     'REJECTED'
 ];
 
-function NewApplicationForm({ onClose, onSubmit }) {
+// salary periods
+const SALARY_PERIODS = [
+    { value: 'YEARLY', label: 'Yearly' },
+    { value: 'MONTHLY', label: 'Monthly' },
+    { value: 'HOURLY', label: 'Hourly' }
+];
+
+function NewApplicationForm({ onClose, onSubmit, initialData }) {
     const { user } = useAuth();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -40,8 +51,12 @@ function NewApplicationForm({ onClose, onSubmit }) {
         };
 
         try {
-            const response = await fetch('/api/applications', {
-                method: 'POST',
+            const url = initialData 
+                ? `http://localhost:8080/api/applications/${initialData.id}`
+                : 'http://localhost:8080/api/applications';
+
+            const response = await fetch(url, {
+                method: initialData ? 'PUT' : 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${user.token}`
@@ -50,7 +65,7 @@ function NewApplicationForm({ onClose, onSubmit }) {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to create application');
+                throw new Error(initialData ? 'Failed to update application' : 'Failed to create application');
             }
 
             const result = await response.json();
@@ -63,156 +78,188 @@ function NewApplicationForm({ onClose, onSubmit }) {
     }
 
     return (
-        <div className={styles.formContainer}>
-            <div className={styles.formHeader}>
-                <h2>New Job Application</h2>
-                <button className={styles.closeButton} onClick={onClose}>&times;</button>
-            </div>
+        <Box className={styles.formContainer}>
+            <Typography variant="h5" component="h2" gutterBottom>
+                {initialData ? 'Edit Application' : 'New Application'}
+            </Typography>
 
             <form onSubmit={handleSubmit}>
-                <div className={styles.formGrid}>
-                    <div className={styles.formGroup}>
-                        <label htmlFor="companyName">Company Name *</label>
-                        <input
-                            id="companyName"
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="Company Name"
                             name="companyName"
-                            type="text"
                             required
-                            placeholder="Enter company name"
+                            defaultValue={initialData?.companyName}
+                            variant="outlined"
                         />
-                    </div>
+                    </Grid>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="jobTitle">Job Title *</label>
-                        <input
-                            id="jobTitle"
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="Job Title"
                             name="jobTitle"
-                            type="text"
                             required
-                            placeholder="Enter job title"
+                            defaultValue={initialData?.jobTitle}
+                            variant="outlined"
                         />
-                    </div>
+                    </Grid>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="jobUrl">Job URL</label>
-                        <input
-                            id="jobUrl"
+                    <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            label="Job URL"
                             name="jobUrl"
                             type="url"
-                            placeholder="https://..."
+                            defaultValue={initialData?.jobUrl}
+                            variant="outlined"
                         />
-                    </div>
+                    </Grid>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="status">Status *</label>
-                        <select id="status" name="status" required>
-                            {APPLICATION_STATUSES.map(status => (
-                                <option key={status} value={status}>
-                                    {status.charAt(0) + status.slice(1).toLowerCase()}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel>Status</InputLabel>
+                            <Select
+                                label="Status"
+                                name="status"
+                                required
+                                defaultValue={initialData?.status || 'APPLIED'}
+                            >
+                                {APPLICATION_STATUSES.map(status => (
+                                    <MenuItem key={status} value={status}>
+                                        {status.charAt(0) + status.slice(1).toLowerCase()}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </Grid>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="location">Location</label>
-                        <input
-                            id="location"
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="Location"
                             name="location"
-                            type="text"
-                            placeholder="City, Country"
+                            defaultValue={initialData?.location}
+                            variant="outlined"
                         />
-                    </div>
+                    </Grid>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="remote">Remote Work</label>
-                        <select id="remote" name="remote">
-                            <option value="false">No</option>
-                            <option value="true">Yes</option>
-                        </select>
-                    </div>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel>Remote Work</InputLabel>
+                            <Select
+                                label="Remote Work"
+                                name="remote"
+                                defaultValue={initialData?.remote?.toString() || 'false'}
+                            >
+                                <MenuItem value="false">No</MenuItem>
+                                <MenuItem value="true">Yes</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="salary">Salary</label>
-                        <input
-                            id="salary"
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="Salary"
                             name="salary"
                             type="number"
-                            step="0.01"
-                            placeholder="Enter salary amount"
+                            defaultValue={initialData?.salary}
+                            variant="outlined"
+                            InputProps={{
+                                step: "0.01"
+                            }}
                         />
-                    </div>
+                    </Grid>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="salaryPeriod">Salary Period</label>
-                        <select id="salaryPeriod" name="salaryPeriod">
-                            <option value="YEARLY">Yearly</option>
-                            <option value="MONTHLY">Monthly</option>
-                            <option value="HOURLY">Hourly</option>
-                        </select>
-                    </div>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel>Salary Period</InputLabel>
+                            <Select
+                                label="Salary Period"
+                                name="salaryPeriod"
+                                defaultValue={initialData?.salaryPeriod || 'YEARLY'}
+                            >
+                                {SALARY_PERIODS.map(period => (
+                                    <MenuItem key={period.value} value={period.value}>
+                                        {period.label}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </Grid>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="contactPerson">Contact Person</label>
-                        <input
-                            id="contactPerson"
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="Contact Person"
                             name="contactPerson"
-                            type="text"
-                            placeholder="Enter contact name"
+                            defaultValue={initialData?.contactPerson}
+                            variant="outlined"
                         />
-                    </div>
+                    </Grid>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="contactEmail">Contact Email</label>
-                        <input
-                            id="contactEmail"
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="Contact Email"
                             name="contactEmail"
                             type="email"
-                            placeholder="Enter contact email"
+                            defaultValue={initialData?.contactEmail}
+                            variant="outlined"
                         />
-                    </div>
+                    </Grid>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="contactPhone">Contact Phone</label>
-                        <input
-                            id="contactPhone"
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="Contact Phone"
                             name="contactPhone"
                             type="tel"
-                            placeholder="Enter contact phone"
+                            defaultValue={initialData?.contactPhone}
+                            variant="outlined"
                         />
-                    </div>
-                </div>
+                    </Grid>
 
-                <div className={styles.formGroup}>
-                    <label htmlFor="notes">Notes</label>
-                    <textarea
-                        id="notes"
-                        name="notes"
-                        rows="4"
-                        placeholder="Add any additional notes..."
-                    ></textarea>
-                </div>
+                    <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            label="Notes"
+                            name="notes"
+                            multiline
+                            rows={4}
+                            defaultValue={initialData?.notes}
+                            variant="outlined"
+                        />
+                    </Grid>
+                </Grid>
 
-                {error && <div className={styles.error}>{error}</div>}
+                {error && (
+                    <Alert severity="error" sx={{ mt: 2 }}>
+                        {error}
+                    </Alert>
+                )}
 
-                <div className={styles.formActions}>
-                    <button 
-                        type="button" 
-                        className={styles.cancelButton}
+                <Box sx={{ mt: 3, display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
+                    <Button
+                        variant="outlined"
                         onClick={onClose}
-                    >
-                        Cancel
-                    </button>
-                    <button 
-                        type="submit" 
-                        className={styles.submitButton}
                         disabled={loading}
                     >
-                        {loading ? 'Creating...' : 'Create Application'}
-                    </button>
-                </div>
+                        Cancel
+                    </Button>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        disabled={loading}
+                    >
+                        {loading ? 'Saving...' : (initialData ? 'Update' : 'Create')}
+                    </Button>
+                </Box>
             </form>
-        </div>
+        </Box>
     );
 }
 

@@ -1,9 +1,34 @@
 // src/pages/Dashboard.jsx
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '../features/auth/AuthContext';
 import NewApplicationForm from '../features/applications/components/NewApplicationForm';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination,
+    TableSortLabel, Card, CardContent, Typography, Button, IconButton, Box, Chip, Dialog, 
+    DialogContent, Select, MenuItem, } from '@mui/material';
+
+import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import styles from '../css/Dashboard.module.css';
+
+//the colors of the statuses
+const STATUS_COLORS = {
+    APPLIED: { bg: '#dbeafe', color: '#1e40af' },
+    SCREENING: { bg: '#fff7ed', color: '#9a3412' },
+    INTERVIEWING: { bg: '#ecfdf5', color: '#065f46' },
+    OFFER: { bg: '#fdf4ff', color: '#86198f' },
+    REJECTED: { bg: '#fef2f2', color: '#991b1b' },
+    ACCEPTED: { bg: '#f0fdf4', color: '#166534' }
+};
+
+// the statuses
+const APPLICATION_STATUSES = [
+    'APPLIED',
+    'SCREENING',
+    'INTERVIEWING',
+    'OFFER',
+    'ACCEPTED',
+    'REJECTED'
+];
 
 function Dashboard() {
     const { user } = useAuth();
@@ -12,6 +37,12 @@ function Dashboard() {
     const [error, setError] = useState(null);
     const [showNewApplicationForm, setShowNewApplicationForm] = useState(false);
     const [editingApplication, setEditingApplication] = useState(null);
+    
+    // sorting and pagination
+    const [order, setOrder] = useState('desc');
+    const [orderBy, setOrderBy] = useState('appliedDate');
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
     useEffect(() => {
         fetchApplications();
@@ -74,109 +105,228 @@ function Dashboard() {
         setShowNewApplicationForm(true);
     }
 
-    if (loading) return <div className={styles.loading}>Loading...</div>;
-    if (error) return <div className={styles.error}>Error: {error}</div>;
+    // sorting logic
+    function handleRequestSort(property) {
+        const isAsc = orderBy === property && order === 'asc';
+        setOrder(isAsc ? 'desc' : 'asc');
+        setOrderBy(property);
+    }
+
+    function descendingComparator(a, b, orderBy) {
+        if (b[orderBy] < a[orderBy]) return -1;
+        if (b[orderBy] > a[orderBy]) return 1;
+        return 0;
+    }
+
+    function getComparator(order, orderBy) {
+        return order === 'desc'
+            ? (a, b) => descendingComparator(a, b, orderBy)
+            : (a, b) => -descendingComparator(a, b, orderBy);
+    }
+
+    const sortedApplications = useMemo(() => {
+        return [...applications].sort(getComparator(order, orderBy));
+    }, [applications, order, orderBy]);
+
+    const paginatedApplications = sortedApplications.slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+    );
+
+    // Stats calculations
+    const stats = useMemo(() => ({
+        total: applications.length,
+        active: applications.filter(app => !['REJECTED', 'ACCEPTED'].includes(app.status)).length,
+        successRate: applications.length > 0
+            ? Math.round((applications.filter(app => app.status === 'ACCEPTED').length / applications.length) * 100)
+            : 0
+    }), [applications]);
+
+    if (loading) return (
+        <Box className={styles.loading}>
+            <Typography variant="h6" color="primary">Loading...</Typography>
+        </Box>
+    );
+
+    if (error) return (
+        <Box className={styles.error}>
+            <Typography variant="h6" color="error">Error: {error}</Typography>
+        </Box>
+    );
 
     return (
         <div className={styles.dashboard}>
-            <header className={styles.header}>
-                <h1>My Job Applications</h1>
-                <button 
-                    className={styles.newButton}
+            <Box className={styles.header}>
+                <Typography variant="h4" component="h1">
+                    My Job Applications
+                </Typography>
+                <Button
+                    variant="contained"
+                    color="primary"
                     onClick={() => {
                         setEditingApplication(null);
                         setShowNewApplicationForm(true);
                     }}
                 >
                     New Application
-                </button>
-            </header>
+                </Button>
+            </Box>
 
-            <div className={styles.stats}>
-                <div className={styles.statCard}>
-                    <h3>Total Applications</h3>
-                    <p>{applications.length}</p>
-                </div>
-                <div className={styles.statCard}>
-                    <h3>Active Applications</h3>
-                    <p>{applications.filter(app => !['REJECTED', 'ACCEPTED'].includes(app.status)).length}</p>
-                </div>
-                <div className={styles.statCard}>
-                    <h3>Success Rate</h3>
-                    <p>
-                        {applications.length > 0 
-                            ? Math.round((applications.filter(app => app.status === 'ACCEPTED').length / applications.length) * 100)
-                            : 0}%
-                    </p>
-                </div>
-            </div>
+            <Box className={styles.stats}>
+                <Card>
+                    <CardContent>
+                        <Typography color="textSecondary" gutterBottom>
+                            Total Applications
+                        </Typography>
+                        <Typography variant="h4">{stats.total}</Typography>
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardContent>
+                        <Typography color="textSecondary" gutterBottom>
+                            Active Applications
+                        </Typography>
+                        <Typography variant="h4">{stats.active}</Typography>
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardContent>
+                        <Typography color="textSecondary" gutterBottom>
+                            Success Rate
+                        </Typography>
+                        <Typography variant="h4">{stats.successRate}%</Typography>
+                    </CardContent>
+                </Card>
+            </Box>
 
-            <div className={styles.applications}>
-                {applications.length === 0 ? (
-                    <div className={styles.noApplications}>
-                        <p>No applications yet. Click "New Application" to get started!</p>
-                    </div>
-                ) : (
-                    applications.map(application => (
-                        <div key={application.id} className={styles.applicationCard}>
-                            <div className={styles.cardHeader}>
-                                <h2>{application.jobTitle}</h2>
-                                <select
-                                    className={`${styles.status} ${styles[application.status.toLowerCase()]}`}
-                                    value={application.status}
-                                    onChange={(e) => handleUpdateStatus(application.id, e.target.value)}
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>
+                                <TableSortLabel
+                                    active={orderBy === 'companyName'}
+                                    direction={orderBy === 'companyName' ? order : 'asc'}
+                                    onClick={() => handleRequestSort('companyName')}
                                 >
-                                    <option value="APPLIED">Applied</option>
-                                    <option value="SCREENING">Screening</option>
-                                    <option value="INTERVIEWING">Interviewing</option>
-                                    <option value="OFFER">Offer</option>
-                                    <option value="ACCEPTED">Accepted</option>
-                                    <option value="REJECTED">Rejected</option>
-                                </select>
-                            </div>
-                            <div className={styles.companyInfo}>
-                                <p>{application.companyName}</p>
-                                <p>{application.location}</p>
-                            </div>
-                            <div className={styles.dates}>
-                                <p>Applied: {new Date(application.appliedDate).toLocaleDateString()}</p>
-                                <p>Last Updated: {new Date(application.lastUpdated).toLocaleDateString()}</p>
-                            </div>
-                            <div className={styles.actions}>
-                                <button 
-                                    className={styles.editButton}
-                                    onClick={() => handleEdit(application)}
+                                    Company
+                                </TableSortLabel>
+                            </TableCell>
+                            <TableCell>
+                                <TableSortLabel
+                                    active={orderBy === 'jobTitle'}
+                                    direction={orderBy === 'jobTitle' ? order : 'asc'}
+                                    onClick={() => handleRequestSort('jobTitle')}
                                 >
-                                    Edit
-                                </button>
-                                <button 
-                                    className={styles.deleteButton}
-                                    onClick={() => handleDelete(application.id)}
+                                    Position
+                                </TableSortLabel>
+                            </TableCell>
+                            <TableCell>
+                                <TableSortLabel
+                                    active={orderBy === 'status'}
+                                    direction={orderBy === 'status' ? order : 'asc'}
+                                    onClick={() => handleRequestSort('status')}
                                 >
-                                    Delete
-                                </button>
-                            </div>
-                        </div>
-                    ))
-                )}
-            </div>
+                                    Status
+                                </TableSortLabel>
+                            </TableCell>
+                            <TableCell>
+                                <TableSortLabel
+                                    active={orderBy === 'appliedDate'}
+                                    direction={orderBy === 'appliedDate' ? order : 'asc'}
+                                    onClick={() => handleRequestSort('appliedDate')}
+                                >
+                                    Applied Date
+                                </TableSortLabel>
+                            </TableCell>
+                            <TableCell>Actions</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {paginatedApplications.map((application) => (
+                            <TableRow key={application.id}>
+                                <TableCell>{application.companyName}</TableCell>
+                                <TableCell>{application.jobTitle}</TableCell>
+                                <TableCell>
+                                    <Select
+                                        value={application.status}
+                                        onChange={(e) => handleUpdateStatus(application.id, e.target.value)}
+                                        size="small"
+                                        sx={{
+                                            backgroundColor: STATUS_COLORS[application.status]?.bg,
+                                            color: STATUS_COLORS[application.status]?.color,
+                                            '.MuiOutlinedInput-notchedOutline': { border: 'none' },
+                                            '&:hover .MuiOutlinedInput-notchedOutline': { border: 'none' },
+                                            '&.Mui-focused .MuiOutlinedInput-notchedOutline': { border: 'none' },
+                                        }}
+                                    >
+                                        {APPLICATION_STATUSES.map(status => (
+                                            <MenuItem key={status} value={status}>
+                                                {status.charAt(0) + status.slice(1).toLowerCase()}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </TableCell>
+                                <TableCell>
+                                    {new Date(application.appliedDate).toLocaleDateString()}
+                                </TableCell>
+                                <TableCell>
+                                    <IconButton
+                                        size="small"
+                                        onClick={() => handleEdit(application)}
+                                    >
+                                        <EditIcon />
+                                    </IconButton>
+                                    <IconButton
+                                        size="small"
+                                        color="error"
+                                        onClick={() => handleDelete(application.id)}
+                                    >
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+                <TablePagination
+                    rowsPerPageOptions={[5, 10, 25]}
+                    component="div"
+                    count={applications.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={(e, newPage) => setPage(newPage)}
+                    onRowsPerPageChange={(e) => {
+                        setRowsPerPage(parseInt(e.target.value, 10));
+                        setPage(0);
+                    }}
+                />
+            </TableContainer>
 
-            {showNewApplicationForm && (
-                <div className={styles.modal}>
-                    <NewApplicationForm 
+            <Dialog
+                open={showNewApplicationForm}
+                onClose={() => {
+                    setShowNewApplicationForm(false);
+                    setEditingApplication(null);
+                }}
+                maxWidth="md"
+                fullWidth
+            >
+                <DialogContent>
+                    <NewApplicationForm
                         onClose={() => {
                             setShowNewApplicationForm(false);
                             setEditingApplication(null);
                         }}
-                        onSubmit={async (data) => {
+                        onSubmit={async () => {
                             setShowNewApplicationForm(false);
                             setEditingApplication(null);
                             await fetchApplications();
                         }}
                         initialData={editingApplication}
                     />
-                </div>
-            )}
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }

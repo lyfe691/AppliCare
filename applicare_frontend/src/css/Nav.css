@@ -22,13 +22,13 @@
     top: 1rem;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 999;
+    z-index: 1003;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
     width: 95%;
-    max-width: 1200px;
+    max-width: 1300px;
     background-color: var(--nav-bg-color);
     backdrop-filter: blur(var(--blur-amount));
     -webkit-backdrop-filter: blur(var(--blur-amount));

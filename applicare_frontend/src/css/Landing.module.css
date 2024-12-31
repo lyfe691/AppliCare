@@ -1,21 +1,19 @@
-/********************
- * LANDING PAGE CSS *
- ********************/
+/* src/css/Landing.module.css */
 
 .landing {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dark {
     background-color: #1a1f2d;
-    color: white;
+    color: #f0f4f8;
 }
 
 .light {
-    background-color: white;
+    background-color: #ffffff;
     color: #1a1f2d;
 }
 
@@ -36,13 +34,20 @@
 }
 
 .logo img {
-    height: 32px;
+    height: 40px;
     width: auto;
 }
 
-.logo span {
-    font-size: 1.25rem;
-    font-weight: 600;
+.logoText {
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .logoText {
+        opacity: 0; /* Hide text on smaller screens */
+    }
 }
 
 .navButtons {
@@ -59,15 +64,17 @@
 .separator {
     width: 1px;
     height: 24px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: background-color 0.3s ease;
 }
 
 .light .separator {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .iconButtons {
     display: flex;
+    align-items: center;
     gap: 0.5rem;
 }
 
@@ -76,7 +83,7 @@
     align-items: center;
     justify-content: center;
     color: rgba(255, 255, 255, 0.7);
-    transition: all 0.2s ease;
+    transition: color 0.2s ease, background-color 0.2s ease;
     padding: 0.5rem;
     border-radius: 6px;
     background: transparent;
@@ -91,14 +98,14 @@
 
 .githubLink:hover, 
 .themeToggle:hover {
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .light .githubLink:hover, 
 .light .themeToggle:hover {
-    color: black;
-    background: rgba(0, 0, 0, 0.1);
+    color: #000000;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .main {
@@ -131,47 +138,50 @@
 
 .subtitle {
     font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(240, 244, 248, 0.7);
     margin-bottom: 2rem;
     line-height: 1.6;
+    transition: color 0.3s ease;
 }
 
 .light .subtitle {
-    color: rgba(0, 0, 0, 0.85);
+    color: rgba(26, 31, 45, 0.85);
 }
 
 .loginButton {
     background: transparent;
     color: inherit;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 0.5rem 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 0.6rem 1.2rem;
     border-radius: 6px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .light .loginButton {
-    border-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.3);
 }
 
 .loginButton:hover {
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
 }
 
 .light .loginButton:hover {
-    border-color: rgba(0, 0, 0, 0.4);
+    border-color: rgba(0, 0, 0, 0.6);
 }
 
 .registerButton {
     background: #3b82f6;
-    color: white;
+    color: #ffffff;
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 6px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
 .registerButton:hover {
@@ -180,28 +190,29 @@
 
 .ctaButton {
     font-size: 1rem;
-    padding: 0.75rem 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.8rem;
+    background: rgba(255, 255, 255, 0.15);
     color: inherit;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 6px;
-    font-weight: 500;
-    transition: all 0.2s ease;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .light .ctaButton {
     background: rgba(0, 0, 0, 0.05);
-    border-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.3);
 }
 
 .ctaButton:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .light .ctaButton:hover {
     background: rgba(0, 0, 0, 0.1);
-    border-color: rgba(0, 0, 0, 0.3);
+    border-color: rgba(0, 0, 0, 0.5);
 }
 
 .demoSection {
@@ -222,6 +233,7 @@
     max-width: 900px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .light .demoCard {
@@ -230,17 +242,18 @@
 }
 
 .statsCard, .todoCard, .metricsCard {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .light .statsCard, 
 .light .todoCard, 
 .light .metricsCard {
     background: rgba(0, 0, 0, 0.05);
-    border-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
 }
 
 .date {
@@ -248,12 +261,13 @@
 }
 
 .date span {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(240, 244, 248, 0.6);
     font-size: 0.875rem;
+    display: block;
 }
 
 .light .date span {
-    color: rgba(0, 0, 0, 0.75);
+    color: rgba(26, 31, 45, 0.75);
 }
 
 .date h2 {
@@ -270,11 +284,12 @@
 
 .todoCard h3 {
     margin-bottom: 1rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(240, 244, 248, 0.9);
+    transition: color 0.3s ease;
 }
 
 .light .todoCard h3 {
-    color: rgba(0, 0, 0, 0.95);
+    color: rgba(26, 31, 45, 0.95);
 }
 
 .todoCard ul {
@@ -284,12 +299,13 @@
 
 .todoCard li {
     padding: 0.75rem 0;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(240, 244, 248, 0.7);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
 .light .todoCard li {
-    color: rgba(0, 0, 0, 0.85);
+    color: rgba(26, 31, 45, 0.85);
     border-bottom-color: rgba(0, 0, 0, 0.15);
 }
 
@@ -303,29 +319,39 @@
 
 .graph h3 {
     margin-bottom: 1rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(240, 244, 248, 0.9);
+    transition: color 0.3s ease;
 }
 
 .light .graph h3 {
-    color: rgba(0, 0, 0, 0.95);
+    color: rgba(26, 31, 45, 0.95);
 }
 
 .graphContent {
     height: 100px;
     background: linear-gradient(90deg, transparent, #3b82f6);
     border-radius: 6px;
-    opacity: 0.5;
+    opacity: 0.6;
+    transition: background 0.3s ease, opacity 0.3s ease;
 }
 
 .light .graphContent {
     background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), #3b82f6);
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
+/* Footer Styles */
 .footer {
-    padding: 4rem 2rem;
+    padding: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.light .footer {
+    border-top-color: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .footerContent {
@@ -333,97 +359,32 @@
     margin: 0 auto;
 }
 
-.footerTop {
-    margin-bottom: 3rem;
+.footerMain {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 2rem;
 }
 
-.footerLogo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.light .footerLogo {
-    background: rgba(0, 0, 0, 0.05);
-}
-
-.footerLogo img {
-    height: 28px;
-    width: auto;
-}
-
-.footerLogo span {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: inherit;
-}
-
-.footerTop p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1rem;
-}
-
-.light .footerTop p {
-    color: rgba(0, 0, 0, 0.85);
-}
-
-.footerLinks {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-
-.footerSection {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.footerSection h4 {
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.footerSection a {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
+.copyright {
+    color: rgba(240, 244, 248, 0.6);
     font-size: 0.875rem;
-    transition: color 0.2s ease;
+    font-weight: 500;
 }
 
-.footerSection a:hover {
-    color: white;
+.light .copyright {
+    color: rgba(26, 31, 45, 0.6);
 }
 
-.footerBottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+.footerDivider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background-color 0.3s ease;
 }
 
-.light .footerBottom {
-    border-top-color: rgba(0, 0, 0, 0.1);
-}
-
-.footerBottom p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.875rem;
-}
-
-.light .footerBottom p {
-    color: rgba(0, 0, 0, 0.75);
+.light .footerDivider {
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .socialLinks {
@@ -431,50 +392,154 @@
     gap: 1rem;
 }
 
-.socialLinks a {
-    color: rgba(255, 255, 255, 0.7);
-    transition: color 0.2s ease;
-}
-
-.light .socialLinks a {
-    color: rgba(0, 0, 0, 0.75);
-}
-
-.socialLinks a:hover {
-    color: white;
-}
-
-.light .socialLinks a:hover {
-    color: rgba(0, 0, 0, 0.95);
-}
-
-.browserIcons {
+.socialLink {
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 2rem;
-    opacity: 0.5;
+    color: rgba(240, 244, 248, 0.6);
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
 }
 
-.light .footer {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+.light .socialLink {
+    color: rgba(26, 31, 45, 0.6);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.socialLink:hover {
+    color: #3b83f67a;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 1.25rem;
+    }
+
+    .footerMain {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .footerDivider {
+        display: none;
+    }
+}
+
+/* FAQ Section Styles */
+.faqSection {
+    width: 100%;
+    max-width: 900px;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.light .faqSection {
     background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.1);
 }
 
-.light .footerSection h4 {
-    color: #1a1f2d;
+.faqSection h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.light .footerSection a,
-.light .footerBottom p,
-.light .socialLinks a {
-    color: rgba(0, 0, 0, 0.7);
+.faqList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.light .footerSection a:hover,
-.light .socialLinks a:hover {
-    color: #1a1f2d;
+.faqItem {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
+.light .faqItem {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.faqItem.active {
+    border-color: rgba(59, 130, 246, 0.5);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.faqQuestion {
+    width: 100%;
+    padding: 1.5rem;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.faqQuestion:focus {
+    outline: none;
+}
+
+.faqQuestion:hover {
+    color: #3b82f6;
+}
+
+.faqQuestion svg {
+    transition: transform 0.3s ease;
+}
+
+.active .faqQuestion svg {
+    transform: rotate(180deg);
+    color: #3b82f6;
+}
+
+.faqAnswer {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(240, 244, 248, 0.85);
+    transition: all 0.3s ease;
+}
+
+.light .faqAnswer {
+    color: rgba(26, 31, 45, 0.85);
+}
+
+.active .faqAnswer {
+    max-height: 200px;
+    padding: 0 1.5rem 1.5rem;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+    color: inherit;
+}
+
+.open {
+    transform: rotate(180deg);
+}
+
+/* Existing Media Queries */
 @media (max-width: 768px) {
     .heroContent h1 {
         font-size: 3rem;
@@ -495,11 +560,16 @@
 
     .main {
         padding: 2rem 1rem;
+        gap: 3rem;
     }
 
-    .footerLinks {
-        grid-template-columns: repeat(2, 1fr);
+    .footerContent {
         gap: 2rem;
+    }
+
+    .footerTop {
+        flex-direction: column;
+        text-align: center;
     }
 
     .footerBottom {
@@ -508,9 +578,16 @@
         text-align: center;
     }
 
-    .footerTop {
-        flex-direction: column;
-        text-align: center;
+    .faqSection {
+        padding: 2rem;
+    }
+
+    .faqQuestion {
+        font-size: 1rem;
+    }
+
+    .faqAnswer {
+        font-size: 0.9rem;
     }
 }
 
@@ -520,7 +597,7 @@
     }
 
     .navButtons {
-        gap: 0.5rem;
+        gap: 0.75rem;
     }
 
     .separator {
@@ -530,4 +607,163 @@
     .iconButtons {
         margin-left: 0.5rem;
     }
+} 
+
+/* Mobile-first improvements */
+@media (max-width: 768px) {
+    .nav {
+        padding: 1rem;
+    }
+
+    .logoText {
+        display: none;
+    }
+
+    .navButtons {
+        gap: 1rem;
+    }
+
+    .authButtons {
+        gap: 0.5rem;
+    }
+
+    .loginButton,
+    .registerButton {
+        padding: 0.6rem 1.2rem;
+        min-width: 100px;
+        font-size: 0.9rem;
+    }
+
+    .main {
+        padding: 2rem 1rem;
+        gap: 3rem;
+    }
+
+    .heroContent h1 {
+        font-size: 3rem;
+    }
+
+    .subtitle {
+        font-size: 1.25rem;
+        padding: 0 1rem;
+    }
+
+    .demoCard {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+    }
+
+    .todoCard {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .faqSection {
+        padding: 2rem 1.5rem;
+        margin: 0 1rem;
+    }
+
+    .faqSection h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .faqQuestion {
+        padding: 1.25rem;
+        font-size: 1rem;
+    }
+
+    .active .faqAnswer {
+        padding: 0 1.25rem 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .navButtons {
+        gap: 0.5rem;
+    }
+
+    .authButtons {
+        gap: 0.375rem;
+    }
+
+    .loginButton,
+    .registerButton {
+        padding: 0.5rem 1rem;
+        min-width: 90px;
+        font-size: 0.875rem;
+    }
+
+    .separator {
+        display: none;
+    }
+
+    .iconButtons {
+        margin-left: 0.375rem;
+    }
+
+    .heroContent h1 {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.125rem;
+    }
+
+    .faqSection {
+        padding: 1.5rem 1rem;
+    }
+}
+
+/* Simplified Footer */
+.footer {
+    padding: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+}
+
+.light .footer {
+    border-top-color: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.footerContent {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.socialLinks {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.socialLinks a {
+    color: rgba(240, 244, 248, 0.7);
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+
+.light .socialLinks a {
+    color: rgba(26, 31, 45, 0.75);
+}
+
+.socialLinks a:hover {
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.footerContent p {
+    color: rgba(240, 244, 248, 0.6);
+    font-size: 0.875rem;
+}
+
+.light .footerContent p {
+    color: rgba(26, 31, 45, 0.6);
 } 

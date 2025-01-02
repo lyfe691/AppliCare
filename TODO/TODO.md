@@ -22,5 +22,13 @@
 2. [ ] IMPORTANT: CREATE A SETTINGS PAGE
 2. [ ] dark mode
 2. [ ] AppliCare text in the authform -> link to /
-2. [ ] use toasitfy for notifs.
-2. [ ] make landing page more mobile friendly.
+2. [X] make landing page more mobile friendly.
+2. [X] remove mui, use antd
+2. [ ] add password confiramtion in register
+2. [ ] refine everything in the Dashboard.
+2. [ ] fix sorting in manage applicaitons
+2. [ ] add norifs in manage applicaitons for creating or failing to save a application
+2. [ ] add cnfirmation to delte the task like in the manage page
+3. [ ] add pagination for the tasks page and fix the mobile responsivess
+3. [ ] add logout confirmation
+3. [ ] create a better footer - inspirated by the landing page footer but w antd

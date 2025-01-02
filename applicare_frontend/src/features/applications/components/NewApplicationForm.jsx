@@ -2,10 +2,12 @@
 
 import { useState } from 'react';
 import { useAuth } from '../../auth/AuthContext';
-import { TextField, Select, MenuItem, FormControl, InputLabel, Grid, Button, Typography,
-    Box, Alert, FormHelperText } from '@mui/material';
-
+import { Form, Input, Select, Button, Typography, Alert, Space, Switch, Row, Col } from 'antd';
 import styles from './NewApplicationForm.module.css';
+
+const { Title } = Typography;
+const { TextArea } = Input;
+const { Option } = Select;
 
 // the statuses
 const APPLICATION_STATUSES = [
@@ -28,48 +30,34 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
     const { user } = useAuth();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [form] = Form.useForm();
 
-    async function handleSubmit(e) {
-        e.preventDefault();
+    async function handleSubmit(values) {
         setError(null);
         setLoading(true);
 
-        const formData = new FormData(e.target);
-        const data = {
-            companyName: formData.get('companyName'),
-            jobTitle: formData.get('jobTitle'),
-            jobUrl: formData.get('jobUrl'),
-            status: formData.get('status'),
-            location: formData.get('location'),
-            contactPerson: formData.get('contactPerson'),
-            contactEmail: formData.get('contactEmail'),
-            contactPhone: formData.get('contactPhone'),
-            notes: formData.get('notes'),
-            salary: formData.get('salary') ? parseFloat(formData.get('salary')) : null,
-            salaryPeriod: formData.get('salaryPeriod'),
-            remote: formData.get('remote') === 'true'
-        };
-
         try {
-            const url = initialData 
+            const url = initialData
                 ? `http://localhost:8080/api/applications/${initialData.id}`
                 : 'http://localhost:8080/api/applications';
 
             const response = await fetch(url, {
                 method: initialData ? 'PUT' : 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${user.token}`
+                    'Authorization': `Bearer ${user.token}`,
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify({
+                    ...values,
+                    salary: values.salary ? parseFloat(values.salary) : null
+                })
             });
 
             if (!response.ok) {
-                throw new Error(initialData ? 'Failed to update application' : 'Failed to create application');
+                throw new Error('Failed to save application');
             }
 
-            const result = await response.json();
-            onSubmit(result);
+            onSubmit();
         } catch (err) {
             setError(err.message);
         } finally {
@@ -78,188 +66,176 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
     }
 
     return (
-        <Box className={styles.formContainer}>
-            <Typography variant="h5" component="h2" gutterBottom>
-                {initialData ? 'Edit Application' : 'New Application'}
-            </Typography>
+        <div className={styles.form}>
+            <Title level={4}>{initialData ? 'Edit Application' : 'New Application'}</Title>
+            
+            {error && (
+                <Alert
+                    message="Error"
+                    description={error}
+                    type="error"
+                    showIcon
+                    className={styles.alert}
+                />
+            )}
 
-            <form onSubmit={handleSubmit}>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            fullWidth
-                            label="Company Name"
+            <Form
+                form={form}
+                layout="vertical"
+                onFinish={handleSubmit}
+                initialValues={{
+                    companyName: initialData?.companyName || '',
+                    jobTitle: initialData?.jobTitle || '',
+                    jobUrl: initialData?.jobUrl || '',
+                    status: initialData?.status || 'APPLIED',
+                    location: initialData?.location || '',
+                    contactPerson: initialData?.contactPerson || '',
+                    contactEmail: initialData?.contactEmail || '',
+                    contactPhone: initialData?.contactPhone || '',
+                    notes: initialData?.notes || '',
+                    salary: initialData?.salary || '',
+                    salaryPeriod: initialData?.salaryPeriod || 'YEARLY',
+                    remote: initialData?.remote || false
+                }}
+            >
+                <Row gutter={16}>
+                    <Col span={12}>
+                        <Form.Item
                             name="companyName"
-                            required
-                            defaultValue={initialData?.companyName}
-                            variant="outlined"
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            fullWidth
-                            label="Job Title"
+                            label="Company Name"
+                            rules={[{ required: true, message: 'Please enter the company name' }]}
+                        >
+                            <Input />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item
                             name="jobTitle"
-                            required
-                            defaultValue={initialData?.jobTitle}
-                            variant="outlined"
-                        />
-                    </Grid>
+                            label="Job Title"
+                            rules={[{ required: true, message: 'Please enter the job title' }]}
+                        >
+                            <Input />
+                        </Form.Item>
+                    </Col>
+                </Row>
 
-                    <Grid item xs={12}>
-                        <TextField
-                            fullWidth
-                            label="Job URL"
-                            name="jobUrl"
-                            type="url"
-                            defaultValue={initialData?.jobUrl}
-                            variant="outlined"
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <FormControl fullWidth variant="outlined">
-                            <InputLabel>Status</InputLabel>
-                            <Select
-                                label="Status"
-                                name="status"
-                                required
-                                defaultValue={initialData?.status || 'APPLIED'}
-                            >
+                <Row gutter={16}>
+                    <Col span={12}>
+                        <Form.Item
+                            name="status"
+                            label="Status"
+                            rules={[{ required: true, message: 'Please select the status' }]}
+                        >
+                            <Select>
                                 {APPLICATION_STATUSES.map(status => (
-                                    <MenuItem key={status} value={status}>
+                                    <Option key={status} value={status}>
                                         {status.charAt(0) + status.slice(1).toLowerCase()}
-                                    </MenuItem>
+                                    </Option>
                                 ))}
                             </Select>
-                        </FormControl>
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            fullWidth
-                            label="Location"
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item
                             name="location"
-                            defaultValue={initialData?.location}
-                            variant="outlined"
-                        />
-                    </Grid>
+                            label="Location"
+                        >
+                            <Input />
+                        </Form.Item>
+                    </Col>
+                </Row>
 
-                    <Grid item xs={12} sm={6}>
-                        <FormControl fullWidth variant="outlined">
-                            <InputLabel>Remote Work</InputLabel>
-                            <Select
-                                label="Remote Work"
-                                name="remote"
-                                defaultValue={initialData?.remote?.toString() || 'false'}
-                            >
-                                <MenuItem value="false">No</MenuItem>
-                                <MenuItem value="true">Yes</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            fullWidth
-                            label="Salary"
+                <Row gutter={16}>
+                    <Col span={12}>
+                        <Form.Item
                             name="salary"
-                            type="number"
-                            defaultValue={initialData?.salary}
-                            variant="outlined"
-                            InputProps={{
-                                step: "0.01"
-                            }}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <FormControl fullWidth variant="outlined">
-                            <InputLabel>Salary Period</InputLabel>
-                            <Select
-                                label="Salary Period"
-                                name="salaryPeriod"
-                                defaultValue={initialData?.salaryPeriod || 'YEARLY'}
-                            >
+                            label="Salary"
+                        >
+                            <Input type="number" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item
+                            name="salaryPeriod"
+                            label="Salary Period"
+                        >
+                            <Select>
                                 {SALARY_PERIODS.map(period => (
-                                    <MenuItem key={period.value} value={period.value}>
+                                    <Option key={period.value} value={period.value}>
                                         {period.label}
-                                    </MenuItem>
+                                    </Option>
                                 ))}
                             </Select>
-                        </FormControl>
-                    </Grid>
+                        </Form.Item>
+                    </Col>
+                </Row>
 
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            fullWidth
-                            label="Contact Person"
+                <Row gutter={16}>
+                    <Col span={12}>
+                        <Form.Item
                             name="contactPerson"
-                            defaultValue={initialData?.contactPerson}
-                            variant="outlined"
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            fullWidth
-                            label="Contact Email"
+                            label="Contact Person"
+                        >
+                            <Input />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item
                             name="contactEmail"
-                            type="email"
-                            defaultValue={initialData?.contactEmail}
-                            variant="outlined"
-                        />
-                    </Grid>
+                            label="Contact Email"
+                            rules={[{ type: 'email', message: 'Please enter a valid email' }]}
+                        >
+                            <Input />
+                        </Form.Item>
+                    </Col>
+                </Row>
 
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            fullWidth
-                            label="Contact Phone"
+                <Row gutter={16}>
+                    <Col span={12}>
+                        <Form.Item
                             name="contactPhone"
-                            type="tel"
-                            defaultValue={initialData?.contactPhone}
-                            variant="outlined"
-                        />
-                    </Grid>
+                            label="Contact Phone"
+                        >
+                            <Input />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item
+                            name="jobUrl"
+                            label="Job URL"
+                        >
+                            <Input />
+                        </Form.Item>
+                    </Col>
+                </Row>
 
-                    <Grid item xs={12}>
-                        <TextField
-                            fullWidth
-                            label="Notes"
-                            name="notes"
-                            multiline
-                            rows={4}
-                            defaultValue={initialData?.notes}
-                            variant="outlined"
-                        />
-                    </Grid>
-                </Grid>
+                <Form.Item
+                    name="remote"
+                    label="Remote"
+                    valuePropName="checked"
+                >
+                    <Switch />
+                </Form.Item>
 
-                {error && (
-                    <Alert severity="error" sx={{ mt: 2 }}>
-                        {error}
-                    </Alert>
-                )}
+                <Form.Item
+                    name="notes"
+                    label="Notes"
+                >
+                    <TextArea rows={4} />
+                </Form.Item>
 
-                <Box sx={{ mt: 3, display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
-                    <Button
-                        variant="outlined"
-                        onClick={onClose}
-                        disabled={loading}
-                    >
-                        Cancel
-                    </Button>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        disabled={loading}
-                    >
-                        {loading ? 'Saving...' : (initialData ? 'Update' : 'Create')}
-                    </Button>
-                </Box>
-            </form>
-        </Box>
+                <Form.Item>
+                    <Space>
+                        <Button type="primary" htmlType="submit" loading={loading}>
+                            {initialData ? 'Update' : 'Submit'}
+                        </Button>
+                        <Button onClick={onClose}>
+                            Cancel
+                        </Button>
+                    </Space>
+                </Form.Item>
+            </Form>
+        </div>
     );
 }
 

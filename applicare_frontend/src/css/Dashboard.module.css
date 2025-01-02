@@ -3,44 +3,193 @@
  *****************/
 
 .dashboard {
-    padding: 2rem;
+    padding: 0 1rem;
     max-width: 1400px;
     margin: 0 auto;
+}
+
+.dashboardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 1rem;
+}
+
+.dashboardMenu {
+    border-bottom: none !important;
+    margin-left: 1rem;
+}
+
+.dashboardMenu :global(.ant-menu-item) {
+    padding: 0 20px !important;
 }
 
 .loading,
 .error {
     text-align: center;
-    padding: 3rem;
-    margin: 2rem 0;
+    padding: 2rem;
+    margin: 1rem 0;
 }
 
-.header {
+.statsRow {
+    margin-bottom: 1.5rem;
+}
+
+.statCard {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.statCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.chartsRow {
+    margin-bottom: 1.5rem;
+}
+
+.chartsRow :global(.ant-card),
+.recentRow :global(.ant-card) {
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.cardTitle {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    gap: 8px;
+    color: rgba(0, 0, 0, 0.85);
 }
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+.cardTitle :global(.anticon) {
+    color: #1890ff;
+}
+
+.statusProgress {
+    margin-bottom: 1rem;
+}
+
+.statusProgress :global(.ant-progress) {
+    margin-top: 0.5rem;
+}
+
+.recentRow :global(.ant-timeline) {
+    padding: 1rem;
+}
+
+.recentRow :global(.ant-list-item) {
+    padding: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.recentRow :global(.ant-list-item:hover) {
+    background-color: #fafafa;
+}
+
+.recentRow :global(.ant-list-item-meta-title) {
+    margin-bottom: 0;
+}
+
+.recentRow :global(.ant-timeline-item-content) {
+    padding-bottom: 1.5rem;
+}
+
+/* Tasks styles */
+.tasksList {
+    margin-top: 1rem;
+}
+
+.taskItem {
+    padding: 12px !important;
+    border-radius: 6px !important;
+    transition: all 0.3s ease !important;
+}
+
+.taskItem:hover {
+    background-color: #fafafa;
+}
+
+.taskItem :global(.ant-list-item-meta) {
+    align-items: center;
+}
+
+.taskItem :global(.ant-list-item-meta-title) {
+    margin-bottom: 0 !important;
+    line-height: 1.5;
+}
+
+.taskItem :global(.ant-list-item-meta-description) {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+
+.taskItem :global(.ant-checkbox-wrapper) {
+    margin-right: 8px;
+}
+
+.taskItem :global(.ant-list-item-action) {
+    margin-left: 48px;
+}
+
+.taskItem :global(.ant-tag) {
+    margin-right: 8px;
+}
+
+.taskItem :global(.ant-btn-text) {
+    padding: 4px 8px;
+}
+
+/* task for modal */
+.modalFooter {
+    margin-bottom: 0 !important;
+    margin-top: 24px !important;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+.modalFooter Button {
+    margin: 2.3px; 
+}
+
+:global(.ant-modal-body) {
+    padding: 24px !important;
 }
 
 @media (max-width: 768px) {
     .dashboard {
-        padding: 1rem;
+        padding: 0 0.5rem;
     }
 
-    .header {
+    .dashboardHeader {
         flex-direction: column;
+        align-items: flex-start;
         gap: 1rem;
-        text-align: center;
     }
 
-    .stats {
-        grid-template-columns: 1fr;
+    .dashboardMenu {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .taskItem :global(.ant-list-item-action) {
+        margin-left: 0;
+    }
+
+    .taskItem {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .taskItem :global(.ant-list-item-action) {
+        padding: 0;
+        margin: 8px 0 0 32px;
     }
 } 

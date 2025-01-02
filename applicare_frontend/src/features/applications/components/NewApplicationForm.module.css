@@ -2,13 +2,20 @@
  * APPLICATION FORM CSS *
  ************************/
 
-.formContainer {
-    width: 100%;
+.form {
     padding: 1rem;
 }
 
+.form :global(.ant-form-item) {
+    margin-bottom: 1rem;
+}
+
+.alert {
+    margin-bottom: 1.5rem;
+}
+
 @media (max-width: 768px) {
-    .formContainer {
+    .form {
         padding: 0.5rem;
     }
 } 

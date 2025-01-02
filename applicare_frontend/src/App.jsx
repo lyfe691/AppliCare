@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from "./features/auth/AuthContext";
 import Layout from "./components/Layout";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
+import Manage from "./pages/Manage";
 import Login from "./features/auth/pages/Login";
 import Register from "./features/auth/pages/Register";
 import ForgotPassword from "./features/auth/pages/ForgotPassword";
@@ -33,6 +34,11 @@ export default function App() {
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/manage" element={
+              <ProtectedRoute>
+                <Manage />
               </ProtectedRoute>
             } />
           </Route>

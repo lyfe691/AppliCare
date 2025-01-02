@@ -19,8 +19,7 @@
 
 .layout-content {
   flex: 1;
-  padding: 2rem;
-  padding-top: 9rem; /* the space between the page content and the navigation*/
+  padding: 1.5rem;
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -28,7 +27,6 @@
 @media (max-width: 768px) {
   .layout-content {
     padding: 1rem;
-    padding-top: 10rem; /* the space between the page content and the navigation*/
   }
 }
   

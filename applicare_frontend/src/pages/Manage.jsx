@@ -231,7 +231,7 @@ function Manage() {
 
     if (initialLoading) return (
         <div className={styles.loading}>
-            <Loading3QuartersOutlined /> //jst a loading icon 
+            <Loading3QuartersOutlined /> {/*jst a loading icon */}
         </div>
     );
 

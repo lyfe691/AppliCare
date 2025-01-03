@@ -332,6 +332,17 @@ function Dashboard() {
                                         areaStyle={{
                                             fill: 'l(270) 0:#ffffff 0.5:#7ec2f3 1:#1890ff',
                                         }}
+                                        animation={{
+                                            appear: {
+                                                animation: 'wave-in',
+                                                duration: 1000,
+                                            }
+                                        }}
+                                        tooltip={{
+                                            formatter: (datum) => {
+                                                return { name: 'Total Applications', value: datum.applications };
+                                            }
+                                        }}
                                     />
                                 </Card>
                             </Col>
@@ -510,8 +521,8 @@ function Dashboard() {
                                                 }
                                                 title={
                                                     <Text
-                                                        delete={task.completed}
                                                         style={{ 
+                                                            textDecoration: task.completed ? 'line-through' : 'none',
                                                             color: task.completed ? '#8c8c8c' : 'inherit',
                                                         }}
                                                     >
@@ -519,7 +530,13 @@ function Dashboard() {
                                                     </Text>
                                                 }
                                                 description={
-                                                    <div className={styles.taskDescription}>
+                                                    <div 
+                                                        className={styles.taskDescription}
+                                                        style={{ 
+                                                            textDecoration: task.completed ? 'line-through' : 'none',
+                                                            color: task.completed ? '#8c8c8c' : 'inherit',
+                                                        }}
+                                                    >
                                                         {task.description}
                                                     </div>
                                                 }

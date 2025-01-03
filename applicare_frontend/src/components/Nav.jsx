@@ -96,7 +96,7 @@ function Nav() {
           {navigationMenu}
           {user && (
             <Button
-              type="text"
+              type="dashed" // lowk clean 
               icon={<LogoutOutlined />}
               onClick={logout}
               className="logout-button"

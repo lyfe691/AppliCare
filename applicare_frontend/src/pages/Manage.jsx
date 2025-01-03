@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../features/auth/AuthContext';
 import NewApplicationForm from '../features/applications/components/NewApplicationForm';
 import { Table, Button, Typography, Space, Modal, Select, Popconfirm, Input, Tag, message } from 'antd';
-import { EditOutlined, DeleteOutlined, SearchOutlined, PlusOutlined, Loading3QuartersOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, SearchOutlined, PlusOutlined, Loading3QuartersOutlined, LoadingOutlined } from '@ant-design/icons';
 import styles from '../css/Manage.module.css';
 
 const { Title, Text } = Typography;
@@ -231,7 +231,7 @@ function Manage() {
 
     if (initialLoading) return (
         <div className={styles.loading}>
-            <Loading3QuartersOutlined /> {/*jst a loading icon */}
+            <LoadingOutlined /> {/*jst a loading icon */}
         </div>
     );
 
@@ -244,7 +244,7 @@ function Manage() {
     return (
         <div className={styles.manage}>
             <div className={styles.header}>
-                <Title level={4}>Manage Applications</Title>
+                <Title level={3}>Manage Applications</Title>
                 <div className={styles.headerControls}>
                     <Input
                         placeholder="Search applications..."

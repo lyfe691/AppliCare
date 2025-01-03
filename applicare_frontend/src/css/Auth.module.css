@@ -4,10 +4,9 @@
 
 /* 
     -.authPage (light mode by default)
-    - defines color variables here so only Auth pages use them
 */
 .authPage {
-    --primary-color: #6C63FF;
+    --primary-color: #719781;
     --secondary-color: #3F3D56;
     --accent-color: #F50057;
     --background-color: #F2F2F2;
@@ -16,8 +15,8 @@
     --border-color: #E0E0E0;
     --success-color: #00C853;
     --error-color: #FF3D00;
-    --gradient-start: #6C63FF;
-    --gradient-end: #FF6584;
+    --gradient-start: #90bda29c;
+    --gradient-end: #71b880;
   
     min-height: 100vh;
     display: flex;
@@ -58,6 +57,12 @@
     padding: 20px 30px;
     margin: 0 auto;
 }
+
+/*antd font fix*/
+.authContainer p {
+    font-size: 18px;
+}
+  
   
 .authContainer::before,
 .authContainer::after {

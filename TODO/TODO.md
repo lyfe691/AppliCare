@@ -24,7 +24,7 @@
 2. [X] make landing page more mobile friendly.
 2. [X] remove mui, use antd
 2. [ ] add password confiramtion in register
-2. [ ] refine everything in the Dashboard.
+2. [X] refine everything in the Dashboard.
 2. [X] fix sorting in manage applicaitons
 2. [X] add norifs in manage applicaitons for creating or failing to save a application
 2. [X] add cnfirmation to delte the task like in the manage page
@@ -33,3 +33,8 @@
 3. [ ] create a better footer - inspirated by the landing page footer but w antd
 3. [X] clear form after creating application.
 3. [ ] when navigating on mobile and clicking on a new page it should remove the menu
+3. [ ] fix: chart in dashboard not recognizing applications
+3. [X] fix: now that i am using the App layer of antd i need to update the naked tags since the text is so small
+3. [ ] chnage the global fiont from antd
+3. [ ] create a new /tasks and there the user creates the tasks like in the current dashboard, and then the user can see their tasks in the dashboard but modifies them im the /tasks
+3. [ ] show 'no data' from antd for charts and statuses.

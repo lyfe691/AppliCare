@@ -185,11 +185,6 @@ function Dashboard() {
             return acc;
         }, {});
 
-        // recent applications
-        const recentApplications = [...applications]
-            .sort((a, b) => new Date(b.appliedDate) - new Date(a.appliedDate))
-            .slice(0, 5);
-
         return {
             total,
             active,
@@ -199,8 +194,7 @@ function Dashboard() {
             rejectionRate,
             inProgress,
             statusCount,
-            applicationsByDate,
-            recentApplications
+            applicationsByDate
         };
     }, [applications]);
 
@@ -250,11 +244,6 @@ function Dashboard() {
             key: 'overview',
             icon: <LineChartOutlined />,
             label: 'Overview',
-        },
-        {
-            key: 'activity',
-            icon: <BarChartOutlined />,
-            label: 'Recent Activity',
         },
         {
             key: 'tasks',
@@ -339,8 +328,8 @@ function Dashboard() {
                                             }
                                         }}
                                         tooltip={{
-                                            formatter: (datum) => {
-                                                return { name: 'Total Applications', value: datum.applications };
+                                            formatter: (date) => {
+                                                return { name: 'Total Applications', value: date.applications };
                                             }
                                         }}
                                     />
@@ -359,7 +348,7 @@ function Dashboard() {
                                         <div key={status} className={styles.statusProgress}>
                                             <Text>{status.charAt(0) + status.slice(1).toLowerCase()}</Text>
                                             <Progress
-                                                percent={Math.round((count / stats.total) * 100)}
+                                                percent={stats.total > 0 ? Math.round((count / stats.total) * 100) : 0}
                                                 strokeColor={STATUS_COLORS[status]?.color}
                                                 size="small"
                                             />
@@ -369,78 +358,6 @@ function Dashboard() {
                             </Col>
                         </Row>
                     </>
-                );
-            case 'activity':
-                return (
-                    <Row gutter={[16, 16]} className={styles.recentRow}>
-                        <Col xs={24} lg={12}>
-                            <Card 
-                                title={
-                                    <div className={styles.cardTitle}>
-                                        <ClockCircleOutlined /> Recent Applications
-                                    </div>
-                                }
-                                bordered={false}
-                                extra={
-                                    <Link to="/manage">
-                                        <Button type="link" icon={<PlusOutlined />}>
-                                            Manage
-                                        </Button>
-                                    </Link>
-                                }
-                            >
-                                <List
-                                    dataSource={stats.recentApplications}
-                                    renderItem={app => (
-                                        <List.Item>
-                                            <List.Item.Meta
-                                                title={app.jobTitle}
-                                                description={
-                                                    <>
-                                                        <Text type="secondary">{app.companyName}</Text>
-                                                        <br />
-                                                        <Text type="secondary">
-                                                            <CalendarOutlined /> {new Date(app.appliedDate).toLocaleDateString()}
-                                                        </Text>
-                                                    </>
-                                                }
-                                            />
-                                            <Tag color={STATUS_COLORS[app.status]?.color}>
-                                                {app.status.charAt(0) + app.status.slice(1).toLowerCase()}
-                                            </Tag>
-                                        </List.Item>
-                                    )}
-                                />
-                            </Card>
-                        </Col>
-                        <Col xs={24} lg={12}>
-                            <Card 
-                                title={
-                                    <div className={styles.cardTitle}>
-                                        <CalendarOutlined /> Application Timeline
-                                    </div>
-                                }
-                                bordered={false}
-                            >
-                                <Timeline
-                                    items={stats.recentApplications.map(app => ({
-                                        color: STATUS_COLORS[app.status]?.color,
-                                        children: (
-                                            <>
-                                                <Text strong>{app.companyName}</Text>
-                                                <br />
-                                                <Text type="secondary">{app.jobTitle}</Text>
-                                                <br />
-                                                <Text type="secondary">
-                                                    <CalendarOutlined /> {new Date(app.appliedDate).toLocaleDateString()}
-                                                </Text>
-                                            </>
-                                        ),
-                                    }))}
-                                />
-                            </Card>
-                        </Col>
-                    </Row>
                 );
             case 'tasks':
                 return (
@@ -568,7 +485,7 @@ function Dashboard() {
     return (
         <div className={styles.dashboard}>
             <div className={styles.dashboardHeader}>
-                <Title level={4}>Dashboard</Title>
+                <Title level={3}>Dashboard</Title>
                 <Menu
                     mode="horizontal"
                     selectedKeys={[activeTab]}
@@ -667,4 +584,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard; 
+export default Dashboard;

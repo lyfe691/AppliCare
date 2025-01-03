@@ -12,23 +12,24 @@
 1. [X] create the applicare dashboard
 1. [X] application files for backend
 1. [X] application form
-1. [ ] fix the structure tree; components folder css folder etc
+1. [X] fix the structure tree; components folder css folder etc
 1. [X] create a logo!
 1. [X] if theres too much applications make sure to add something like next page eg 1 2 3 etc
 1. [X] use mui material for the dashboard page cause ive seen it be useful especially for forms.
 1. [X] better looking landing page with a good base.
-1. [ ] create statistics page.
-1. [ ] move the statisitcs in the dashbopard page to a new statistics page.
-2. [ ] IMPORTANT: CREATE A SETTINGS PAGE
+1. [X] move the statisitcs in the dashbopard page to a new statistics page.
+1. [ ] IMPORTANT: CREATE A SETTINGS PAGE
 2. [ ] dark mode
 2. [ ] AppliCare text in the authform -> link to /
 2. [X] make landing page more mobile friendly.
 2. [X] remove mui, use antd
 2. [ ] add password confiramtion in register
 2. [ ] refine everything in the Dashboard.
-2. [ ] fix sorting in manage applicaitons
-2. [ ] add norifs in manage applicaitons for creating or failing to save a application
-2. [ ] add cnfirmation to delte the task like in the manage page
-3. [ ] add pagination for the tasks page and fix the mobile responsivess
-3. [ ] add logout confirmation
+2. [X] fix sorting in manage applicaitons
+2. [X] add norifs in manage applicaitons for creating or failing to save a application
+2. [X] add cnfirmation to delte the task like in the manage page
+2. [X] add pagination for the tasks page and fix the mobile responsivess
+3. [X] add logout confirmation
 3. [ ] create a better footer - inspirated by the landing page footer but w antd
+3. [X] clear form after creating application.
+3. [ ] when navigating on mobile and clicking on a new page it should remove the menu

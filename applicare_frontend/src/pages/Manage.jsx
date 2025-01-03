@@ -1,25 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../features/auth/AuthContext';
 import NewApplicationForm from '../features/applications/components/NewApplicationForm';
-import { Table, Button, Typography, Space, Modal, Select, Popconfirm, Input, Tag } from 'antd';
-import { EditOutlined, DeleteOutlined, SearchOutlined, PlusOutlined } from '@ant-design/icons';
+import { Table, Button, Typography, Space, Modal, Select, Popconfirm, Input, Tag, message } from 'antd';
+import { EditOutlined, DeleteOutlined, SearchOutlined, PlusOutlined, Loading3QuartersOutlined } from '@ant-design/icons';
 import styles from '../css/Manage.module.css';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 // bascially the same as in the previous dashboard page but now with antd instead of mui
-
-
-//the colors of the statuses
-const STATUS_COLORS = {
-    APPLIED: { color: '#1e40af', tag: 'processing' },
-    SCREENING: { color: '#9a3412', tag: 'warning' },
-    INTERVIEWING: { color: '#065f46', tag: 'default' },
-    OFFER: { color: '#86198f', tag: 'success' },
-    REJECTED: { color: '#991b1b', tag: 'error' },
-    ACCEPTED: { color: '#166534', tag: 'success' }
-};
 
 // application statuses
 const APPLICATION_STATUSES = [
@@ -34,7 +23,7 @@ const APPLICATION_STATUSES = [
 function Manage() {
     const { user } = useAuth();
     const [applications, setApplications] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [initialLoading, setInitialLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showNewApplicationForm, setShowNewApplicationForm] = useState(false);
     const [editingApplication, setEditingApplication] = useState(null);
@@ -62,7 +51,8 @@ function Manage() {
 
     async function fetchApplications() {
         try {
-            const response = await fetch('http://localhost:8080/api/applications', {
+            if (initialLoading) setInitialLoading(true);
+            const response = await fetch('/api/applications', {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
@@ -72,15 +62,16 @@ function Manage() {
             setApplications(data);
             setError(null);
         } catch (err) {
+            message.error('Failed to fetch applications');
             setError(err.message);
         } finally {
-            setLoading(false);
+            setInitialLoading(false);
         }
     }
 
     async function handleUpdateStatus(applicationId, newStatus) {
         try {
-            const response = await fetch(`http://localhost:8080/api/applications/${applicationId}/status?status=${newStatus}`, {
+            const response = await fetch(`/api/applications/${applicationId}/status?status=${newStatus}`, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${user.token}`
@@ -88,14 +79,16 @@ function Manage() {
             });
             if (!response.ok) throw new Error('Failed to update status');
             await fetchApplications();
+            message.success('Application status updated successfully');
         } catch (err) {
+            message.error('Failed to update application status');
             setError(err.message);
         }
     }
 
     async function handleDelete(applicationId) {
         try {
-            const response = await fetch(`http://localhost:8080/api/applications/${applicationId}`, {
+            const response = await fetch(`/api/applications/${applicationId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${user.token}`
@@ -103,7 +96,9 @@ function Manage() {
             });
             if (!response.ok) throw new Error('Failed to delete application');
             await fetchApplications();
+            message.success('Application deleted successfully');
         } catch (err) {
+            message.error('Failed to delete application');
             setError(err.message);
         }
     }
@@ -114,6 +109,20 @@ function Manage() {
     }
 
     const handleTableChange = (pagination, filters, sorter) => {
+        const sortedData = [...applications];
+        if (sorter.field) {
+            sortedData.sort((a, b) => {
+                if (sorter.field === 'appliedDate') {
+                    return sorter.order === 'ascend' 
+                        ? new Date(a.appliedDate) - new Date(b.appliedDate)
+                        : new Date(b.appliedDate) - new Date(a.appliedDate);
+                }
+                if (a[sorter.field] < b[sorter.field]) return sorter.order === 'ascend' ? -1 : 1;
+                if (a[sorter.field] > b[sorter.field]) return sorter.order === 'ascend' ? 1 : -1;
+                return 0;
+            });
+            setApplications(sortedData);
+        }
         setTableParams({
             pagination,
             sorter: sorter.field ? sorter : tableParams.sorter,
@@ -127,6 +136,14 @@ function Manage() {
             app.location?.toLowerCase().includes(searchText.toLowerCase())
         );
     };
+
+    // show message when search with no results
+    useEffect(() => {
+        const filtered = getFilteredApplications();
+        if (searchText && filtered.length === 0) {
+            message.info('No applications found matching your search');
+        }
+    }, [searchText, applications]);
 
     const columns = [
         {
@@ -161,7 +178,7 @@ function Manage() {
                     value={status}
                     style={{ width: '100%' }}
                     onChange={(value) => handleUpdateStatus(record.id, value)}
-                    status={STATUS_COLORS[status]?.tag}
+                    className={`${styles.statusSelect} ${styles[status.toLowerCase()]}`}
                 >
                     {APPLICATION_STATUSES.map(status => (
                         <Option key={status} value={status}>
@@ -212,9 +229,9 @@ function Manage() {
         },
     ];
 
-    if (loading) return (
+    if (initialLoading) return (
         <div className={styles.loading}>
-            <Text>Loading...</Text>
+            <Loading3QuartersOutlined /> //jst a loading icon 
         </div>
     );
 
@@ -228,13 +245,13 @@ function Manage() {
         <div className={styles.manage}>
             <div className={styles.header}>
                 <Title level={4}>Manage Applications</Title>
-                <Space size="middle">
+                <div className={styles.headerControls}>
                     <Input
                         placeholder="Search applications..."
                         prefix={<SearchOutlined />}
                         value={searchText}
                         onChange={e => setSearchText(e.target.value)}
-                        style={{ width: 250 }}
+                        className={styles.searchInput}
                         allowClear
                     />
                     <Button
@@ -247,7 +264,7 @@ function Manage() {
                     >
                         New Application
                     </Button>
-                </Space>
+                </div>
             </div>
 
             <Table
@@ -256,8 +273,9 @@ function Manage() {
                 rowKey={record => record.id}
                 pagination={tableParams.pagination}
                 onChange={handleTableChange}
-                loading={loading}
-                scroll={{ y: 'calc(100vh - 250px)' }}
+                loading={initialLoading}
+                scroll={{ x: 'max-content' }}
+                className={styles.table}
             />
 
             <Modal
@@ -266,10 +284,12 @@ function Manage() {
                     setShowNewApplicationForm(false);
                     setEditingApplication(null);
                 }}
+                destroyOnClose={true}
                 footer={null}
                 width={700}
             >
                 <NewApplicationForm
+                    key={editingApplication ? editingApplication.id : 'new'}
                     onClose={() => {
                         setShowNewApplicationForm(false);
                         setEditingApplication(null);

@@ -1,8 +1,8 @@
 // src/features/applications/components/NewApplicationForm.jsx
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../auth/AuthContext';
-import { Form, Input, Select, Button, Typography, Alert, Space, Switch, Row, Col } from 'antd';
+import { Form, Input, Select, Button, Typography, Alert, Space, Switch, Row, Col, message } from 'antd';
 import styles from './NewApplicationForm.module.css';
 
 const { Title } = Typography;
@@ -32,14 +32,38 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
     const [error, setError] = useState(null);
     const [form] = Form.useForm();
 
+    // set initial data
+    useEffect(() => {
+        if (initialData) {
+            // when editing add existing data
+            form.setFieldsValue(initialData);
+        } else {
+            // annoying but when creating a new form set empty values
+            form.setFieldsValue({
+                companyName: '',
+                jobTitle: '',
+                jobUrl: '',
+                status: 'APPLIED',
+                location: '',
+                contactPerson: '',
+                contactEmail: '',
+                contactPhone: '',
+                notes: '',
+                salary: '',
+                salaryPeriod: 'YEARLY',
+                remote: false
+            });
+        }
+    }, [form, initialData]);
+
     async function handleSubmit(values) {
         setError(null);
         setLoading(true);
 
         try {
             const url = initialData
-                ? `http://localhost:8080/api/applications/${initialData.id}`
-                : 'http://localhost:8080/api/applications';
+                ? `/api/applications/${initialData.id}`
+                : '/api/applications';
 
             const response = await fetch(url, {
                 method: initialData ? 'PUT' : 'POST',
@@ -57,9 +81,11 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
                 throw new Error('Failed to save application');
             }
 
+            message.success(initialData ? 'Application updated successfully' : 'Application created successfully');
             onSubmit();
         } catch (err) {
             setError(err.message);
+            message.error(initialData ? 'Failed to update application' : 'Failed to create application');
         } finally {
             setLoading(false);
         }
@@ -83,20 +109,7 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
                 form={form}
                 layout="vertical"
                 onFinish={handleSubmit}
-                initialValues={{
-                    companyName: initialData?.companyName || '',
-                    jobTitle: initialData?.jobTitle || '',
-                    jobUrl: initialData?.jobUrl || '',
-                    status: initialData?.status || 'APPLIED',
-                    location: initialData?.location || '',
-                    contactPerson: initialData?.contactPerson || '',
-                    contactEmail: initialData?.contactEmail || '',
-                    contactPhone: initialData?.contactPhone || '',
-                    notes: initialData?.notes || '',
-                    salary: initialData?.salary || '',
-                    salaryPeriod: initialData?.salaryPeriod || 'YEARLY',
-                    remote: initialData?.remote || false
-                }}
+                preserve={false}
             >
                 <Row gutter={16}>
                     <Col span={12}>
@@ -227,7 +240,7 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
                 <Form.Item>
                     <Space>
                         <Button type="primary" htmlType="submit" loading={loading}>
-                            {initialData ? 'Update' : 'Submit'}
+                            {initialData ? 'Update' : 'Create'}
                         </Button>
                         <Button onClick={onClose}>
                             Cancel

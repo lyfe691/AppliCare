@@ -8,20 +8,35 @@
     margin: 0 auto;
 }
 
-.loading,
-.error {
-    text-align: center;
-    padding: 2rem;
-    margin: 1rem 0;
-}
-
 .header {
+    margin-bottom: 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
+.headerControls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.searchInput {
+    width: 250px;
+}
+
+.table {
+    margin-bottom: 2rem;
+}
+
+.table :global(.ant-table-cell) {
+    white-space: nowrap;
+}
+
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
     .manage {
         padding: 0 0.5rem;
@@ -29,7 +44,73 @@
 
     .header {
         flex-direction: column;
-        gap: 1rem;
-        text-align: center;
+        align-items: stretch;
     }
+
+    .headerControls {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .searchInput {
+        width: 100%;
+    }
+
+    .headerControls button {
+        width: 100%;
+    }
+
+    .table :global(.ant-table-content) {
+        overflow-x: auto;
+    }
+
+    .table :global(.ant-table-cell) {
+        padding: 8px !important;
+    }
+
+    .table :global(.ant-select) {
+        width: 120px !important;
+    }
+
+    .table :global(.ant-space) {
+        gap: 4px !important;
+    }
+}
+
+/* loading and error states */
+.loading, .error {
+    text-align: center;
+    padding: 2rem;
+    margin: 1rem 0;
+}
+
+
+/* outline colors of the statuses */
+.statusSelect :global(.ant-select-selector) {
+    border-width: 2px !important;
+    transition: all 0.3s;
+}
+
+.statusSelect.applied :global(.ant-select-selector) {
+    border-color: #76a4e4 !important;
+}
+    
+.statusSelect.screening :global(.ant-select-selector) {
+    border-color: #faad14 !important;
+}
+
+.statusSelect.interviewing :global(.ant-select-selector) {
+    border-color: #c5c73f !important;
+}
+
+.statusSelect.offer :global(.ant-select-selector) {
+    border-color: #714897 !important;
+}
+
+.statusSelect.rejected :global(.ant-select-selector) {
+    border-color: #f5222d !important;
+}
+
+.statusSelect.accepted :global(.ant-select-selector) {
+    border-color: #52c41a !important;
 } 

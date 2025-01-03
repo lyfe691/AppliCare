@@ -193,3 +193,80 @@
         margin: 8px 0 0 32px;
     }
 } 
+
+.tasksCard {
+    margin-bottom: 24px;
+}
+
+.tasksList {
+    margin-top: 16px;
+}
+
+.taskItem {
+    padding: 12px !important;
+    transition: background-color 0.3s;
+}
+
+.taskItem:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.taskDescription {
+    max-width: 100%;
+    word-break: break-word;
+}
+
+.taskDate {
+    white-space: nowrap;
+}
+
+.taskPriority {
+    min-width: 60px;
+    text-align: center;
+}
+
+.taskAction {
+    padding: 4px 8px !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .taskItem {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .taskItem :global(.ant-list-item-meta) {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+
+    .taskItem :global(.ant-list-item-action) {
+        width: 100%;
+        margin: 0;
+        padding-top: 12px;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    .taskDate, .taskPriority {
+        margin-bottom: 8px;
+    }
+
+    .taskAction {
+        padding: 8px !important;
+    }
+
+    /* Stats cards responsiveness */
+    .statsRow > div {
+        margin-bottom: 16px;
+    }
+
+    .chartsRow {
+        flex-direction: column;
+    }
+
+    .chartsRow > div {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+} 

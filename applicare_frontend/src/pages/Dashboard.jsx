@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '../features/auth/AuthContext';
 import { Card, Row, Col, Typography, Statistic, Progress, Timeline, List, Tag, Menu, Button, 
-    Tooltip, Checkbox, Modal, Form, Input, DatePicker, Select, message } from 'antd';
+    Tooltip, Checkbox, Modal, Form, Input, DatePicker, Select, message, Popconfirm } from 'antd';
 import { Area } from '@ant-design/plots';
 import { 
     RiseOutlined, FallOutlined, ClockCircleOutlined, 
@@ -19,15 +19,19 @@ import styles from '../css/Dashboard.module.css';
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
+
+// status colors matching the colors in manage.module.css
 const STATUS_COLORS = {
-    APPLIED: { color: '#1e40af', tag: 'processing' },
-    SCREENING: { color: '#9a3412', tag: 'warning' },
-    INTERVIEWING: { color: '#065f46', tag: 'default' },
-    OFFER: { color: '#86198f', tag: 'success' },
-    REJECTED: { color: '#991b1b', tag: 'error' },
-    ACCEPTED: { color: '#166534', tag: 'success' }
+    APPLIED: { color: '#76a4e4', tag: 'processing' }, 
+    SCREENING: { color: '#faad14', tag: 'warning' }, 
+    INTERVIEWING: { color: '#c5c73f', tag: 'default' }, 
+    OFFER: { color: '#714897', tag: 'success' }, 
+    REJECTED: { color: '#f5222d', tag: 'error' }, 
+    ACCEPTED: { color: '#52c41a', tag: 'success' } 
+
 };
 
+// priority colors
 const PRIORITY_COLORS = {
     HIGH: '#f5222d',
     MEDIUM: '#fa8c16',
@@ -210,6 +214,37 @@ function Dashboard() {
         }));
     }, [stats.applicationsByDate]);
 
+    // Add pagination state for tasks
+    const [tasksPagination, setTasksPagination] = useState({
+        current: 1,
+        pageSize: 5,
+        total: 0
+    });
+
+    // Get paginated tasks
+    const getPaginatedTasks = () => {
+        const start = (tasksPagination.current - 1) * tasksPagination.pageSize;
+        const end = start + tasksPagination.pageSize;
+        return tasks.slice(start, end);
+    };
+
+    // Handle tasks pagination change
+    const handleTasksPaginationChange = (page, pageSize) => {
+        setTasksPagination(prev => ({
+            ...prev,
+            current: page,
+            pageSize: pageSize
+        }));
+    };
+
+    // Update total whenever tasks change
+    useEffect(() => {
+        setTasksPagination(prev => ({
+            ...prev,
+            total: tasks.length
+        }));
+    }, [tasks]);
+
     const menuItems = [
         {
             key: 'overview',
@@ -338,7 +373,7 @@ function Dashboard() {
                                 extra={
                                     <Link to="/manage">
                                         <Button type="link" icon={<PlusOutlined />}>
-                                            Add New
+                                            Manage
                                         </Button>
                                     </Link>
                                 }
@@ -407,6 +442,7 @@ function Dashboard() {
                                     </div>
                                 }
                                 bordered={false}
+                                className={styles.tasksCard}
                                 extra={
                                     <Button 
                                         type="primary" 
@@ -424,28 +460,45 @@ function Dashboard() {
                                 <List
                                     className={styles.tasksList}
                                     itemLayout="horizontal"
-                                    dataSource={tasks}
+                                    dataSource={getPaginatedTasks()}
+                                    pagination={{
+                                        ...tasksPagination,
+                                        onChange: handleTasksPaginationChange,
+                                        showSizeChanger: true,
+                                        showQuickJumper: true,
+                                        pageSizeOptions: [5, 10, 20],
+                                        showTotal: (total) => `Total ${total} tasks`
+                                    }}
                                     renderItem={task => (
                                         <List.Item
                                             className={styles.taskItem}
                                             actions={[
-                                                <Text type="secondary">
+                                                <Text type="secondary" className={styles.taskDate}>
                                                     Due: {new Date(task.deadline).toLocaleDateString()}
                                                 </Text>,
-                                                <Tag color={PRIORITY_COLORS[task.priority]}>
+                                                <Tag color={PRIORITY_COLORS[task.priority]} className={styles.taskPriority}>
                                                     {task.priority}
                                                 </Tag>,
                                                 <Button
                                                     type="text"
                                                     icon={<EditOutlined />}
                                                     onClick={() => handleEditTask(task)}
+                                                    className={styles.taskAction}
                                                 />,
-                                                <Button
-                                                    type="text"
-                                                    danger
-                                                    icon={<DeleteOutlined />}
-                                                    onClick={() => handleTaskDelete(task.id)}
-                                                />
+                                                <Popconfirm
+                                                    title="Delete task"
+                                                    description="Are you sure you want to delete this task?"
+                                                    onConfirm={() => handleTaskDelete(task.id)}
+                                                    okText="Yes"
+                                                    cancelText="No"
+                                                >
+                                                    <Button
+                                                        type="text"
+                                                        danger
+                                                        icon={<DeleteOutlined />}
+                                                        className={styles.taskAction}
+                                                    />
+                                                </Popconfirm>
                                             ]}
                                         >
                                             <List.Item.Meta
@@ -465,7 +518,11 @@ function Dashboard() {
                                                         {task.title}
                                                     </Text>
                                                 }
-                                                description={task.description}
+                                                description={
+                                                    <div className={styles.taskDescription}>
+                                                        {task.description}
+                                                    </div>
+                                                }
                                             />
                                         </List.Item>
                                     )}

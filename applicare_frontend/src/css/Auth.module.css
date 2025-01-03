@@ -40,8 +40,8 @@
         --border-color: #333;
         --success-color: #00e676;
         --error-color: #ff5252;
-        --gradient-start: #bb86fc;
-        --gradient-end: #ff6584;
+        --gradient-start: #4e339785;
+        --gradient-end: #7857a3;
         background-color: var(--background-color);
     }
 }

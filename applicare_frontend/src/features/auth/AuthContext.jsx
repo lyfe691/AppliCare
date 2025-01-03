@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Modal } from 'antd';
 
 const AuthContext = createContext(null);
 
@@ -76,10 +77,19 @@ export function AuthProvider({ children }) {
     return await res.text();
   }
 
-  function logout() {
-    setUser(null);
-    localStorage.removeItem("appliCareUser");
-    navigate("/login");
+  // logout modal -> remove item from localstorage
+  function confirmLogout() {
+    Modal.confirm({
+      title: 'Confirm Logout',
+      content: 'Are you sure you want to log out?',
+      okText: 'Yes',
+      cancelText: 'No',
+      onOk() {
+        setUser(null);
+        localStorage.removeItem("appliCareUser");
+        navigate("/login");
+      }
+    });
   }
 
   const value = {
@@ -88,7 +98,7 @@ export function AuthProvider({ children }) {
     registerUser,
     forgotPassword,
     resetPassword,
-    logout,
+    logout: confirmLogout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

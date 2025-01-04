@@ -30,6 +30,42 @@ public class AuthService {
     @Autowired
     private MailService mailService;
 
+    // vaidate with regex
+
+    // username must be between 3 and 20 characters 
+    private static final int MIN_USERNAME_LENGTH = 3;
+    // username must be less than 20 characters
+    private static final int MAX_USERNAME_LENGTH = 20;
+    // password must be at least 6 characters
+    private static final int MIN_PASSWORD_LENGTH = 6;
+    // username can only contain letters, numbers, and underscores
+    private static final String USERNAME_PATTERN = "^[a-zA-Z0-9_]+$";
+    // email must be a valid email address
+    private static final String EMAIL_PATTERN = "^[A-Za-z0-9+_.-]+@(.+)$";
+
+    private void validateUsername(String username) {
+        if (username.length() < MIN_USERNAME_LENGTH || username.length() > MAX_USERNAME_LENGTH) {
+            throw new RuntimeException("Username must be between " + MIN_USERNAME_LENGTH + " and " + MAX_USERNAME_LENGTH + " characters");
+        }
+        if (!username.matches(USERNAME_PATTERN)) {
+            throw new RuntimeException("Username can only contain letters, numbers, and underscores");
+        }
+    }
+
+    // validate email
+    private void validateEmail(String email) {
+        if (!email.matches(EMAIL_PATTERN)) {
+            throw new RuntimeException("Invalid email format");
+        }
+    }
+
+    // validate password
+    private void validatePassword(String password) {
+        if (password.length() < MIN_PASSWORD_LENGTH) {
+            throw new RuntimeException("Password must be at least " + MIN_PASSWORD_LENGTH + " characters");
+        }
+    }
+
     // LOGIN
     public Map<String, String> login(String usernameOrEmail, String rawPassword) {
         // find user by username or email
@@ -43,7 +79,7 @@ public class AuthService {
 
         User user = opt.get();
 
-        // validate pwd
+        // check if password is correct
         if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
             throw new RuntimeException("Invalid username/email or password");
         }
@@ -60,6 +96,12 @@ public class AuthService {
 
     // REGISTER
     public String register(String username, String email, String rawPassword) {
+        
+        // validate
+        validateUsername(username);
+        validateEmail(email);
+        validatePassword(rawPassword);
+
         if (userRepository.findByUsername(username).isPresent()) {
             throw new RuntimeException("Username already in use");
         }

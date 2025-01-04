@@ -18,6 +18,11 @@ function Register() {
     try {
       const msg = await registerUser(data.username, data.email, data.password);
       setSuccess(msg);
+
+      // redirect to login page after 2 seconds
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (err) {
       setError(err.message);
     }

@@ -1,7 +1,7 @@
 // src/features/auth/pages/ResetPassword.jsx
 
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import AuthForm from "../components/AuthForm";
 
@@ -10,6 +10,7 @@ function ResetPassword() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   // Get token from query parameters
   const [searchParams] = useSearchParams();
@@ -28,6 +29,11 @@ function ResetPassword() {
       setLoading(true);
       const msg = await resetPassword(token, data.password);
       setSuccess(msg);
+      
+      // redirect to login page after 2 seconds
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (err) {
       setError(err.message);
     } finally {

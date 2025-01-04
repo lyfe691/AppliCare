@@ -33,8 +33,12 @@
 3. [ ] create a better footer - inspirated by the landing page footer but w antd
 3. [X] clear form after creating application.
 3. [ ] when navigating on mobile and clicking on a new page it should remove the menu
-3. [ ] fix: chart in dashboard not recognizing applications
+3. [ ] fix: chart in dashboard not recognizing applications; the number, it always shows null.
 3. [X] fix: now that i am using the App layer of antd i need to update the naked tags since the text is so small
 3. [ ] chnage the global fiont from antd
 3. [ ] create a new /tasks and there the user creates the tasks like in the current dashboard, and then the user can see their tasks in the dashboard but modifies them im the /tasks
 3. [ ] show 'no data' from antd for charts and statuses.
+3. [ ] create profile in nav with drop down like in shadcn example
+4. [ ] fix: when logged out and logged in in different browser tabs it should wither be that action that was made latest, example: if the user logged in and in the other tab is still in the reset password that the user should be logged in on that tab aswell on refresh. Same thing the other way around, if the user is logged in in one tab and logges out in another, on refresh the user shouls also be logged out.
+4. [ ] Add pagination to mobile too.
+4. [ ] fix: Warning: [antd: Modal] Static function can not consume context like dynamic theme. Please use 'App' component instead.

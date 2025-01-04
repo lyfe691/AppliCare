@@ -1,14 +1,23 @@
-// src/components/Nav.jsx
-
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../features/auth/AuthContext";
-import { Layout, Menu, Button, Space, Drawer } from 'antd';
+import {
+  Layout,
+  Menu,
+  Button,
+  Space,
+  Drawer,
+  Dropdown,
+  Avatar,
+  Divider,
+} from "antd";
 import {
   DashboardOutlined,
   TableOutlined,
   LogoutOutlined,
   MenuOutlined,
-} from '@ant-design/icons';
+  UserOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import "../css/Nav.css";
 
@@ -17,18 +26,17 @@ const { Header } = Layout;
 function Nav() {
   const location = useLocation();
   const { user, logout } = useAuth();
+
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // main nav items
   const menuItems = [
     {
       key: '/dashboard',
@@ -42,16 +50,32 @@ function Nav() {
     },
   ];
 
-  const selectedKey = menuItems.find(item => item.key === location.pathname)?.key || '/dashboard';
 
-  const navigationMenu = (
-    <Menu
-      mode={isMobile ? "vertical" : "horizontal"}
-      selectedKeys={[selectedKey]}
-      items={menuItems}
-      className="nav-menu"
-    />
-  );
+  // profile menu items
+  const profileMenuItems = [
+    {
+      key: "user-info",
+      disabled: true,
+      label: (
+        <div style={{ cursor: "default" }}>
+          <div style={{ fontWeight: "bold", color: "#262626 " }}>{user?.username || "no username"}</div>
+          <div style={{ fontSize: "0.85rem" }}>{user?.email || "no email"}</div>
+        </div>
+      ),
+    },
+    { type: "divider" },
+    {
+      key: "profile",
+      icon: <UserOutlined />,
+      label: <Link to="/profile">Profile</Link>,
+    },
+    {
+      key: "settings",
+      icon: <SettingOutlined />,
+      label: <Link to="/settings">Settings</Link>,
+    },
+    
+  ];
 
   return (
     <Header className="app-header">
@@ -77,32 +101,64 @@ function Nav() {
             open={drawerVisible}
             width={250}
           >
-            {navigationMenu}
+            <Menu
+              mode="vertical"
+              items={menuItems}
+              className="nav-menu"
+            />
+
             {user && (
-              <Button
-                type="primary"
-                danger
-                icon={<LogoutOutlined />}
-                onClick={logout}
-                className="mobile-logout-button"
-              >
-                Logout
-              </Button>
+              <>
+                <Divider />
+
+                <Dropdown
+                  menu={{ items: profileMenuItems }}
+                  trigger={["click"]}
+                >
+                  <Button
+                    icon={<UserOutlined />}
+                    className="mobile-profile-button"
+                    style={{ margin: "16px", marginBottom:"auto", width: "calc(100% - 32px)" }}
+                  >
+                    {user?.username || "Profile"}
+                  </Button>
+                </Dropdown>
+
+                <Button
+                  type="primary"
+                  danger
+                  icon={<LogoutOutlined />}
+                  onClick={logout}
+                  className="mobile-logout-button"
+                >
+                  Logout
+                </Button>
+              </>
             )}
           </Drawer>
         </>
       ) : (
         <Space className="nav-content">
-          {navigationMenu}
+          <Menu
+            mode="horizontal"
+            items={menuItems}
+            className="nav-menu"
+          />
+
           {user && (
-            <Button
-              type="dashed" // lowk clean 
-              icon={<LogoutOutlined />}
-              onClick={logout}
-              className="logout-button"
-            >
-              Logout
-            </Button>
+            <>
+              <Dropdown menu={{ items: profileMenuItems }} trigger={["click"]}>
+                <Avatar icon={<UserOutlined />} style={{ cursor: "pointer" }} />
+              </Dropdown>
+              <Button
+                type="dashed"
+                icon={<LogoutOutlined />}
+                onClick={logout}
+                className="logout-button"
+              >
+                Logout
+              </Button>
+            </>
           )}
         </Space>
       )}

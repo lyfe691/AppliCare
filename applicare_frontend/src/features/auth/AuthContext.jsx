@@ -13,11 +13,12 @@ export function AuthProvider({ children }) {
     return stored ? JSON.parse(stored) : null;
   });
 
+  // LOGIN
   async function login(username, password) {
     const params = new URLSearchParams();
     params.append("username", username);
     params.append("password", password);
-
+  
     const res = await fetch("/api/auth/login", {
       method: "POST",
       body: params,
@@ -25,13 +26,20 @@ export function AuthProvider({ children }) {
     if (!res.ok) {
       throw new Error(await res.text());
     }
-    const token = await res.text();
-    const newUser = { username, token };
+
+    const data = await res.json(); 
+    const newUser = {
+      username: data.username,
+      email: data.email,
+      token: data.token,
+    };
     setUser(newUser);
     localStorage.setItem("appliCareUser", JSON.stringify(newUser));
     navigate("/"); // redirect to home
   }
-
+  
+  
+ // REGISTER USER
   async function registerUser(username, email, password) {
     const params = new URLSearchParams();
     params.append("username", username);
@@ -48,6 +56,7 @@ export function AuthProvider({ children }) {
     return await res.text();
   }
 
+  // FORGOT PASSWORD
   async function forgotPassword(email) {
     const params = new URLSearchParams();
     params.append("email", email);
@@ -62,6 +71,7 @@ export function AuthProvider({ children }) {
     return await res.text();
   }
 
+  // RESET PASSWORD
   async function resetPassword(token, password) {
     const params = new URLSearchParams();
     params.append("token", token);

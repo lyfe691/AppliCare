@@ -10,6 +10,8 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,24 +25,34 @@ public class AuthService {
     private JwtUtil jwtUtil;
 
     @Autowired
-    private MailService mailService;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private MailService mailService;
+
     // LOGIN
-    public String login(String username, String rawPassword) {
+    public Map<String, String> login(String username, String rawPassword) {
+        // Find user by username
         Optional<User> opt = userRepository.findByUsername(username);
         if (opt.isEmpty()) {
             throw new RuntimeException("Invalid username or password");
         }
 
         User user = opt.get();
+
+        // validate pwd
         if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
             throw new RuntimeException("Invalid username or password");
         }
 
-        return jwtUtil.generateToken(username, user.getId());
+        String token = jwtUtil.generateToken(username, user.getId());
+
+        Map<String, String> response = new HashMap<>();
+        response.put("token", token); 
+        response.put("username", user.getUsername()); 
+        response.put("email", user.getEmail()); 
+
+        return response; 
     }
 
     // REGISTER
@@ -78,6 +90,7 @@ public class AuthService {
         user.setPasswordResetToken(token);
         userRepository.save(user);
 
+        // send reset email
         mailService.sendResetLink(email, token);
 
         return "A reset link has been emailed to " + email;

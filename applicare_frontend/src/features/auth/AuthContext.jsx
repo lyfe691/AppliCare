@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
   // LOGIN
   async function login(username, password) {
     const params = new URLSearchParams();
-    params.append("username", username);
+    params.append("usernameOrEmail", username);
     params.append("password", password);
   
     const res = await fetch("/api/auth/login", {

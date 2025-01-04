@@ -6,7 +6,7 @@
 4. [X] cleaning up the frontend -> fixing the issues with global styles (index.css) and personal linked files like (Auth.css) for interfeering.
 5. [ ] keeping an eye on security config since ill need to change it for production.
 6. [X] make the error message in the auth forms look better
-7. [ ] make it possible to log in with username or email, currenly only username is possible. or remove username completely.
+7. [X] make it possible to log in with username or email, currenly only username is possible. or remove username completely.
 8. [ ] create some regex to make sure the user doesnt user absurd usernames or emails, i dont really care about the password though, maybe just a length limit.
 9. [X] create some protected route stuff
 1. [X] create the applicare dashboard

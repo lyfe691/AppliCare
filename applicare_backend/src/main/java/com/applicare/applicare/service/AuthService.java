@@ -31,21 +31,24 @@ public class AuthService {
     private MailService mailService;
 
     // LOGIN
-    public Map<String, String> login(String username, String rawPassword) {
-        // Find user by username
-        Optional<User> opt = userRepository.findByUsername(username);
+    public Map<String, String> login(String usernameOrEmail, String rawPassword) {
+        // find user by username or email
+        Optional<User> opt = userRepository.findByUsername(usernameOrEmail);
         if (opt.isEmpty()) {
-            throw new RuntimeException("Invalid username or password");
+            opt = userRepository.findByEmail(usernameOrEmail);
+        }
+        if (opt.isEmpty()) {
+            throw new RuntimeException("Invalid username/email or password");
         }
 
         User user = opt.get();
 
         // validate pwd
         if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
-            throw new RuntimeException("Invalid username or password");
+            throw new RuntimeException("Invalid username/email or password");
         }
 
-        String token = jwtUtil.generateToken(username, user.getId());
+        String token = jwtUtil.generateToken(user.getUsername(), user.getId());
 
         Map<String, String> response = new HashMap<>();
         response.put("token", token); 

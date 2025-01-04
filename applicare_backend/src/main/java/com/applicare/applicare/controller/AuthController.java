@@ -19,11 +19,11 @@ public class AuthController {
     // LOGIN
     @PostMapping("/login")
     public ResponseEntity<?> login(
-            @RequestParam String username, 
+            @RequestParam String usernameOrEmail, 
             @RequestParam String password
     ) {
         try {
-            Map<String, String> response = authService.login(username, password);
+            Map<String, String> response = authService.login(usernameOrEmail, password);
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

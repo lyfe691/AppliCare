@@ -18,7 +18,7 @@ function Login() {
   }
 
   const fields = [
-    { name: "username", placeholder: "Username", required: true },
+    { name: "username", placeholder: "Username or Email", required: true },
     { name: "password", type: "password", placeholder: "Password", required: true }
   ];
 
@@ -37,7 +37,7 @@ function Login() {
         <a href="/forgot-password">Forgot Password?</a>
       </p>
     </AuthForm>
-  );
+  );  
 }
 
 export default Login;

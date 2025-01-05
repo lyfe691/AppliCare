@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from "./features/auth/AuthContext";
 import Layout from "./components/Layout";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
+import Settings from "./features/settings/pages/Settings";
 import Manage from "./pages/Manage";
 import Login from "./features/auth/pages/Login";
 import Register from "./features/auth/pages/Register";
@@ -41,6 +42,11 @@ export default function AppComponent() {
               <Route path="/manage" element={
                 <ProtectedRoute>
                   <Manage />
+                </ProtectedRoute>
+              } />
+              <Route path="/settings" element={
+                <ProtectedRoute>
+                  <Settings />
                 </ProtectedRoute>
               } />
             </Route>

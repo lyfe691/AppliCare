@@ -107,12 +107,11 @@
 
 .taskItem {
     padding: 12px !important;
-    border-radius: 6px !important;
-    transition: all 0.3s ease !important;
+    transition: background-color 0.3s;
 }
 
 .taskItem:hover {
-    background-color: #fafafa;
+    background-color: rgba(0, 0, 0, 0.02);
 }
 
 .taskItem :global(.ant-list-item-meta) {
@@ -131,7 +130,9 @@
 }
 
 .taskItem :global(.ant-checkbox-wrapper) {
-    margin-right: 8px;
+    padding: 8px !important;
+    margin: -8px !important;
+    touch-action: manipulation;
 }
 
 .taskItem :global(.ant-list-item-action) {
@@ -192,6 +193,78 @@
         padding: 0;
         margin: 8px 0 0 32px;
     }
+
+    .tasksList :global(.ant-list-pagination) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 16px;
+        width: 100%;
+    }
+
+    .tasksList :global(.ant-pagination) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .tasksList :global(.ant-pagination-options) {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    .tasksList :global(.ant-pagination-options-size-changer.ant-select) {
+        width: auto !important;
+        min-width: 90px;
+    }
+
+    .tasksList :global(.ant-pagination-total-text) {
+        margin: 0 8px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .tasksList :global(.ant-pagination-prev),
+    .tasksList :global(.ant-pagination-next) {
+        flex-shrink: 0;
+        margin: 0;
+    }
+
+    .tasksList :global(.ant-pagination-item) {
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 380px) {
+        .tasksList :global(.ant-pagination-item:not(.ant-pagination-item-active)),
+        .tasksList :global(.ant-pagination-jump-prev),
+        .tasksList :global(.ant-pagination-jump-next) {
+            display: none;
+        }
+
+        .tasksList :global(.ant-pagination) {
+            gap: 4px;
+        }
+    }
+
+    .statsRow > div {
+        margin-bottom: 16px;
+    }
+
+    .chartsRow {
+        flex-direction: column;
+    }
+
+    .chartsRow > div {
+        width: 100%;
+        margin-bottom: 16px;
+    }
 } 
 
 .tasksCard {
@@ -229,7 +302,6 @@
     padding: 4px 8px !important;
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 768px) {
     .taskItem {
         flex-direction: column;
@@ -256,7 +328,6 @@
         padding: 8px !important;
     }
 
-    /* Stats cards responsiveness */
     .statsRow > div {
         margin-bottom: 16px;
     }
@@ -268,5 +339,39 @@
     .chartsRow > div {
         width: 100%;
         margin-bottom: 16px;
+    }
+} 
+
+.taskItem :global(.ant-checkbox-wrapper) {
+    padding: 8px !important;
+    margin: -8px !important;
+    touch-action: manipulation;
+}
+
+@media (max-width: 768px) {
+    .taskItem {
+        padding: 16px !important;
+    }
+
+    .taskItem :global(.ant-list-item-meta) {
+        align-items: flex-start !important;
+        margin-bottom: 8px;
+    }
+
+    .taskItem :global(.ant-checkbox-wrapper) {
+        padding: 12px !important;
+        margin: -12px !important;
+    }
+
+    .taskItem :global(.ant-list-item-meta-avatar) {
+        margin-right: 16px !important;
+        padding: 4px 0;
+    }
+
+    .taskItem :global(.ant-checkbox-wrapper),
+    .taskItem :global(.ant-checkbox) {
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
     }
 } 

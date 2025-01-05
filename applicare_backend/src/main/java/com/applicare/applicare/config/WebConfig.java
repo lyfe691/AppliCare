@@ -1,3 +1,5 @@
+// com.applicare.applicare.config.WebConfig.java
+
 package com.applicare.applicare.config;
 
 import org.springframework.context.annotation.Configuration;

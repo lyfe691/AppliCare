@@ -64,11 +64,7 @@ function Nav() {
       ),
     },
     { type: "divider" },
-    {
-      key: "profile",
-      icon: <UserOutlined />,
-      label: <Link to="/profile">Profile</Link>,
-    },
+    
     {
       key: "settings",
       icon: <SettingOutlined />,

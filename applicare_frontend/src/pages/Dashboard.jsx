@@ -10,7 +10,7 @@ import {
     TeamOutlined, CalendarOutlined, FireOutlined,
     TrophyOutlined, LineChartOutlined, BarChartOutlined,
     PlusOutlined, CheckOutlined, UnorderedListOutlined,
-    DeleteOutlined, EditOutlined
+    DeleteOutlined, EditOutlined, LoadingOutlined
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -472,7 +472,7 @@ function Dashboard() {
 
     if (loading) return (
         <div className={styles.loading}>
-            <Text>Loading...</Text>
+             <LoadingOutlined /> 
         </div>
     );
 

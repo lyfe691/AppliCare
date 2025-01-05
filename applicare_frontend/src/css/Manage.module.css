@@ -2,7 +2,7 @@
  * MANAGE CSS *
  *****************/
 
-.manage {
+ .manage {
     padding: 0 1rem;
     max-width: 1400px;
     margin: 0 auto;
@@ -74,6 +74,58 @@
 
     .table :global(.ant-space) {
         gap: 4px !important;
+    }
+
+    .table :global(.ant-pagination) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 16px 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .table :global(.ant-pagination-options) {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    .table :global(.ant-pagination-options-size-changer.ant-select) {
+        width: auto !important;
+        min-width: 90px;
+    }
+
+    .table :global(.ant-pagination-total-text) {
+        margin: 0 8px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .table :global(.ant-pagination-prev),
+    .table :global(.ant-pagination-next) {
+        flex-shrink: 0;
+        margin: 0;
+    }
+
+    .table :global(.ant-pagination-item) {
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 380px) {
+        .table :global(.ant-pagination-item:not(.ant-pagination-item-active)),
+        .table :global(.ant-pagination-jump-prev),
+        .table :global(.ant-pagination-jump-next) {
+            display: none;
+        }
+
+        .table :global(.ant-pagination) {
+            gap: 4px;
+        }
     }
 }
 

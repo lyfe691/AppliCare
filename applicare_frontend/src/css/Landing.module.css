@@ -1,10 +1,13 @@
-/* src/css/Landing.module.css */
+/**********************
+ * LANDING MODULE CSS *
+ **********************/
 
 .landing {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
 }
 
 .dark {

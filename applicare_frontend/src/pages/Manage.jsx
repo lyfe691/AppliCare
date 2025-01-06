@@ -138,12 +138,15 @@ function Manage() {
     };
 
     // show message when search with no results
-    useEffect(() => {
+    // removing it for now
+
+    /* useEffect(() => {
         const filtered = getFilteredApplications();
         if (searchText && filtered.length === 0) {
             message.info('No applications found matching your search');
         }
     }, [searchText, applications]);
+    */
 
     const columns = [
         {

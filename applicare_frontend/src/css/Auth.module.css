@@ -25,6 +25,7 @@
     background-color: var(--background-color);
     margin: 0;
     padding: 1rem;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
 }
   
 /* dark mode */

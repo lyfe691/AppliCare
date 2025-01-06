@@ -17,7 +17,7 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    private final Key signingKey;
+    private final Key signingKey; //openssl rand -base64 numbofbytes
     private final long EXPIRATION_MS = 3600000; // 1 hour
 
     public JwtUtil(@Value("${JWT_SECRET}") String secret) {

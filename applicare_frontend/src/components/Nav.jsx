@@ -30,6 +30,8 @@ function Nav() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [drawerVisible, setDrawerVisible] = useState(false);
 
+  const currentPath = location.pathname;
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
@@ -41,12 +43,12 @@ function Nav() {
     {
       key: '/dashboard',
       icon: <DashboardOutlined />,
-      label: <Link to="/dashboard">Dashboard</Link>,
+      label: <Link to="/dashboard" onClick={() => setDrawerVisible(false)}>Dashboard</Link>, 
     },
     {
       key: '/manage',
       icon: <TableOutlined />,
-      label: <Link to="/manage">Manage</Link>,
+      label: <Link to="/manage" onClick={() => setDrawerVisible(false)}>Manage</Link>,
     },
   ];
 
@@ -101,6 +103,7 @@ function Nav() {
               mode="vertical"
               items={menuItems}
               className="nav-menu"
+              selectedKeys={[currentPath]}
             />
 
             {user && (
@@ -139,6 +142,7 @@ function Nav() {
             mode="horizontal"
             items={menuItems}
             className="nav-menu"
+            selectedKeys={[currentPath]}
           />
 
           {user && (

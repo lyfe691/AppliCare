@@ -224,7 +224,7 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
 
                 <Form.Item
                     name="remote"
-                    label="Remote"
+                    label="Remote Work"
                     valuePropName="checked"
                 >
                     <Switch />

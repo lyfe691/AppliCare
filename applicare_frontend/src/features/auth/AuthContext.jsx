@@ -2,12 +2,13 @@
 
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Modal } from 'antd';
+import { App } from 'antd';
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const navigate = useNavigate();
+  const { modal } = App.useApp();
   const [user, setUser] = useState(() => {
     const stored = localStorage.getItem("appliCareUser");
     return stored ? JSON.parse(stored) : null;
@@ -89,7 +90,7 @@ export function AuthProvider({ children }) {
 
   // logout modal -> remove item from localstorage
   function confirmLogout() {
-    Modal.confirm({
+    modal.confirm({
       title: 'Confirm Logout',
       content: 'Are you sure you want to log out?',
       okText: 'Yes',

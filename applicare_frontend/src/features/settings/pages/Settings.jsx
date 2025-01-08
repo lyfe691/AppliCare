@@ -17,7 +17,7 @@ const { confirm } = Modal;
 {/*TODO: avatar upload - with backend. also update the avatar in the whole app eg. Nav.jsx*/}
 
 const Settings = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, cleanupAndRedirect } = useAuth();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [selectedKey, setSelectedKey] = useState('profile');
@@ -101,8 +101,7 @@ const Settings = () => {
           }
 
           message.success('Account deleted successfully');
-          logout();
-          navigate('/login');
+          cleanupAndRedirect();
         } catch (error) {
           message.error(error.message || 'Failed to delete account');
         }

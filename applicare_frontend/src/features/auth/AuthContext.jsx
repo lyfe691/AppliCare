@@ -103,6 +103,13 @@ export function AuthProvider({ children }) {
     });
   }
 
+  // cleanup without showing modal - for acc deletion
+  function cleanupAndRedirect() {
+    setUser(null);
+    localStorage.removeItem("appliCareUser");
+    navigate("/login");
+  }
+
   const value = {
     user,
     login,
@@ -110,6 +117,7 @@ export function AuthProvider({ children }) {
     forgotPassword,
     resetPassword,
     logout: confirmLogout,
+    cleanupAndRedirect,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -8,7 +8,7 @@ function AppConfigProvider({ children }) {
         <AntConfigProvider
             theme={{
                 token: {
-                    colorPrimary: '#9FB9A1',  // changes all stuff with the type="primary"
+                    colorPrimary: '#94a3b8', // changes all stuff with the type="primary" | slate-400
                     borderRadius: 9,
                     colorText: '#2a2a2a',
                     fontFamily: "'Montserrat', 'Roboto', sans-serif", // changes all text, remove if menu problems

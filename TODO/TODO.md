@@ -43,3 +43,6 @@
 4. [X] fix: Warning: [antd: Modal] Static function can not consume context like dynamic theme. Please use 'App' component instead.
 4. [ ] no longer use hardcoded urls
 4. [ ] fix: Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+4. [ ] fix: password regex validation should also apply to reset password page. (or everywhere) its important that its the same everywhere.
+5. [ ] implement Oauth 2 with github and google
+6. [ ] create support 

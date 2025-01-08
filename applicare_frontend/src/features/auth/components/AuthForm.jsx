@@ -1,6 +1,10 @@
 // src/features/auth/components/AuthForm.jsx
 
+import { Form, Input, Button, Typography, Alert, Space } from 'antd';
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import styles from "../../../css/Auth.module.css";
+
+const { Title, Text } = Typography;
 
 function AuthForm({
   title,
@@ -12,47 +16,115 @@ function AuthForm({
   disabled = false, 
   children,
 }) {
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = {};
-    for (let [key, val] of formData.entries()) {
-      data[key] = val;
-    }
-    onSubmit && onSubmit(data);
+  const [form] = Form.useForm();
+
+  async function handleSubmit(values) {
+    onSubmit && onSubmit(values);
   }
+
+  const getIcon = (type) => {
+    switch (type) {
+      case 'email':
+        return <MailOutlined className="auth-icon" />;
+      case 'password':
+        return <LockOutlined className="auth-icon" />;
+      default:
+        return <UserOutlined className="auth-icon" />;
+    }
+
+  };
 
   return (
     <div className={styles.authPage}>
       <div className={styles.authContainer}>
-        {title && <h2>{title}</h2>}
-        <form onSubmit={handleSubmit}>
-          {fields.map((f, i) => (
-            <input
-              key={i}
-              type={f.type || "text"}
-              name={f.name}
-              placeholder={f.placeholder || ""}
-              defaultValue={f.defaultValue || ""}
-              required={f.required || false}
-              disabled={disabled} 
-            />
-          ))}
-          <button type="submit" disabled={disabled}>
-            {buttonText}
-          </button>
-        </form>
-        {children}
-        {error && (
-          <div className={styles.errorContainer}>
-            <span className={styles.errorMessage}>{error}</span>
-          </div>
-        )}
-        {success && (
-          <div className={styles.successContainer}>
-            <span className={styles.successMessage}>{success}</span>
-          </div>
-        )}
+        <Space direction="vertical" size={24} style={{ width: '100%' }}>
+          {title && (
+            <div style={{ textAlign: 'center' }}>
+              <Title level={2} style={{ fontSize: '24px', margin: 0 }}>
+                {title}
+              </Title>
+              <Text type="secondary">
+                {title.includes("Login") ? "Welcome back! Please enter your details" : "Create your account to get started."}
+              </Text>
+            </div>
+          )}
+          
+          <Form
+            form={form}
+            onFinish={handleSubmit}
+            layout="vertical"
+            disabled={disabled}
+            size="large"
+            requiredMark={false}
+            style={{ width: '100%' }}
+          >
+            <Space direction="vertical" size={16} style={{ width: '100%', display: 'flex' }}>
+              {fields.map((f, i) => (
+                <Form.Item
+                  key={i}
+                  name={f.name}
+                  label={f.placeholder}
+                  rules={[
+                    { 
+                      required: f.required, 
+                      message: `Please enter your ${f.name}`
+                    }
+                  ]}
+                  style={{ marginBottom: 0 }}
+                >
+                  {f.type === "password" ? (
+                    <Input.Password
+                      prefix={getIcon(f.type)}
+                      placeholder={`Enter your ${f.placeholder.toLowerCase()}`}
+                      visibilityToggle={true}
+                      autoComplete={f.name === "password" ? "current-password" : "new-password"}
+                    />
+                  ) : (
+                    <Input
+                      prefix={getIcon(f.type)}
+                      type={f.type || "text"}
+                      placeholder={`Enter your ${f.placeholder.toLowerCase()}`}
+                      autoComplete={f.type === "email" ? "email" : "username"}
+                    />
+                  )}
+                </Form.Item>
+              ))}
+
+              <Form.Item style={{ marginBottom: 0, marginTop: 8 }}>
+                <Button
+                  type='primary'
+                  htmlType="submit"
+                  disabled={disabled}
+                  loading={disabled}
+                  block
+                >
+                  {buttonText}
+                </Button>
+              </Form.Item>
+            </Space>
+          </Form>
+
+          {children}
+
+          {(error || success) && (
+            <Space direction="vertical" style={{ width: '100%' }}>
+              {error && (
+                <Alert
+                  message={error}
+                  type="error"
+                  showIcon
+                />
+              )}
+              {success && (
+                <Alert
+                  message={success}
+                  type="success"
+                  showIcon
+                />
+              )}
+            </Space>
+          )}
+        </Space>
       </div>
     </div>
   );

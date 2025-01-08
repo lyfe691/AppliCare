@@ -12,7 +12,7 @@ function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Get token from query parameters
+  // get token from query parameters
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
 
@@ -56,7 +56,7 @@ function ResetPassword() {
       disabled={loading}
     >
       <p>
-        <a href="/login">Never mind, take me back</a>
+        <a href="/login">Back to Login</a>
       </p>
     </AuthForm>
   );

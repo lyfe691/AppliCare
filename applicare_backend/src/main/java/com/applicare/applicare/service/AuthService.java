@@ -43,7 +43,7 @@ public class AuthService {
     // email must be a valid email address
     private static final String EMAIL_PATTERN = "^[A-Za-z0-9+_.-]+@(.+)$";
 
-    private void validateUsername(String username) {
+    public void validateUsername(String username) {
         if (username.length() < MIN_USERNAME_LENGTH || username.length() > MAX_USERNAME_LENGTH) {
             throw new RuntimeException("Username must be between " + MIN_USERNAME_LENGTH + " and " + MAX_USERNAME_LENGTH + " characters");
         }
@@ -53,14 +53,14 @@ public class AuthService {
     }
 
     // validate email
-    private void validateEmail(String email) {
+    public void validateEmail(String email) {
         if (!email.matches(EMAIL_PATTERN)) {
             throw new RuntimeException("Invalid email format");
         }
     }
 
     // validate password
-    private void validatePassword(String password) {
+    public void validatePassword(String password) {
         if (password.length() < MIN_PASSWORD_LENGTH) {
             throw new RuntimeException("Password must be at least " + MIN_PASSWORD_LENGTH + " characters");
         }

@@ -46,3 +46,6 @@
 4. [ ] fix: password regex validation should also apply to reset password page. (or everywhere) its important that its the same everywhere.
 5. [ ] implement Oauth 2 with github and google
 6. [ ] create support 
+6. [ ] use axios instead of fetch
+7. [ ] when deleting account all associated data should be deleted eg. applications, tasks, etc.
+8. [ ] fix: when deleting account the logout modal shoould NOT be shown. also redirect to /

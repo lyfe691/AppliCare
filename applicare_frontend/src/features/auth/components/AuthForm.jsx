@@ -14,7 +14,7 @@ function AuthForm({
   error,
   success,
   buttonText = "Submit",
-  disabled = false, 
+  loading = false,
   children,
 }) {
   const [form] = Form.useForm();
@@ -53,7 +53,7 @@ function AuthForm({
             form={form}
             onFinish={handleSubmit}
             layout="vertical"
-            disabled={disabled}
+            disabled={loading}
             size="large"
             requiredMark={false}
             style={{ width: '100%' }}
@@ -93,8 +93,7 @@ function AuthForm({
                 <Button
                   type='primary'
                   htmlType="submit"
-                  disabled={disabled}
-                  loading={disabled}
+                  loading={loading}
                   block
                 >
                   {buttonText}

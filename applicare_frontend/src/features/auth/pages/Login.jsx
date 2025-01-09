@@ -7,13 +7,17 @@ import AuthForm from "../components/AuthForm";
 function Login() {
   const { login } = useAuth();
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(data) {
     setError(null);
+    setLoading(true);
     try {
       await login(data.username, data.password);
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -28,7 +32,8 @@ function Login() {
       fields={fields}
       onSubmit={handleSubmit}
       error={error}
-      buttonText="Login"
+      loading={loading}
+      buttonText={loading ? "Logging in..." : "Login"}
     >
       <p>
         Don't have an account? <a href="/register">Register</a>

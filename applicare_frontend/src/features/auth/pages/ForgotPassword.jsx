@@ -13,9 +13,9 @@ function ForgotPassword() {
   async function handleSubmit(data) {
     setError(null);
     setSuccess(null);
+    setLoading(true);
 
     try {
-      setLoading(true);
       const msg = await forgotPassword(data.email);
       setSuccess(msg);
     } catch (err) {
@@ -36,8 +36,8 @@ function ForgotPassword() {
       onSubmit={handleSubmit}
       error={error}
       success={success}
+      loading={loading}
       buttonText={loading ? "Sending..." : "Send Reset Link"}
-      disabled={loading} 
     >
       <p>
         <a href="/login">Back to Login</a>

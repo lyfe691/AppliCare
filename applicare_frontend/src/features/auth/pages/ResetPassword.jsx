@@ -19,21 +19,23 @@ function ResetPassword() {
   async function handleSubmit(data) {
     setError(null);
     setSuccess(null);
+    setLoading(true);
 
     if (!token) {
       setError("Invalid or missing reset token.");
+      setLoading(false);
       return;
     }
 
     try {
-      setLoading(true);
       const msg = await resetPassword(token, data.password);
       setSuccess(msg);
       
-      // redirect to login page after 2 seconds
+      /* redirect to login page after 2 seconds
       setTimeout(() => {
         navigate("/login");
       }, 2000);
+      */
     } catch (err) {
       setError(err.message);
     } finally {
@@ -52,8 +54,8 @@ function ResetPassword() {
       onSubmit={handleSubmit}
       error={error}
       success={success}
+      loading={loading}
       buttonText={loading ? "Resetting..." : "Reset Password"}
-      disabled={loading}
     >
       <p>
         <a href="/login">Back to Login</a>

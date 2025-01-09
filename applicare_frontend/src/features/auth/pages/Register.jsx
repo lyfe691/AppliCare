@@ -9,11 +9,13 @@ function Register() {
   const { registerUser } = useAuth();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   async function handleSubmit(data) {
     setError(null);
     setSuccess(null);
+    setLoading(true);
 
     try {
       const msg = await registerUser(data.username, data.email, data.password);
@@ -25,6 +27,8 @@ function Register() {
       }, 2000);
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -41,7 +45,8 @@ function Register() {
       onSubmit={handleSubmit}
       error={error}
       success={success}
-      buttonText="Register"
+      loading={loading}
+      buttonText={loading ? "Registering..." : "Register"}
     >
       <p>
         Already have an account? <a href="/login">Login here</a>

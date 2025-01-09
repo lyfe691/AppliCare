@@ -49,4 +49,4 @@
 6. [ ] use axios instead of fetch
 7. [X] when deleting account all associated data should be deleted eg. applications, tasks, etc.
 8. [X] fix: when deleting account the logout modal shoould NOT be shown. also redirect to /
-8. [ ] fix: dont allow spaces in passwords
+8. [X] fix: dont allow spaces in passwords

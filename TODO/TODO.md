@@ -34,7 +34,6 @@
 3. [X] when navigating on mobile and clicking on a new page it should remove the menu
 3. [ ] fix: chart in dashboard not recognizing applications; the number, it always shows null.
 3. [X] fix: now that i am using the App layer of antd i need to update the naked tags since the text is so small
-3. [ ] chnage the global fiont from antd
 3. [ ] create a new /tasks and there the user creates the tasks like in the current dashboard, and then the user can see their tasks in the dashboard but modifies them im the /tasks
 3. [ ] show 'no data' from antd for charts and statuses.
 3. [X] create profile in nav with drop down like in shadcn example
@@ -43,7 +42,7 @@
 4. [X] fix: Warning: [antd: Modal] Static function can not consume context like dynamic theme. Please use 'App' component instead.
 4. [ ] no longer use hardcoded urls
 4. [ ] fix: Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
-4. [ ] fix: password regex validation should also apply to reset password page. (or everywhere) its important that its the same everywhere.
+4. [X] fix: password regex validation should also apply to reset password page. (or everywhere) its important that its the same everywhere.
 5. [ ] implement Oauth 2 with github and google
 6. [ ] create support 
 6. [ ] use axios instead of fetch

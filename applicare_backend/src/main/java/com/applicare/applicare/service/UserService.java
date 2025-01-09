@@ -2,15 +2,24 @@ package com.applicare.applicare.service;
 
 import com.applicare.applicare.model.User;
 import com.applicare.applicare.repository.UserRepository;
+import com.applicare.applicare.repository.JobApplicationRepository;
+import com.applicare.applicare.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JobApplicationRepository jobApplicationRepository;
+
+    @Autowired
+    private TaskRepository taskRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -46,21 +55,29 @@ public class UserService {
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // Verify current password
+        // verify current password
         if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
             throw new RuntimeException("Current password is incorrect");
         }
 
-        // Validate and set new password
+        // validate and set new password
         authService.validatePassword(newPassword);
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
 
+    // WHEN DELETING THE ACCOUNT, DELETE ALL ASSOCIATED DATA. NEEDS TO BE UPDATED WHEN CREATING NEW FEATURES.
+    @Transactional
     public void deleteAccount(String userId) {
+        // verify if the user exists
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new RuntimeException("User not found"));
         
+        // delete all tasks for the user
+        taskRepository.deleteByUserId(userId);  
+        // delete all job applications for the user 
+        jobApplicationRepository.deleteByUserId(userId);
+        // delete the user at last
         userRepository.delete(user);
     }
 } 

@@ -15,6 +15,7 @@ import {
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import styles from '../css/Dashboard.module.css';
+import api from '../api/axios';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
@@ -56,13 +57,7 @@ function Dashboard() {
 
     async function fetchApplications() {
         try {
-            const response = await fetch('http://localhost:8080/api/applications', {
-                headers: {
-                    'Authorization': `Bearer ${user.token}`
-                }
-            });
-            if (!response.ok) throw new Error('Failed to fetch applications');
-            const data = await response.json();
+            const data = await api.get('/applications');
             setApplications(data);
             setError(null);
         } catch (err) {
@@ -74,13 +69,7 @@ function Dashboard() {
 
     async function fetchTasks() {
         try {
-            const response = await fetch('http://localhost:8080/api/tasks', {
-                headers: {
-                    'Authorization': `Bearer ${user.token}`
-                }
-            });
-            if (!response.ok) throw new Error('Failed to fetch tasks');
-            const data = await response.json();
+            const data = await api.get('/tasks');
             setTasks(data);
         } catch (err) {
             message.error('Failed to fetch tasks');
@@ -95,20 +84,11 @@ function Dashboard() {
                 completed: false
             };
 
-            const url = editingTask 
-                ? `http://localhost:8080/api/tasks/${editingTask.id}`
-                : 'http://localhost:8080/api/tasks';
-
-            const response = await fetch(url, {
-                method: editingTask ? 'PUT' : 'POST',
-                headers: {
-                    'Authorization': `Bearer ${user.token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(taskData)
-            });
-
-            if (!response.ok) throw new Error('Failed to save task');
+            if (editingTask) {
+                await api.put(`/tasks/${editingTask.id}`, taskData);
+            } else {
+                await api.post('/tasks', taskData);
+            }
             
             await fetchTasks();
             setTaskModalVisible(false);
@@ -122,14 +102,7 @@ function Dashboard() {
 
     const handleTaskToggle = async (taskId) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/tasks/${taskId}/toggle`, {
-                method: 'PATCH',
-                headers: {
-                    'Authorization': `Bearer ${user.token}`
-                }
-            });
-
-            if (!response.ok) throw new Error('Failed to update task');
+            await api.patch(`/tasks/${taskId}/toggle`);
             await fetchTasks();
         } catch (err) {
             message.error('Failed to update task');
@@ -138,14 +111,7 @@ function Dashboard() {
 
     const handleTaskDelete = async (taskId) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/tasks/${taskId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${user.token}`
-                }
-            });
-
-            if (!response.ok) throw new Error('Failed to delete task');
+            await api.delete(`/tasks/${taskId}`);
             await fetchTasks();
             message.success('Task deleted successfully');
         } catch (err) {

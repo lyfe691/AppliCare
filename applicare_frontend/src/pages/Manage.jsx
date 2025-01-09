@@ -4,6 +4,7 @@ import NewApplicationForm from '../features/applications/components/NewApplicati
 import { Table, Button, Typography, Space, Modal, Select, Popconfirm, Input, Tag, message } from 'antd';
 import { EditOutlined, DeleteOutlined, SearchOutlined, PlusOutlined, Loading3QuartersOutlined, LoadingOutlined } from '@ant-design/icons';
 import styles from '../css/Manage.module.css';
+import api from '../api/axios';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -52,13 +53,7 @@ function Manage() {
     async function fetchApplications() {
         try {
             if (initialLoading) setInitialLoading(true);
-            const response = await fetch('/api/applications', {
-                headers: {
-                    'Authorization': `Bearer ${user.token}`
-                }
-            });
-            if (!response.ok) throw new Error('Failed to fetch applications');
-            const data = await response.json();
+            const data = await api.get('/applications');
             setApplications(data);
             setError(null);
         } catch (err) {
@@ -71,13 +66,7 @@ function Manage() {
 
     async function handleUpdateStatus(applicationId, newStatus) {
         try {
-            const response = await fetch(`/api/applications/${applicationId}/status?status=${newStatus}`, {
-                method: 'PATCH',
-                headers: {
-                    'Authorization': `Bearer ${user.token}`
-                }
-            });
-            if (!response.ok) throw new Error('Failed to update status');
+            await api.patch(`/applications/${applicationId}/status?status=${newStatus}`);
             await fetchApplications();
             message.success('Application status updated successfully');
         } catch (err) {
@@ -88,13 +77,7 @@ function Manage() {
 
     async function handleDelete(applicationId) {
         try {
-            const response = await fetch(`/api/applications/${applicationId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${user.token}`
-                }
-            });
-            if (!response.ok) throw new Error('Failed to delete application');
+            await api.delete(`/applications/${applicationId}`);
             await fetchApplications();
             message.success('Application deleted successfully');
         } catch (err) {

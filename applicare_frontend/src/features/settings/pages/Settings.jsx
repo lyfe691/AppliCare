@@ -7,6 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext';
 import PasswordInput from '../../auth/components/PasswordInput';
 import styles from './Settings.module.css';
+import api from '../../../api/axios';
+import { App } from 'antd';
 
 const { Option } = Select;
 const { Title } = Typography;
@@ -27,23 +29,16 @@ const Settings = () => {
   const handleProfileUpdate = async (values) => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/user/profile?username=${encodeURIComponent(values.username)}&email=${encodeURIComponent(values.email)}`, {
-        method: 'PUT',
+      const formData = new FormData();
+      formData.append("username", values.username);
+      formData.append("email", values.email);
+
+      await api.put('/user/profile', formData, {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user.token}`
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.log('Response status:', response.status);
-        console.log('Error details:', errorText);
-        throw new Error(errorText);
-      }
-
-      const data = await response.json();
-      console.log('Success response:', data);
       message.success('Profile updated successfully');
     } catch (error) {
       console.error('Full error:', error);
@@ -56,18 +51,15 @@ const Settings = () => {
   const handlePasswordUpdate = async (values) => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/user/password?currentPassword=${encodeURIComponent(values.currentPassword)}&newPassword=${encodeURIComponent(values.newPassword)}`, {
-        method: 'PUT',
+      const formData = new FormData();
+      formData.append("currentPassword", values.currentPassword);
+      formData.append("newPassword", values.newPassword);
+
+      await api.put('/user/password', formData, {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user.token}`
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
       });
-
-      if (!response.ok) {
-        const error = await response.text();
-        throw new Error(error);
-      }
 
       message.success('Password updated successfully');
       form.resetFields();
@@ -88,19 +80,7 @@ const Settings = () => {
       cancelText: 'No',
       async onOk() {
         try {
-          const response = await fetch('/api/user/account', {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${user.token}`
-            }
-          });
-
-          if (!response.ok) {
-            const error = await response.text();
-            throw new Error(error);
-          }
-
+          await api.delete('/user/account');
           message.success('Account deleted successfully');
           cleanupAndRedirect();
         } catch (error) {

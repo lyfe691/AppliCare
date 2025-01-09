@@ -3,6 +3,7 @@
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { App } from 'antd';
+import api from '../../api/axios';
 
 const AuthContext = createContext(null);
 
@@ -16,19 +17,16 @@ export function AuthProvider({ children }) {
 
   // LOGIN
   async function login(username, password) {
-    const params = new URLSearchParams();
-    params.append("usernameOrEmail", username);
-    params.append("password", password);
+    const formData = new FormData();
+    formData.append("usernameOrEmail", username);
+    formData.append("password", password);
   
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      body: params,
+    const data = await api.post("/auth/login", formData, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
     });
-    if (!res.ok) {
-      throw new Error(await res.text());
-    }
-
-    const data = await res.json(); 
+    
     const newUser = {
       username: data.username,
       email: data.email,
@@ -36,56 +34,46 @@ export function AuthProvider({ children }) {
     };
     setUser(newUser);
     localStorage.setItem("appliCareUser", JSON.stringify(newUser));
-    navigate("/"); // redirect to home
+    navigate("/dashboard"); // redirect to dashboard instead of home
   }
   
-  
- // REGISTER USER
+  // REGISTER USER
   async function registerUser(username, email, password) {
-    const params = new URLSearchParams();
-    params.append("username", username);
-    params.append("email", email);
-    params.append("password", password);
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("password", password);
 
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      body: params,
+    return await api.post("/auth/register", formData, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
     });
-    if (!res.ok) {
-      throw new Error(await res.text());
-    }
-    return await res.text();
   }
 
   // FORGOT PASSWORD
   async function forgotPassword(email) {
-    const params = new URLSearchParams();
-    params.append("email", email);
+    const formData = new FormData();
+    formData.append("email", email);
 
-    const res = await fetch("/api/auth/forgot-password", {
-      method: "POST",
-      body: params,
+    return await api.post("/auth/forgot-password", formData, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
     });
-    if (!res.ok) {
-      throw new Error(await res.text());
-    }
-    return await res.text();
   }
 
   // RESET PASSWORD
   async function resetPassword(token, password) {
-    const params = new URLSearchParams();
-    params.append("token", token);
-    params.append("password", password);
+    const formData = new FormData();
+    formData.append("token", token);
+    formData.append("password", password);
 
-    const res = await fetch("/api/auth/reset-password", {
-      method: "POST",
-      body: params,
+    return await api.post("/auth/reset-password", formData, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
     });
-    if (!res.ok) {
-      throw new Error(await res.text());
-    }
-    return await res.text();
   }
 
   // logout modal -> remove item from localstorage

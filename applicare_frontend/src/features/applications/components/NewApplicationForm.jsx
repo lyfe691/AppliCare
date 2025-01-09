@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../../auth/AuthContext';
 import { Form, Input, Select, Button, Typography, Alert, Space, Switch, Row, Col, message } from 'antd';
 import styles from './NewApplicationForm.module.css';
+import api from '../../../api/axios';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -61,25 +62,13 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
         setLoading(true);
 
         try {
-            const url = initialData
-                ? `/api/applications/${initialData.id}`
-                : '/api/applications';
+            const url = initialData ? `/applications/${initialData.id}` : '/applications';
+            const method = initialData ? 'put' : 'post';
 
-            const response = await fetch(url, {
-                method: initialData ? 'PUT' : 'POST',
-                headers: {
-                    'Authorization': `Bearer ${user.token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    ...values,
-                    salary: values.salary ? parseFloat(values.salary) : null
-                })
+            await api[method](url, {
+                ...values,
+                salary: values.salary ? parseFloat(values.salary) : null
             });
-
-            if (!response.ok) {
-                throw new Error('Failed to save application');
-            }
 
             message.success(initialData ? 'Application updated successfully' : 'Application created successfully');
             onSubmit();

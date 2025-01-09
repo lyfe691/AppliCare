@@ -42,6 +42,8 @@ public class AuthService {
     private static final String USERNAME_PATTERN = "^[a-zA-Z0-9_]+$";
     // email must be a valid email address
     private static final String EMAIL_PATTERN = "^[A-Za-z0-9+_.-]+@(.+)$";
+    // password must not contain spacesl
+    private static final String PASSWORD_PATTERN = "^\\S+$";
 
     public void validateUsername(String username) {
         if (username.length() < MIN_USERNAME_LENGTH || username.length() > MAX_USERNAME_LENGTH) {
@@ -63,6 +65,10 @@ public class AuthService {
     public void validatePassword(String password) {
         if (password.length() < MIN_PASSWORD_LENGTH) {
             throw new RuntimeException("Password must be at least " + MIN_PASSWORD_LENGTH + " characters");
+        }
+
+        if (!password.matches(PASSWORD_PATTERN)) {
+            throw new RuntimeException("Password cannot contain spaces");
         }
     }
 
@@ -147,6 +153,9 @@ public class AuthService {
         if (opt.isEmpty()) {
             throw new RuntimeException("Invalid or expired reset token");
         }
+
+        // Validate the new password
+        validatePassword(rawPassword);
 
         User user = opt.get();
         user.setPassword(passwordEncoder.encode(rawPassword));

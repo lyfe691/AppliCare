@@ -5,6 +5,7 @@ import { Card, Menu, Form, Input, Button, Avatar, Upload, Switch, Divider, messa
 import { UserOutlined, LockOutlined, BellOutlined, UploadOutlined, SettingOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext';
+import PasswordInput from '../../auth/components/PasswordInput';
 import styles from './Settings.module.css';
 
 const { Option } = Select;
@@ -160,11 +161,7 @@ const Settings = () => {
                   name="username"
                   label="Username"
                   rules={[
-                  
-                    { required: true, message: 'Please enter your username' },
-                    { min: 3, message: 'Username must be at least 3 characters' },
-                    { max: 20, message: 'Username must be less than 20 characters' },
-                    { pattern: /^[a-zA-Z0-9_]+$/, message: 'Username can only contain letters, numbers, and underscores' }
+                    { required: true, message: 'Please enter your username' }
                   ]}
                 >
                   <Input placeholder="Enter your username" />
@@ -174,8 +171,7 @@ const Settings = () => {
                   name="email"
                   label="Email"
                   rules={[
-                    { required: true, message: 'Please enter your email' },
-                    { type: 'email', message: 'Please enter a valid email' }
+                    { required: true, message: 'Please enter your email' }
                   ]}
                 >
                   <Input placeholder="Enter your email" />
@@ -211,18 +207,17 @@ const Settings = () => {
                     label="1. Current Password"
                     rules={[{ required: true, message: 'Please enter your current password' }]}
                   >
-                    <Input.Password placeholder="Enter your current password" />
+                    <PasswordInput placeholder="Enter your current password" />
                   </Form.Item>
 
                   <Form.Item
                     name="newPassword"
                     label="2. New Password"
                     rules={[
-                      { required: true, message: 'Please enter a new password' },
-                      { min: 6, message: 'Password must be at least 6 characters' }
+                      { required: true, message: 'Please enter a new password' }
                     ]}
                   >
-                    <Input.Password placeholder="Enter a new password" />
+                    <PasswordInput placeholder="Enter a new password" />
                   </Form.Item>
 
                   <Form.Item
@@ -240,7 +235,7 @@ const Settings = () => {
                       }),
                     ]}
                   >
-                    <Input.Password placeholder="Confirm your new password" />
+                    <PasswordInput placeholder="Confirm your new password" />
                   </Form.Item>
                 </div>
 

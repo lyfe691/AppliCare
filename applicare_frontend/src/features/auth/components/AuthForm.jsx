@@ -3,6 +3,7 @@
 import { Form, Input, Button, Typography, Alert, Space } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import styles from "../../../css/Auth.module.css";
+import PasswordInput from './PasswordInput';
 
 const { Title, Text } = Typography;
 
@@ -31,7 +32,6 @@ function AuthForm({
       default:
         return <UserOutlined className="auth-icon" />;
     }
-
   };
 
   return (
@@ -67,16 +67,15 @@ function AuthForm({
                   rules={[
                     { 
                       required: f.required, 
-                      message: `Please enter your ${f.name}`
+                      message: `Please enter your ${f.placeholder.toLowerCase()}`
                     }
                   ]}
                   style={{ marginBottom: 0 }}
                 >
                   {f.type === "password" ? (
-                    <Input.Password
+                    <PasswordInput
                       prefix={getIcon(f.type)}
                       placeholder={`Enter your ${f.placeholder.toLowerCase()}`}
-                      visibilityToggle={true}
                       autoComplete={f.name === "password" ? "current-password" : "new-password"}
                     />
                   ) : (

@@ -44,11 +44,13 @@ function Dashboard() {
     const [applications, setApplications] = useState([]);
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [initialLoading, setInitialLoading] = useState(true);
     const [error, setError] = useState(null);
     const [activeTab, setActiveTab] = useState('overview');
     const [taskModalVisible, setTaskModalVisible] = useState(false);
     const [editingTask, setEditingTask] = useState(null);
     const [taskForm] = Form.useForm();
+    const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
         fetchApplications();
@@ -77,6 +79,7 @@ function Dashboard() {
     }
 
     const handleTaskSubmit = async (values) => {
+        setSubmitting(true);
         try {
             const taskData = {
                 ...values,
@@ -97,6 +100,8 @@ function Dashboard() {
             message.success(`Task ${editingTask ? 'updated' : 'created'} successfully`);
         } catch (err) {
             message.error('Failed to save task');
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -531,7 +536,7 @@ function Dashboard() {
                     </Form.Item>
 
                     <Form.Item className={styles.modalFooter}>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" loading={submitting}>
                             {editingTask ? 'Update' : 'Create'}
                         </Button>
                         <Button 
@@ -540,6 +545,7 @@ function Dashboard() {
                                 setEditingTask(null);
                                 taskForm.resetFields();
                             }}
+                            disabled={submitting}
                         >
                             Cancel
                         </Button>

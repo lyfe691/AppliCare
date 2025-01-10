@@ -38,6 +38,31 @@ function Nav() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // consts for truncation
+  const MAX_EMAIL_LOCAL_LENGTH = 10;
+  const MAX_USERNAME_LENGTH = 15;
+  const DEFAULT_EMAIL = "no email";
+  const DEFAULT_USERNAME = "no username";
+
+  const truncateEmail = (email) => {
+    if (!email) return DEFAULT_EMAIL;
+    const [localPart, domain] = email.split('@');
+    if (!domain) return email;
+    
+    if (localPart.length > MAX_EMAIL_LOCAL_LENGTH) {
+      return `${localPart.slice(0, MAX_EMAIL_LOCAL_LENGTH)}...@${domain}`;
+    }
+    return email;
+  };
+
+  const truncateUsername = (username) => {
+    if (!username) return DEFAULT_USERNAME;
+    if (username.length > MAX_USERNAME_LENGTH) {
+      return `${username.slice(0, MAX_USERNAME_LENGTH)}...`;
+    }
+    return username;
+  };
+
   // main nav items
   const menuItems = [
     {
@@ -52,16 +77,28 @@ function Nav() {
     },
   ];
 
-
   // profile menu items
   const profileMenuItems = [
     {
       key: "user-info",
       disabled: true,
       label: (
-        <div style={{ cursor: "default" }}>
-          <div style={{ fontWeight: "bold", color: "#262626 " }}>{user?.username || "no username"}</div>
-          <div style={{ fontSize: "0.85rem" }}>{user?.email || "no email"}</div>
+        <div style={{ cursor: "default", maxWidth: "200px" }}>
+          <div style={{ 
+            fontWeight: "bold", 
+            color: "#262626",
+            overflow: "hidden",
+            whiteSpace: "nowrap"
+          }}>
+            {truncateUsername(user?.username)}
+          </div>
+          <div style={{ 
+            fontSize: "0.85rem",
+            overflow: "hidden",
+            whiteSpace: "nowrap"
+          }}>
+            {truncateEmail(user?.email)}
+          </div>
         </div>
       ),
     },
@@ -70,9 +107,8 @@ function Nav() {
     {
       key: "settings",
       icon: <SettingOutlined />,
-      label: <Link to="/settings">Settings</Link>,
+      label: <Link to="/settings" onClick={() => setDrawerVisible(false)}>Settings</Link>,
     },
-    
   ];
 
   return (
@@ -119,7 +155,7 @@ function Nav() {
                     className="mobile-profile-button"
                     style={{ margin: "16px", marginBottom:"auto", width: "calc(100% - 32px)" }}
                   >
-                    {user?.username || "Profile"}
+                    {truncateUsername(user?.username)}
                   </Button>
                 </Dropdown>
 

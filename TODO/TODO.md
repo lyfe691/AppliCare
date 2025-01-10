@@ -38,14 +38,16 @@
 3. [ ] show 'no data' from antd for charts and statuses.
 3. [X] create profile in nav with drop down like in shadcn example
 3. [ ] fix: when logged out and logged in in different browser tabs it should wither be that action that was made latest, example: if the user logged in and in the other tab is still in the reset password that the user should be logged in on that tab aswell on refresh. Same thing the other way around, if the user is logged in in one tab and logges out in another, on refresh the user shouls also be logged out.
-4. [X] Add pagination to mobile too.
+3. [X] Add pagination to mobile too.
 4. [X] fix: Warning: [antd: Modal] Static function can not consume context like dynamic theme. Please use 'App' component instead.
 4. [ ] no longer use hardcoded urls
 4. [ ] fix: Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
 4. [X] fix: password regex validation should also apply to reset password page. (or everywhere) its important that its the same everywhere.
-5. [ ] implement Oauth 2 with github and google
-6. [ ] create support 
-6. [ ] use axios instead of fetch
-7. [X] when deleting account all associated data should be deleted eg. applications, tasks, etc.
-8. [X] fix: when deleting account the logout modal shoould NOT be shown. also redirect to /
-8. [X] fix: dont allow spaces in passwords
+4. [ ] implement Oauth 2 with github and google
+4. [ ] create support
+4. [X] use axios instead of fetch
+4. [X] when deleting account all associated data should be deleted eg. applications, tasks, etc.
+4. [X] fix: when deleting account the logout modal shoould NOT be shown. also redirect to /
+4. [X] fix: dont allow spaces in passwords
+5. [ ] fix wird 3 dots nav bug
+5. [ ] add text limit to almost all forms

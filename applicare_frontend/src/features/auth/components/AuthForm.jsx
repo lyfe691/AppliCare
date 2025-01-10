@@ -19,6 +19,22 @@ function AuthForm({
 }) {
   const [form] = Form.useForm();
 
+  // the matching title for each auth page
+  const getSecondaryText = (title) => {
+    if (!title) return "";
+    
+    if (title.includes("Login")) {
+      return "Welcome back! Please enter your details";
+    } else if (title.includes("Register")) {
+      return "Create your account to get started";
+    } else if (title.includes("Forgot Password")) {
+      return "Enter your email to receive a reset link";
+    } else if (title.includes("Reset Password")) {
+      return "Enter your new password below";
+    }
+    return "";
+  };
+
   async function handleSubmit(values) {
     onSubmit && onSubmit(values);
   }
@@ -44,7 +60,7 @@ function AuthForm({
                 {title}
               </Title>
               <Text type="secondary">
-                {title.includes("Login") ? "Welcome back! Please enter your details" : "Create your account to get started."}
+                {getSecondaryText(title)}
               </Text>
             </div>
           )}

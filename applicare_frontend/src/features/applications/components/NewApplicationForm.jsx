@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../auth/AuthContext';
-import { Form, Input, Select, Button, Typography, Alert, Space, Switch, Row, Col, message } from 'antd';
+import { Form, Input, Select, Button, Typography, Alert, Space, Switch, Row, Col, App } from 'antd';
 import styles from './NewApplicationForm.module.css';
 import api from '../../../api/axios';
 
@@ -32,6 +32,7 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [form] = Form.useForm();
+    const { message } = App.useApp();
 
     // set initial data
     useEffect(() => {

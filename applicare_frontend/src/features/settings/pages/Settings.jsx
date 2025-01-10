@@ -1,23 +1,16 @@
 // src/features/settings/pages/Settings.jsx
 
 import React, { useState } from 'react';
-import { Card, Menu, Form, Input, Button, Avatar, Upload, Switch, Divider, message, Select, Space, Tooltip, Typography, Modal } from 'antd';
+import { Card, Menu, Form, Input, Button, Avatar, Upload, Switch, Divider, Select, Space, Tooltip, Typography, Modal, App } from 'antd';
 import { UserOutlined, LockOutlined, BellOutlined, UploadOutlined, SettingOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext';
 import PasswordInput from '../../auth/components/PasswordInput';
 import styles from './Settings.module.css';
 import api from '../../../api/axios';
-import { App } from 'antd';
 
 const { Option } = Select;
 const { Title } = Typography;
-const { confirm } = Modal;
-
-
-
-{/*TODO: use regex from the backend not here.*/}
-{/*TODO: avatar upload - with backend. also update the avatar in the whole app eg. Nav.jsx*/}
 
 const Settings = () => {
   const { user, logout, cleanupAndRedirect } = useAuth();
@@ -25,6 +18,7 @@ const Settings = () => {
   const [loading, setLoading] = useState(false);
   const [selectedKey, setSelectedKey] = useState('profile');
   const navigate = useNavigate();
+  const { message, modal } = App.useApp();
 
   const handleProfileUpdate = async (values) => {
     setLoading(true);
@@ -71,7 +65,7 @@ const Settings = () => {
   };
 
   const showDeleteConfirm = () => {
-    confirm({
+    modal.confirm({
       title: 'Are you sure you want to delete your account?',
       icon: <ExclamationCircleOutlined />,
       content: 'This action cannot be undone. All your data will be permanently deleted.',

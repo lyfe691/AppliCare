@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '../features/auth/AuthContext';
 import { Card, Row, Col, Typography, Statistic, Progress, Timeline, List, Tag, Menu, Button, 
-    Tooltip, Checkbox, Modal, Form, Input, DatePicker, Select, message, Popconfirm } from 'antd';
+    Tooltip, Checkbox, Modal, Form, Input, DatePicker, Select, Popconfirm, App } from 'antd';
 import { Area } from '@ant-design/plots';
 import { 
     RiseOutlined, FallOutlined, ClockCircleOutlined, 
@@ -51,6 +51,7 @@ function Dashboard() {
     const [editingTask, setEditingTask] = useState(null);
     const [taskForm] = Form.useForm();
     const [submitting, setSubmitting] = useState(false);
+    const { message } = App.useApp();
 
     useEffect(() => {
         fetchApplications();

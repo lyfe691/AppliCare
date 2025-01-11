@@ -17,63 +17,90 @@ export function AuthProvider({ children }) {
 
   // LOGIN
   async function login(username, password) {
-    const formData = new FormData();
-    formData.append("usernameOrEmail", username);
-    formData.append("password", password);
-  
-    const data = await api.post("/auth/login", formData, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    });
+    try {
+      const formData = new URLSearchParams();
+      formData.append("usernameOrEmail", username);
+      formData.append("password", password);
     
-    const newUser = {
-      username: data.username,
-      email: data.email,
-      token: data.token,
-    };
-    setUser(newUser);
-    localStorage.setItem("appliCareUser", JSON.stringify(newUser));
-    navigate("/dashboard"); 
+      const response = await api.post("/auth/login", formData.toString(), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
+      
+      const { token, username: responseUsername, email } = response;
+      
+      if (!token || !responseUsername || !email) {
+        throw new Error('Invalid response data received from server');
+      }
+
+      const newUser = {
+        username: responseUsername,
+        email: email,
+        token: token,
+      };
+      
+      setUser(newUser);
+      localStorage.setItem("appliCareUser", JSON.stringify(newUser));
+      navigate("/dashboard"); 
+    } catch (error) {
+      throw error;
+    }
   }
   
   // REGISTER USER
   async function registerUser(username, email, password) {
-    const formData = new FormData();
-    formData.append("username", username);
-    formData.append("email", email);
-    formData.append("password", password);
+    try {
+      const formData = new URLSearchParams();
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("password", password);
 
-    return await api.post("/auth/register", formData, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    });
+      const response = await api.post("/auth/register", formData.toString(), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
+
+      return response;
+    } catch (error) {
+      throw new Error(error.message || 'Registration failed. Please try again.');
+    }
   }
 
   // FORGOT PASSWORD
   async function forgotPassword(email) {
-    const formData = new FormData();
-    formData.append("email", email);
+    try {
+      const formData = new URLSearchParams();
+      formData.append("email", email);
 
-    return await api.post("/auth/forgot-password", formData, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    });
+      const response = await api.post("/auth/forgot-password", formData.toString(), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
+      return response;
+    } catch (error) {
+      throw new Error(error.message || 'Failed to send reset link. Please try again.');
+    }
   }
 
   // RESET PASSWORD
   async function resetPassword(token, password) {
-    const formData = new FormData();
-    formData.append("token", token);
-    formData.append("password", password);
+    try {
+      const formData = new URLSearchParams();
+      formData.append("token", token);
+      formData.append("password", password);
 
-    return await api.post("/auth/reset-password", formData, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    });
+      const response = await api.post("/auth/reset-password", formData.toString(), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
+      return response;
+    } catch (error) {
+      throw new Error(error.message || 'Password reset failed. Please try again.');
+    }
   }
 
   // logout modal -> remove item from localstorage

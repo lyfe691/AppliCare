@@ -1,57 +1,55 @@
-/**************
+/***************
  * FOOTER CSS *
- **************/
+ ***************/
 
- :root {
-    --footer-bg-color: #f8f9fa; 
-    --footer-text-color: #2c3e50; 
-    --footer-link-color: #2980b9; 
-    --footer-link-hover-color: #4545c9aa; 
-    --footer-border-color: #dee2e6; 
-    --footer-icon-color: #b2b2b292; 
-  }
-  
- .footer {
-    background-color: var(--footer-bg-color);
-    color: var(--footer-text-color);
-    padding: 1.5rem 0;
-    text-align: center;
-    border-top: 1px solid var(--footer-border-color);
-    margin-top: auto;
-  }
-  
-  .footer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  
+.footer {
+  padding: 1rem 2rem;
+  text-align: center;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-tertiary);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer-link {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.footer-link:hover {
+  color: var(--text-secondary);
+}
+
+.copyright {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+@media (max-width: 768px) {
   .footer-links {
-    display: flex;
     gap: 1.5rem;
-    justify-content: center;
   }
-  
-  .footer-links a {
-    color: var(--footer-link-color);
-    transition: transform 0.2s ease, color 0.3s ease;
-    text-decoration: none;
-  }
-  
-  .footer-links a:hover {
-    transform: scale(1.1);
-    color: var(--footer-link-hover-color);
-  }
-  
-  .footer-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    fill: var(--footer-icon-color); /* if .svg, or lucide; should work too. */
-  }
-  
-  .footer-text {
-    font-size: 0.9rem;
-    opacity: 0.8;
-  }
+}
   

@@ -1,8 +1,9 @@
 // src/features/auth/pages/ForgotPassword.jsx
 
 import { useState } from "react";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../../context/auth/AuthContext";
 import AuthForm from "../components/AuthForm";
+import { Link } from "react-router-dom";
 
 function ForgotPassword() {
   const { forgotPassword } = useAuth();
@@ -40,7 +41,7 @@ function ForgotPassword() {
       buttonText={loading ? "Sending..." : "Send Reset Link"}
     >
       <p>
-        <a href="/login">Back to Login</a>
+        <Link to="/login">Back to Login</Link>
       </p>
     </AuthForm>
   );

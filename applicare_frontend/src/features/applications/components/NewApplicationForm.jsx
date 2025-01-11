@@ -1,7 +1,7 @@
 // src/features/applications/components/NewApplicationForm.jsx
 
 import { useState, useEffect } from 'react';
-import { useAuth } from '../../auth/AuthContext';
+import { useAuth } from '../../../context/auth/AuthContext';
 import { Form, Input, Select, Button, Typography, Alert, Space, Switch, Row, Col, App } from 'antd';
 import styles from './NewApplicationForm.module.css';
 import api from '../../../api/axios';

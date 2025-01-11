@@ -5,18 +5,76 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;700&display=swap');
 
 /* Global CSS Variables */
+
 :root {
-  /* Colors */
-  --primary-color: #2563eb;
-  --text-color: #1f2937;
-  --light-text: #6b7280;
-  --background-color: #ffffff;
-  --border-color: #e5e7eb;
+  /* base colors */
+  --primary: #94a3b8;
+  --primary-hover: #64748b;
   --success: #059669;
   --error: #dc2626;
-  --hover-bg: #f3f4f6;
+  --warning: #f59e0b;
+}
 
-  /* Typography */
+/* default light theme variables */
+.light-theme {
+  /* colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  
+  /* text Colors */
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+  
+  /* border Colors */
+  --border-primary: #e5e7eb;
+  --border-secondary: #f3f4f6;
+  
+  /* component Colors */
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --hover-bg: #f3f4f6;
+  
+  /* shadow */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* dark theme variables */
+.dark-theme {
+  /* colors */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-tertiary: #1f1f1f;
+  
+  /* text colors */
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-tertiary: #a0a0a0;
+  
+  /* border colos */
+  --border-primary: #2a2a2a;
+  --border-secondary: #333333;
+  
+  /* component colors */
+  --card-bg: #141414;
+  --card-border: #2a2a2a;
+  --input-bg: #0a0a0a;
+  --input-border: #2a2a2a;
+  --hover-bg: #1f1f1f;
+  
+  /* shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+}
+
+/* typography */
+:root {
   font-family: 'Montserrat', 'Roboto', sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -40,56 +98,56 @@ body {
   min-width: 320px;
   min-height: 100vh;
   font-family: 'Montserrat', 'Roboto', sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Headings */
 h1 {
   font-size: 2.5rem;
   line-height: 1.2;
-  color: var(--text-color);
+  color: var(--text-primary);
   font-weight: 700;
 }
 
 h2 {
   font-size: 2rem;
   line-height: 1.2;
-  color: var(--text-color);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
 h3 {
   font-size: 1.5rem;
   line-height: 1.2;
-  color: var(--text-color);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
 /* Buttons */
 button {
-  border-radius: 6px;
-  border: 1px solid transparent;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--primary-color);
+
+}
+
+
+/* links */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+/* selection */
+::selection {
+  background-color: var(--primary);
   color: white;
-  cursor: pointer;
-  transition: background-color 0.2s;
 }
 
-button:hover {
-  opacity: 0.9;
-}
-
-/*button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--primary-color);
-  transition: box-shadow 0.2s ease;
-
-
-  commented out cause of problem with faq in landing.jsx
-}*/
-          

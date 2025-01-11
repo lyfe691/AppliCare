@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../features/auth/AuthContext';
+import { useAuth } from '../context/auth/AuthContext';
 import styles from '../css/Landing.module.css';
 import { FaGithub, FaLinkedin, FaSun, FaMoon, FaChevronDown, FaGlobe } from 'react-icons/fa';
 

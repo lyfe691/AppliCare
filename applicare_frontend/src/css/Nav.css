@@ -2,31 +2,19 @@
  * NAV CSS *
  ***********/
 
-:root {
-    --nav-bg-color: rgba(255, 255, 255, 0.8); 
-    --blur-amount: 10px; 
-    --border-color: rgba(143, 138, 138, 0.2); 
-    --overlay-bg: rgba(0, 0, 0, 0.5);
-    --nav-shadow: rgba(0, 0, 0, 0.15) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -1px;
-    --nav-text-color: #2c3e50; 
-    --nav-text-hover-color: #2980b9; 
-    --nav-underline-color: #2980b9; 
-    --font-size: 1rem;
-    --font-weight: 600;
-    --transition-speed: 0.3s;
-    --brand-size: 2rem;
-}
-
 .app-header {
     padding: 0 24px;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    background: var(--bg-primary);
+    box-shadow: var(--shadow-sm);
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 1px solid var(--border-primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    height: 64px;
 }
 
 .logo-container {
@@ -39,15 +27,17 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #9FB9A1;
+    color: var(--primary);
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .logo-text {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #9FB9A1;
+    color: var(--primary);
     display: inline-block;
+    transition: color 0.3s ease;
 }
 
 .nav-content {
@@ -62,15 +52,39 @@
     border: none;
     flex: 1;
     justify-content: center;
+    background: transparent;
+    min-width: 400px;
 }
 
 .nav-menu :global(.ant-menu-item) {
-    display: flex;
-    align-items: center;
+    padding: 0 20px !important;
+    margin: 0 4px !important;
+    min-width: fit-content;
 }
 
 .nav-menu :global(.ant-menu-item .anticon) {
     margin-right: 8px;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+.nav-menu :global(.ant-menu-item:hover),
+.nav-menu :global(.ant-menu-item-selected) {
+    color: var(--text-primary) !important;
+}
+
+.nav-menu :global(.ant-menu-item:hover .anticon),
+.nav-menu :global(.ant-menu-item-selected .anticon) {
+    color: var(--text-primary) !important;
+}
+
+.nav-menu :global(.ant-menu-overflow-item) {
+    min-width: fit-content !important;
+    padding: 0 20px !important;
+}
+
+.nav-menu :global(.ant-menu-overflow-item-rest) {
+    padding: 0 12px !important;
 }
 
 .logout-button {
@@ -79,6 +93,7 @@
 
 .mobile-menu-button {
     display: none;
+    color: var(--text-primary);
 }
 
 .mobile-logout-button {
@@ -108,9 +123,53 @@
 /* drawer customization */
 :global(.ant-drawer-body) {
     padding: 0;
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease;
+}
+
+:global(.ant-drawer-header) {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+:global(.ant-drawer-title) {
+    color: var(--text-primary);
+}
+
+:global(.ant-drawer-close) {
+    color: var(--text-primary);
 }
 
 :global(.ant-drawer-body .ant-menu) {
+    background-color: transparent;
     border-right: none;
+}
+
+:global(.ant-drawer-body .ant-menu-item) {
+    margin: 4px 8px !important;
+    border-radius: 6px;
+    color: var(--text-secondary) !important;
+}
+
+:global(.ant-drawer-body .ant-menu-item:hover),
+:global(.ant-drawer-body .ant-menu-item-selected) {
+    background-color: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* dropdown menu overrides */
+:global(.ant-dropdown-menu) {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--border-primary) !important;
+}
+
+:global(.ant-dropdown-menu-item:hover),
+:global(.ant-dropdown-menu-submenu-title:hover) {
+    background-color: var(--hover-bg) !important;
+}
+
+:global(.ant-dropdown-menu-item-divider) {
+    background-color: var(--border-primary) !important;
 }
   

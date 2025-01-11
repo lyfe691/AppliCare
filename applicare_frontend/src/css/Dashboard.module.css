@@ -6,6 +6,8 @@
     padding: 0 1rem;
     max-width: 1400px;
     margin: 0 auto;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
 }
 
 .dashboardHeader {
@@ -13,17 +15,29 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1.5rem;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border-primary);
     padding-bottom: 1rem;
 }
 
 .dashboardMenu {
     border-bottom: none !important;
     margin-left: 1rem;
+    min-width: 300px;
 }
 
 .dashboardMenu :global(.ant-menu-item) {
     padding: 0 20px !important;
+    margin: 0 4px !important;
+    min-width: fit-content;
+}
+
+.dashboardMenu :global(.ant-menu-overflow-item) {
+    min-width: fit-content !important;
+    padding: 0 20px !important;
+}
+
+.dashboardMenu :global(.ant-menu-overflow-item-rest) {
+    padding: 0 12px !important;
 }
 
 .loading,
@@ -31,6 +45,7 @@
     text-align: center;
     padding: 2rem;
     margin: 1rem 0;
+    color: var(--text-primary);
 }
 
 .statsRow {
@@ -38,14 +53,16 @@
 }
 
 .statCard {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
     border-radius: 8px;
     transition: all 0.3s ease;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
 }
 
 .statCard:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
 }
 
 .chartsRow {
@@ -56,18 +73,20 @@
 .recentRow :global(.ant-card) {
     height: 100%;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
 }
 
 .cardTitle {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: rgba(0, 0, 0, 0.85);
+    color: var(--text-primary);
 }
 
 .cardTitle :global(.anticon) {
-    color: #1890ff;
+    color: var(--primary);
 }
 
 .statusProgress {
@@ -89,15 +108,17 @@
 }
 
 .recentRow :global(.ant-list-item:hover) {
-    background-color: #fafafa;
+    background-color: var(--hover-bg);
 }
 
 .recentRow :global(.ant-list-item-meta-title) {
     margin-bottom: 0;
+    color: var(--text-primary);
 }
 
 .recentRow :global(.ant-timeline-item-content) {
     padding-bottom: 1.5rem;
+    color: var(--text-primary);
 }
 
 /* Tasks styles */
@@ -111,7 +132,7 @@
 }
 
 .taskItem:hover {
-    background-color: rgba(0, 0, 0, 0.02);
+    background-color: var(--hover-bg);
 }
 
 .taskItem :global(.ant-list-item-meta) {
@@ -121,10 +142,11 @@
 .taskItem :global(.ant-list-item-meta-title) {
     margin-bottom: 0 !important;
     line-height: 1.5;
+    color: var(--text-primary);
 }
 
 .taskItem :global(.ant-list-item-meta-description) {
-    color: rgba(0, 0, 0, 0.45);
+    color: var(--text-tertiary);
     font-size: 0.9em;
     margin-top: 4px;
 }
@@ -147,7 +169,35 @@
     padding: 4px 8px;
 }
 
-/* task for modal */
+/* Chart styles */
+:global(.g2-tooltip) {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--border-primary) !important;
+    box-shadow: var(--shadow-sm) !important;
+    color: var(--text-primary) !important;
+}
+
+:global(.g2-tooltip-title) {
+    color: var(--text-primary) !important;
+}
+
+:global(.g2-tooltip-list-item) {
+    color: var(--text-secondary) !important;
+}
+
+:global(.ant-card-head-title) {
+    color: var(--text-primary) !important;
+}
+
+:global(.ant-statistic-title) {
+    color: var(--text-secondary) !important;
+}
+
+:global(.ant-statistic-content) {
+    color: var(--text-primary) !important;
+}
+
+/* task form modal */
 .modalFooter {
     margin-bottom: 0 !important;
     margin-top: 24px !important;
@@ -155,6 +205,7 @@
     justify-content: flex-end;
     gap: 8px;
 }
+
 .modalFooter Button {
     margin: 2.3px; 
 }
@@ -179,199 +230,35 @@
         width: 100%;
     }
 
-    .taskItem :global(.ant-list-item-action) {
-        margin-left: 0;
-    }
-
     .taskItem {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-
-    .taskItem :global(.ant-list-item-action) {
-        padding: 0;
-        margin: 8px 0 0 32px;
-    }
-
-    .tasksList :global(.ant-list-pagination) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 16px;
-        width: 100%;
-    }
-
-    .tasksList :global(.ant-pagination) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 8px;
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .tasksList :global(.ant-pagination-options) {
-        display: flex;
-        align-items: center;
-        margin: 0;
-        flex-shrink: 0;
-    }
-
-    .tasksList :global(.ant-pagination-options-size-changer.ant-select) {
-        width: auto !important;
-        min-width: 90px;
-    }
-
-    .tasksList :global(.ant-pagination-total-text) {
-        margin: 0 8px;
-        white-space: nowrap;
-        flex-shrink: 0;
-    }
-
-    .tasksList :global(.ant-pagination-prev),
-    .tasksList :global(.ant-pagination-next) {
-        flex-shrink: 0;
-        margin: 0;
-    }
-
-    .tasksList :global(.ant-pagination-item) {
-        margin: 0;
-        flex-shrink: 0;
-    }
-
-    @media (max-width: 380px) {
-        .tasksList :global(.ant-pagination-item:not(.ant-pagination-item-active)),
-        .tasksList :global(.ant-pagination-jump-prev),
-        .tasksList :global(.ant-pagination-jump-next) {
-            display: none;
-        }
-
-        .tasksList :global(.ant-pagination) {
-            gap: 4px;
-        }
-    }
-
-    .statsRow > div {
-        margin-bottom: 16px;
-    }
-
-    .chartsRow {
-        flex-direction: column;
-    }
-
-    .chartsRow > div {
-        width: 100%;
-        margin-bottom: 16px;
-    }
-} 
-
-.tasksCard {
-    margin-bottom: 24px;
-}
-
-.tasksList {
-    margin-top: 16px;
-}
-
-.taskItem {
-    padding: 12px !important;
-    transition: background-color 0.3s;
-}
-
-.taskItem:hover {
-    background-color: rgba(0, 0, 0, 0.02);
-}
-
-.taskDescription {
-    max-width: 100%;
-    word-break: break-word;
-}
-
-.taskDate {
-    white-space: nowrap;
-}
-
-.taskPriority {
-    min-width: 60px;
-    text-align: center;
-}
-
-.taskAction {
-    padding: 4px 8px !important;
-}
-
-@media (max-width: 768px) {
-    .taskItem {
-        flex-direction: column;
+        flex-direction: column !important;
         align-items: flex-start !important;
-    }
-
-    .taskItem :global(.ant-list-item-meta) {
-        width: 100%;
-        margin-bottom: 12px;
-    }
-
-    .taskItem :global(.ant-list-item-action) {
-        width: 100%;
-        margin: 0;
-        padding-top: 12px;
-        border-top: 1px solid #f0f0f0;
-    }
-
-    .taskDate, .taskPriority {
-        margin-bottom: 8px;
-    }
-
-    .taskAction {
-        padding: 8px !important;
-    }
-
-    .statsRow > div {
-        margin-bottom: 16px;
-    }
-
-    .chartsRow {
-        flex-direction: column;
-    }
-
-    .chartsRow > div {
-        width: 100%;
-        margin-bottom: 16px;
-    }
-} 
-
-.taskItem :global(.ant-checkbox-wrapper) {
-    padding: 8px !important;
-    margin: -8px !important;
-    touch-action: manipulation;
-}
-
-@media (max-width: 768px) {
-    .taskItem {
+        gap: 12px !important;
         padding: 16px !important;
     }
 
     .taskItem :global(.ant-list-item-meta) {
-        align-items: flex-start !important;
-        margin-bottom: 8px;
+        width: 100% !important;
+        margin-bottom: 0 !important;
     }
 
-    .taskItem :global(.ant-checkbox-wrapper) {
-        padding: 12px !important;
-        margin: -12px !important;
+    .taskItem :global(.ant-list-item-meta-content) {
+        width: calc(100% - 40px) !important;
+        margin-left: 8px !important;
     }
 
-    .taskItem :global(.ant-list-item-meta-avatar) {
-        margin-right: 16px !important;
-        padding: 4px 0;
+    .taskItem :global(.ant-list-item-action) {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
     }
 
-    .taskItem :global(.ant-checkbox-wrapper),
-    .taskItem :global(.ant-checkbox) {
-        user-select: none;
-        -webkit-user-select: none;
-        -webkit-tap-highlight-color: transparent;
+    .taskItem :global(.ant-list-item-action > li) {
+        padding: 0 !important;
+        margin: 0 12px 0 0 !important;
+    }
+
+    .taskItem :global(.ant-tag) {
+        margin: 4px 8px 4px 0 !important;
     }
 } 

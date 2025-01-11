@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../../context/auth/AuthContext";
 import AuthForm from "../components/AuthForm";
+import { Link } from "react-router-dom";
 
 function ResetPassword() {
   const { resetPassword } = useAuth();
@@ -58,7 +59,7 @@ function ResetPassword() {
       buttonText={loading ? "Resetting..." : "Reset Password"}
     >
       <p>
-        <a href="/login">Back to Login</a>
+        <Link to="/login">Back to Login</Link>
       </p>
     </AuthForm>
   );

@@ -1,7 +1,7 @@
 // src/pages/Dashboard.jsx
 
 import { useState, useEffect, useMemo } from 'react';
-import { useAuth } from '../features/auth/AuthContext';
+import { useAuth } from '../context/auth/AuthContext';
 import { Card, Row, Col, Typography, Statistic, Progress, Timeline, List, Tag, Menu, Button, 
     Tooltip, Checkbox, Modal, Form, Input, DatePicker, Select, Popconfirm, App } from 'antd';
 import { Area } from '@ant-design/plots';

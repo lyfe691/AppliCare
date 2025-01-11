@@ -1,11 +1,12 @@
 // src/features/settings/pages/Settings.jsx
 
 import React, { useState } from 'react';
-import { Card, Menu, Form, Input, Button, Avatar, Upload, Switch, Divider, Select, Space, Tooltip, Typography, Modal, App } from 'antd';
-import { UserOutlined, LockOutlined, BellOutlined, UploadOutlined, SettingOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { Card, Menu, Form, Input, Button, Switch, Divider, Select, Space, Tooltip, Typography, Modal, App, Radio } from 'antd';
+import { UserOutlined, LockOutlined, BellOutlined, UploadOutlined, SettingOutlined, ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../auth/AuthContext';
+import { useAuth } from '../../../context/auth/AuthContext';
 import PasswordInput from '../../auth/components/PasswordInput';
+import { useTheme } from '../../../context/theme/ThemeContext';
 import styles from './Settings.module.css';
 import api from '../../../api/axios';
 
@@ -19,6 +20,7 @@ const Settings = () => {
   const [selectedKey, setSelectedKey] = useState('profile');
   const navigate = useNavigate();
   const { message, modal } = App.useApp();
+  const { theme, setTheme } = useTheme();
 
   const handleProfileUpdate = async (values) => {
     setLoading(true);
@@ -84,6 +86,11 @@ const Settings = () => {
     });
   };
 
+  const handleThemeChange = (value) => {
+    setTheme(value);
+    message.success('Theme preference updated');
+  };
+
   const menuItems = [
     {
       key: 'profile',
@@ -116,20 +123,6 @@ const Settings = () => {
                 email: user?.email || '',
               }}
             >
-              <div className={styles.avatarSection}>
-                <div className={styles.avatarWrapper}>
-                  <Avatar size={96} icon={<UserOutlined />} className={styles.avatar} />
-                  <Upload>
-                    <Button icon={<UploadOutlined />} className={styles.uploadButton}>
-                      Change Photo
-                    </Button>
-                  </Upload>
-                </div>
-                <div className={styles.avatarInfo}>
-                  <p className={styles.avatarHelp}>JPG, PNG. Max size 2MB</p>
-                </div>
-              </div>
-
               <div className={styles.formGrid}>
                 <Form.Item
                   name="username"
@@ -163,74 +156,85 @@ const Settings = () => {
 
       case 'preferences':
         return (
-          <>nothing here yet. might add themes and notifications</>
+          <Card title="Preferences" className={styles.sectionCard}>
+            <Form layout="vertical">
+              <Form.Item label="Theme">
+                <Radio.Group value={theme} onChange={(e) => handleThemeChange(e.target.value)}>
+                  <Space direction="vertical">
+                    <Radio value="light">Light</Radio>
+                    <Radio value="dark">Dark</Radio>
+                    <Radio value="system">Use System Settings</Radio>
+                  </Space>
+                </Radio.Group>
+              </Form.Item>
+              
+              <Divider className={styles.sectionDivider} />
+              
+              {/* Add other preference settings here */}
+            </Form>
+          </Card>
         );
 
       case 'security':
         return (
-          <Card className={styles.sectionCard} title="Security Settings">
-            <div className={styles.securitySection}>
-              <Form 
-                layout="vertical" 
-                className={styles.securityForm}
-                onFinish={handlePasswordUpdate}
-              >
-                <div className={styles.formGrid}>
-                  <Form.Item
-                    name="currentPassword"
-                    label="1. Current Password"
-                    rules={[{ required: true, message: 'Please enter your current password' }]}
-                  >
-                    <PasswordInput placeholder="Enter your current password" />
-                  </Form.Item>
-
-                  <Form.Item
-                    name="newPassword"
-                    label="2. New Password"
-                    rules={[
-                      { required: true, message: 'Please enter a new password' }
-                    ]}
-                  >
-                    <PasswordInput placeholder="Enter a new password" />
-                  </Form.Item>
-
-                  <Form.Item
-                    name="confirmPassword"
-                    label="3. Confirm New Password"
-                    rules={[
-                      { required: true, message: 'Please confirm your password' },
-                      ({ getFieldValue }) => ({
-                        validator(_, value) {
-                          if (!value || getFieldValue('newPassword') === value) {
-                            return Promise.resolve();
-                          }
-                          return Promise.reject(new Error('Passwords do not match'));
-                        },
-                      }),
-                    ]}
-                  >
-                    <PasswordInput placeholder="Confirm your new password" />
-                  </Form.Item>
-                </div>
-
-                <Form.Item>
-                  <Button type="primary" htmlType="submit" loading={loading}>
-                    Update Password
-                  </Button>
+          <Card title="Security" className={styles.sectionCard}>
+            <Form
+              form={form}
+              layout="vertical"
+              onFinish={handlePasswordUpdate}
+              className={styles.securityForm}
+            >
+              <div className={styles.formGrid}>
+                <Form.Item
+                  name="currentPassword"
+                  label="Current Password"
+                  rules={[{ required: true, message: 'Please enter your current password' }]}
+                >
+                  <PasswordInput placeholder="Enter your current password" />
                 </Form.Item>
-              </Form>
+                <Form.Item
+                  name="newPassword"
+                  label="New Password"
+                  rules={[{ required: true, message: 'Please enter your new password' }]}
+                >
+                  <PasswordInput placeholder="Enter your new password" />
+                </Form.Item>
+                <Form.Item
+                  name="confirmPassword"
+                  label="Confirm New Password"
+                  dependencies={['newPassword']}
+                  rules={[
+                    { required: true, message: 'Please confirm your new password' },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue('newPassword') === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(new Error('The two passwords do not match'));
+                      },
+                    }),
+                  ]}
+                >
+                  <PasswordInput placeholder="Confirm your new password" />
+                </Form.Item>
+              </div>
+              <Button type="primary" htmlType="submit" loading={loading}>
+                Update Password
+              </Button>
+            </Form>
 
-              <Divider className={styles.sectionDivider} />
+            <Divider className={styles.sectionDivider} />
 
-              <div className={styles.dangerZone}>
-                <h3>Danger Zone</h3>
-                <div className={styles.dangerItem}>
-                  <div>
-                    <h4>Delete Account</h4>
-                    <p>Permanently delete your account and all associated data</p>
-                  </div>
-                  <Button danger onClick={showDeleteConfirm}>Delete Account</Button>
+            <div className={styles.dangerZone}>
+              <h3>Danger Zone</h3>
+              <div className={styles.dangerItem}>
+                <div>
+                  <h4>Delete Account</h4>
+                  <p>Permanently delete your account and all data</p>
                 </div>
+                <Button danger icon={<DeleteOutlined />} onClick={showDeleteConfirm}>
+                  Delete Account
+                </Button>
               </div>
             </div>
           </Card>

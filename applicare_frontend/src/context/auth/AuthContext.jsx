@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
     };
     setUser(newUser);
     localStorage.setItem("appliCareUser", JSON.stringify(newUser));
-    navigate("/dashboard"); // redirect to dashboard instead of home
+    navigate("/dashboard"); 
   }
   
   // REGISTER USER
@@ -91,7 +91,7 @@ export function AuthProvider({ children }) {
     });
   }
 
-  // cleanup without showing modal - for acc deletion
+  // cleanup without showing modal - for acc deletion mainly
   function cleanupAndRedirect() {
     setUser(null);
     localStorage.removeItem("appliCareUser");
@@ -110,7 +110,7 @@ export function AuthProvider({ children }) {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
-
 export function useAuth() {
   return useContext(AuthContext);
 }
+

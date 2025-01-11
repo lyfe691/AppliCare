@@ -18,7 +18,7 @@
 1. [X] better looking landing page with a good base.
 1. [X] move the statisitcs in the dashbopard page to a new statistics page.
 1. [X] IMPORTANT: CREATE A SETTINGS PAGE
-1. [ ] dark mode
+1. [X] dark mode
 2. [ ] AppliCare text in the authform -> link to /
 2. [X] make landing page more mobile friendly.
 2. [X] remove mui, use antd
@@ -49,5 +49,8 @@
 4. [X] when deleting account all associated data should be deleted eg. applications, tasks, etc.
 4. [X] fix: when deleting account the logout modal shoould NOT be shown. also redirect to /
 4. [X] fix: dont allow spaces in passwords
-5. [ ] fix wird 3 dots nav bug
-5. [ ] add text limit to almost all forms
+5. [X] fix wird 3 dots nav bug
+5. [ ] add text limit to almost all forms like (5/100) etc.
+5. [ ] fix: 0:30:21 [vite] (client) hmr invalidate /src/context/auth/AuthContext.jsx Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-export
+5. [ ] fix: 10:46:13 [vite] (client) hmr invalidate /src/context/theme/ThemeContext.jsx Could not Fast Refresh ("useTheme" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-expo
+5. [ ] fix: when closing the browser in the app and opening it again it shows blank and this error: Failed to load resource: the server responded with a status of 500 (Internal Server Error)

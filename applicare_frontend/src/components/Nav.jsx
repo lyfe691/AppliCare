@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useAuth } from "../features/auth/AuthContext";
+import { useAuth } from "../context/auth/AuthContext";
 import {
   Layout,
   Menu,
@@ -9,6 +9,7 @@ import {
   Dropdown,
   Avatar,
   Divider,
+  Typography,
 } from "antd";
 import {
   DashboardOutlined,
@@ -22,6 +23,7 @@ import { useState, useEffect } from "react";
 import "../css/Nav.css";
 
 const { Header } = Layout;
+const { Text } = Typography;
 
 function Nav() {
   const location = useLocation();
@@ -84,21 +86,21 @@ function Nav() {
       disabled: true,
       label: (
         <div style={{ cursor: "default", maxWidth: "200px" }}>
-          <div style={{ 
-            fontWeight: "bold", 
-            color: "#262626",
+          <Text strong style={{ 
+            display: "block",
             overflow: "hidden",
             whiteSpace: "nowrap"
           }}>
             {truncateUsername(user?.username)}
-          </div>
-          <div style={{ 
+          </Text>
+          <Text type="secondary" style={{ 
             fontSize: "0.85rem",
+            display: "block",
             overflow: "hidden",
             whiteSpace: "nowrap"
           }}>
             {truncateEmail(user?.email)}
-          </div>
+          </Text>
         </div>
       ),
     },

@@ -1,8 +1,9 @@
 // src/features/auth/pages/Login.jsx
 
 import { useState } from "react";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../../context/auth/AuthContext";
 import AuthForm from "../components/AuthForm";
+import { Link } from "react-router-dom";
 
 function Login() {
   const { login } = useAuth();
@@ -36,10 +37,10 @@ function Login() {
       buttonText={loading ? "Logging in..." : "Login"}
     >
       <p>
-        Don't have an account? <a href="/register">Register</a>
+        Don't have an account? <Link to="/register">Register</Link>
       </p>
       <p>
-        <a href="/forgot-password">Forgot Password?</a>
+        <Link to="/forgot-password">Forgot Password?</Link>
       </p>
     </AuthForm>
   );  

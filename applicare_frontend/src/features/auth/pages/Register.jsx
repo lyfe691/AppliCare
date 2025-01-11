@@ -1,9 +1,10 @@
 // src/features/auth/pages/Register.jsx
 
 import { useState } from "react";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../../context/auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../components/AuthForm";
+import { Link } from "react-router-dom"
 
 function Register() {
   const { registerUser } = useAuth();
@@ -49,7 +50,7 @@ function Register() {
       buttonText={loading ? "Registering..." : "Register"}
     >
       <p>
-        Already have an account? <a href="/login">Login here</a>
+        Already have an account? <Link to="/login">Login here</Link>
       </p>
     </AuthForm>
   );

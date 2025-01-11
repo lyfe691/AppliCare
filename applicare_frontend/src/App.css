@@ -1,4 +1,162 @@
-/***********
+/*************
  * APP CSS *
- ***********/
- /* Nothing here yet. */
+ *************/
+
+/* global styles */
+.app {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* antd overrides */
+:global(.ant-btn-primary) {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+:global(.ant-btn-primary:hover) {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+:global(.ant-input) {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+:global(.ant-input:hover) {
+  border-color: var(--primary);
+}
+
+:global(.ant-input:focus) {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.1);
+}
+
+:global(.ant-input-password) {
+  background-color: var(--input-bg);
+}
+
+:global(.ant-input-password input) {
+  background-color: transparent;
+}
+
+:global(.ant-select-selector) {
+  background-color: var(--input-bg) !important;
+  border-color: var(--input-border) !important;
+  color: var(--text-primary) !important;
+}
+
+:global(.ant-select-arrow) {
+  color: var(--text-tertiary);
+}
+
+:global(.ant-select-dropdown) {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+}
+
+:global(.ant-select-item) {
+  color: var(--text-primary);
+}
+
+:global(.ant-select-item-option-selected) {
+  background-color: var(--bg-tertiary) !important;
+}
+
+:global(.ant-select-item-option-active) {
+  background-color: var(--hover-bg) !important;
+}
+
+:global(.ant-modal-content),
+:global(.ant-modal-header) {
+  background-color: var(--bg-secondary) !important;
+}
+
+:global(.ant-modal-title),
+:global(.ant-modal-close) {
+  color: var(--text-primary) !important;
+}
+
+:global(.ant-modal-close:hover) {
+  color: var(--primary) !important;
+}
+
+:global(.ant-form-item-label > label) {
+  color: var(--text-primary);
+}
+
+:global(.ant-form-item-explain-error) {
+  color: var(--error);
+}
+
+:global(.ant-message-notice-content) {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
+}
+
+:global(.ant-message-success .anticon),
+:global(.ant-message-error .anticon),
+:global(.ant-message-warning .anticon),
+:global(.ant-message-info .anticon) {
+  color: inherit;
+}
+
+:global(.ant-menu) {
+  background-color: transparent;
+  border-right: none;
+  color: var(--text-primary);
+}
+
+:global(.ant-menu-item:hover) {
+  color: var(--primary) !important;
+}
+
+:global(.ant-menu-item-selected) {
+  background-color: var(--hover-bg) !important;
+  color: var(--primary) !important;
+}
+
+:global(.ant-radio-wrapper) {
+  color: var(--text-primary);
+}
+
+:global(.ant-radio-checked .ant-radio-inner) {
+  border-color: var(--primary) !important;
+}
+
+:global(.ant-radio-inner::after) {
+  background-color: var(--primary);
+}
+
+:global(.ant-switch) {
+  background-color: var(--border-primary);
+}
+
+:global(.ant-switch-checked) {
+  background-color: var(--primary);
+}
+
+/* transitions */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 200ms ease-in;
+}

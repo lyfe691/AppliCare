@@ -1,75 +1,64 @@
-/******************
+/****************
  * SETTINGS CSS *
- ******************/
+ ****************/
 
 .settings {
   padding: 0 1rem;
   max-width: 1400px;
   margin: 0 auto;
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease;
 }
 
 .settingsHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .settingsLayout {
-  display: flex;
+  display: grid;
+  grid-template-columns: 250px 1fr;
   gap: 2rem;
-  min-height: calc(100vh - 200px);
 }
 
 .settingsMenu {
-  width: 240px;
-  background: #fff;
+  background-color: var(--bg-secondary);
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  height: fit-content;
-}
-
-.settingsMenu :global(.ant-menu-item) {
-  margin: 0 !important;
-  border-radius: 0 !important;
+  border: 1px solid var(--border-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .settingsContent {
   flex: 1;
-  max-width: calc(100% - 260px);
 }
 
 .sectionCard {
-  background: #fff;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .sectionCard :global(.ant-card-head) {
-  border-bottom: 1px solid #f0f0f0;
-  padding: 0 24px;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .sectionCard :global(.ant-card-head-title) {
-  font-size: 1.1rem;
-  font-weight: 500;
+  color: var(--text-primary);
 }
 
-.sectionCard :global(.ant-card-body) {
-  padding: 24px;
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
 }
 
-/* Profile Section */
 .avatarSection {
   display: flex;
   align-items: flex-start;
   gap: 2rem;
   margin-bottom: 2rem;
-  padding: 1.5rem;
-  background: var(--hover-bg);
-  border-radius: 8px;
 }
 
 .avatarWrapper {
@@ -80,157 +69,76 @@
 }
 
 .avatar {
-  border: 2px solid var(--border-color);
+  background-color: var(--bg-tertiary);
+  border: 2px solid var(--border-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.avatarInfo {
-  color: var(--light-text);
-  font-size: 0.875rem;
-}
-
-.avatarHelp {
-  margin-top: 0.5rem;
-  opacity: 0.8;
-}
-
-.formGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-/* Notification Settings */
-.notificationList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.notificationItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-}
-
-.notificationInfo {
-  flex: 1;
-  padding-right: 2rem;
-}
-
-.notificationInfo h4 {
-  margin: 0;
-  color: var(--text-color);
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.notificationInfo p {
-  margin: 0.25rem 0 0;
-  color: var(--light-text);
-  font-size: 0.875rem;
-}
-
-/* Security Section */
-.securitySection {
+.uploadButton {
   width: 100%;
 }
 
-.securityForm {
-  margin-bottom: 2rem;
+.avatarInfo {
+  flex: 1;
 }
 
-.securityForm .formGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+.avatarHelp {
+  color: var(--text-tertiary);
+  font-size: 0.875rem;
+}
+
+.sectionDivider {
+  margin: 2rem 0;
+  border-color: var(--border-primary);
 }
 
 .dangerZone {
+  margin-top: 2rem;
   padding: 1.5rem;
-  border: 1px solid #ff4d4f;
+  border: 1px solid var(--error);
   border-radius: 8px;
-  background: rgba(255, 77, 79, 0.02);
 }
 
 .dangerZone h3 {
-  color: #ff4d4f;
-  margin-bottom: 1.5rem;
+  color: var(--error);
+  margin-bottom: 1rem;
 }
 
 .dangerItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
+  gap: 1rem;
 }
 
 .dangerItem h4 {
-  color: var(--text-color);
-  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
 }
 
 .dangerItem p {
-  color: var(--light-text);
+  color: var(--text-tertiary);
   font-size: 0.875rem;
-  margin: 0;
 }
 
-.sectionDivider {
-  margin: 2rem 0;
-  opacity: 0.6;
-}
-
-/* Mobile Responsiveness */
+/* Responsive styles */
 @media (max-width: 768px) {
-  .settings {
-    padding: 0 0.5rem;
-  }
-
   .settingsLayout {
-    flex-direction: column;
-    gap: 1rem;
+    grid-template-columns: 1fr;
   }
 
   .settingsMenu {
-    width: 100%;
-  }
-
-  .settingsContent {
-    max-width: 100%;
+    margin-bottom: 1rem;
   }
 
   .avatarSection {
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
     text-align: center;
-  }
-
-  .formGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .notificationItem {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-    padding: 1rem 0;
-  }
-
-  .notificationInfo {
-    padding-right: 0;
   }
 
   .dangerItem {
     flex-direction: column;
-    gap: 1rem;
     text-align: center;
-  }
-
-  .dangerItem button {
-    width: 100%;
   }
 } 

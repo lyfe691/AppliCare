@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// Create axios instance with default config
+// creates axios instance with default config
 const api = axios.create({
   baseURL: '/api',
   headers: {
@@ -8,7 +8,7 @@ const api = axios.create({
   }
 });
 
-// Add request interceptor to add auth token
+// adds request interceptor to add auth token
 api.interceptors.request.use(
   (config) => {
     const user = JSON.parse(localStorage.getItem('appliCareUser'));
@@ -22,7 +22,7 @@ api.interceptors.request.use(
   }
 );
 
-// Add response interceptor to handle errors
+// adds response interceptor to handle errors
 api.interceptors.response.use(
   (response) => response.data,
   (error) => {

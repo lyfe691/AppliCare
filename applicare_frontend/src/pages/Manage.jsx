@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../features/auth/AuthContext';
+import { useAuth } from '../context/auth/AuthContext';
 import NewApplicationForm from '../features/applications/components/NewApplicationForm';
-import { Table, Button, Typography, Space, Modal, Select, Popconfirm, Input, Tag, message } from 'antd';
+import { Table, Button, Typography, Space, Modal, Select, Popconfirm, Input, Tag, message, App } from 'antd';
 import { EditOutlined, DeleteOutlined, SearchOutlined, PlusOutlined, Loading3QuartersOutlined, LoadingOutlined } from '@ant-design/icons';
 import styles from '../css/Manage.module.css';
 import api from '../api/axios';
@@ -29,6 +29,8 @@ function Manage() {
     const [showNewApplicationForm, setShowNewApplicationForm] = useState(false);
     const [editingApplication, setEditingApplication] = useState(null);
     const [searchText, setSearchText] = useState('');
+    const [searchedColumn, setSearchedColumn] = useState('');
+    const { message } = App.useApp();
     
     // sorting and pagination
     const [tableParams, setTableParams] = useState({

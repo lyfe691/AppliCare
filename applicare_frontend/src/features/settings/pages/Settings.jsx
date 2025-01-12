@@ -162,7 +162,7 @@ const Settings = () => {
                 <Radio.Group value={theme} onChange={(e) => handleThemeChange(e.target.value)}>
                   <Space direction="vertical">
                     <Radio value="light">Light</Radio>
-                    <Radio value="dark">Dark</Radio>
+                    <Radio value="dark">Dark (beta)</Radio>
                     <Radio value="system">Use System Settings</Radio>
                   </Space>
                 </Radio.Group>
@@ -170,7 +170,6 @@ const Settings = () => {
               
               <Divider className={styles.sectionDivider} />
               
-              {/* Add other preference settings here */}
             </Form>
           </Card>
         );

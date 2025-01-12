@@ -6,8 +6,15 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-family: 'Montserrat', 'Roboto', sans-serif;
+    background-color: #ffffff;
+    color: #2a2a2a;
+}
+
+@media (prefers-color-scheme: dark) {
+    .landing {
+        background-color: #1a1f2d;
+        color: #ffffff;
+    }
 }
 
 .dark {

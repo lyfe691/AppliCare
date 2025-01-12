@@ -18,15 +18,7 @@ function Landing() {
         }
     }, [user, navigate]);
 
-    useEffect(() => {
-        // Persist theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            setIsDark(savedTheme === 'dark');
-            document.documentElement.classList.toggle('light-mode', savedTheme === 'light');
-            document.body.style.backgroundColor = savedTheme === 'light' ? '#ffffff' : '#1a1f2d';
-        }
-    }, []);
+
 
     const toggleTheme = () => {
         const newTheme = !isDark ? 'dark' : 'light';

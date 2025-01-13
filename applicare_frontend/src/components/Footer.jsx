@@ -12,7 +12,7 @@ function Footer() {
           <div className="footer-branding">
             <span className="footer-logo">AppliCare<sup className="beta-tag">beta</sup></span>
             <span className="footer-tagline">Manage your job applications with ease.</span>
-            <span className="footer-tagline">A project made with <span className="heart">❤️</span> by <Link to="https://ysz.life">Yanis Sebastian Zürcher</Link></span>
+            <span className="footer-tagline">A project made with <span className="heart">❤️</span> by <Link target='_blank' to="https://ysz.life">Yanis Sebastian Zürcher</Link></span>
           </div>
           
           <div className="footer-links">

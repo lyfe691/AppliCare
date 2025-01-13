@@ -265,7 +265,13 @@ function Dashboard() {
                             <Col xs={12} sm={12} lg={6}>
                                 <Card bordered={false} className={styles.statCard}>
                                     <Statistic
-                                        title="Active Applications"
+                                        // fix text overlap on mobile
+                                        title={
+                                            <>
+                                                <span className={styles.desktopOnly}>Active Applications</span>
+                                                <span className={styles.mobileOnly}>Active Appli's</span>
+                                            </>
+                                        }
                                         value={stats.active}
                                         prefix={<ClockCircleOutlined />}
                                         valueStyle={{ color: '#722ed1' }}

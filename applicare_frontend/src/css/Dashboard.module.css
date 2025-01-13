@@ -261,4 +261,21 @@
     .taskItem :global(.ant-tag) {
         margin: 4px 8px 4px 0 !important;
     }
+}
+
+.desktopOnly {
+    display: inline;
+}
+
+.mobileOnly {
+    display: none;
+}
+
+@media (max-width: 576px) {
+    .desktopOnly {
+        display: none;
+    }
+    .mobileOnly {
+        display: inline;
+    }
 } 

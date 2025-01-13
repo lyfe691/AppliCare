@@ -1,3 +1,5 @@
+// com.applicare.applicare.repository.JobApplicationRepository.java
+
 package com.applicare.applicare.repository;
 
 import com.applicare.applicare.model.JobApplication;

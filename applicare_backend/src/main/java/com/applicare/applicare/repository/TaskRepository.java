@@ -1,3 +1,5 @@
+// com.applicare.applicare.repository.TaskRepository.java
+
 package com.applicare.applicare.repository;
 
 import com.applicare.applicare.model.Task;
@@ -12,4 +14,4 @@ public interface TaskRepository extends MongoRepository<Task, String> {
     List<Task> findByUserIdAndCompletedOrderByDeadlineAsc(String userId, boolean completed);
     List<Task> findByApplicationIdOrderByDeadlineAsc(String applicationId);
     void deleteByUserId(String userId);
-} 
+}

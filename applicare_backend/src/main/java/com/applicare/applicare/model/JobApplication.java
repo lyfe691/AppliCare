@@ -1,3 +1,5 @@
+// com.applicare.applicare.model.JobApplication.java
+
 package com.applicare.applicare.model;
 
 import org.springframework.data.annotation.Id;

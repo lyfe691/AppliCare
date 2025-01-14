@@ -382,6 +382,11 @@ function Dashboard() {
                                                 <Text type="secondary" className={styles.taskDate}>
                                                     Due: {new Date(task.deadline).toLocaleDateString()}
                                                 </Text>,
+                                                task.applicationId && (
+                                                    <Tag color="blue">
+                                                        {applications.find(app => app.id === task.applicationId)?.companyName || 'Unknown Company'}
+                                                    </Tag>
+                                                ),
                                                 <Tag color={PRIORITY_COLORS[task.priority]} className={styles.taskPriority}>
                                                     {task.priority}
                                                 </Tag>,
@@ -529,7 +534,7 @@ function Dashboard() {
                     </Form.Item>
 
                     <Form.Item
-                        name="relatedApplication"
+                        name="applicationId"
                         label="Related Application"
                     >
                         <Select

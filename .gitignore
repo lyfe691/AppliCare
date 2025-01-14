@@ -2,3 +2,5 @@ applicare/target/
 .env
 *.env
 .vscode/settings.json
+
+setup.bat

@@ -14,6 +14,12 @@ import java.util.Base64;
 import io.jsonwebtoken.Claims;
 import java.util.function.Function;
 
+/**
+ * 
+ * @author Yanis Sebastian Zürcher
+ * 
+ */
+
 @Component
 public class JwtUtil {
 

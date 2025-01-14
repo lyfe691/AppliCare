@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 
+ * @author Yanis Sebastian Zürcher
+ * 
+ */
+
 @RestController
 @RequestMapping("/api/tasks")
 @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")

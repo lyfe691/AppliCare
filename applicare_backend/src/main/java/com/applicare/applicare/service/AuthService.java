@@ -15,6 +15,12 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * 
+ * @author Yanis Sebastian Zürcher
+ * 
+ */
+
 @Service
 public class AuthService {
 

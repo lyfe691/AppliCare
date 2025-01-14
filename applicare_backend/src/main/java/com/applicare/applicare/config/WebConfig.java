@@ -7,6 +7,12 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * 
+ * @author Yanis Sebastian Zürcher
+ * 
+ */
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

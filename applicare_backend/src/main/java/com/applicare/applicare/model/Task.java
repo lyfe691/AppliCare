@@ -7,6 +7,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 import java.time.LocalDate;
 
+/**
+ * 
+ * @author Yanis Sebastian Zürcher
+ * 
+ */
+
 @Data
 @Document(collection = "tasks")
 public class Task {

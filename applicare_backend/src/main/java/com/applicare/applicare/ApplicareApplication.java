@@ -6,6 +6,12 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+/**
+ * 
+ * @author Yanis Sebastian Zürcher
+ * 
+ */
+
 @SpringBootApplication
 @ComponentScan({"com.applicare.applicare", "com.applicare.applicare.controller"})
 @EnableMongoRepositories("com.applicare.applicare.repository")

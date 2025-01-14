@@ -130,7 +130,7 @@ function Landing() {
                                 <FaChevronDown />
                             </button>
                             <div className={styles.faqAnswer}>
-                                AppliCare streamlines your job search with an intuitive interface, smart tracking features, and automated follow-ups. Stay organized and never miss an opportunity.
+                                AppliCare is a job application management tool that helps you stay organized and never miss an opportunity.
                             </div>
                         </div>
                         <div className={`${styles.faqItem} ${activeFAQ === 2 ? styles.active : ''}`}>
@@ -143,7 +143,7 @@ function Landing() {
                                 <FaChevronDown />
                             </button>
                             <div className={styles.faqAnswer}>
-                                Yes! AppliCare's core features are completely free. Track applications, set reminders, and manage your job search journey without any cost.
+                                Yes! AppliCare is free to use as its in beta.
                             </div>
                         </div>
                         <div className={`${styles.faqItem} ${activeFAQ === 3 ? styles.active : ''}`}>

@@ -170,11 +170,11 @@ classDiagram
 - Forgot Password
 - Reset Password
 
-#### Main Layout (nach login)
+#### Main Layout (nach auth)
 
 - Navigation (Logo, /dashboard, /manage, /settings, User icon, logout)
 - content
-- Footer (copyright, socials etc) 
+- Footer (copyright, socials etc)
 
 #### Dashboard
 
@@ -194,15 +194,34 @@ classDiagram
 
 ### 6.2 Screen-Mockups
 
-<div style="font-style: italic; color: #666;">
-Für die folgenden Mockups können beispielhaft Platzhalterbilder genutzt werden.
+<div>
+<em>Die folgenden Mockups zeigen das geplante Design der Anwendung:</em>
 </div>
+<br>
 
-- Landing: [Platzhalterbild]
-- Login: [Platzhalterbild]
-- Dashboard: [Platzhalterbild]
-- Manage: [Platzhalterbild]
-- Settings: [Platzhalterbild]
+*Landing Page*
+
+![Landing Page](images/mockups/Landing_Mockup.png)
+
+*Authentication Pages*
+
+![Auth Pages](images/mockups/Auth_Mockup.png)
+
+*Dashboard*
+
+![Dashboard](images/mockups/Dashboard_Mockup.png)
+
+*Manage Applications*
+
+![Manage](images/mockups/Manage_Mockup.png)
+
+*Settings*
+
+![Settings](images/mockups/Settings_Mockup.png)
+
+
+
+
 
 ---
 
@@ -260,7 +279,7 @@ Für die folgenden Mockups können beispielhaft Platzhalterbilder genutzt werden
   "status": "APPLIED",
   "location": "Zürich",
   "contactPerson": "Hans Muster",
-  "contactEmail": "hans.muster@google.com",
+  "contactEmail": "hans.muster@gmail.com",
   "contactPhone": "+41 12 123 12 12",
   "notes": "Remote möglich?",
   "salary": 120000,
@@ -323,7 +342,6 @@ Für die folgenden Mockups können beispielhaft Platzhalterbilder genutzt werden
 2. `npm install`
 3. `npm run dev`
 4. http://localhost:5173
-
 
 ### 9.2 Backend (M295)
 

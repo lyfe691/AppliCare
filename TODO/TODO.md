@@ -54,6 +54,7 @@
 5. [ ] fix: 10:46:13 [vite] (client) hmr invalidate /src/context/theme/ThemeContext.jsx Could not Fast Refresh ("useTheme" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-expo
 5. [ ] fix: when closing the browser in the app and opening it again it shows blank and this error: Failed to load resource: the server responded with a status of 500 (Internal Server Error)
 5. [X] fix landing theme issue
+5. [ ] add remember me to login
 5. [ ] notifications
 5. [ ] cerate min. 5 unit tests for frontend and backend.
 5. [ ] clean up x1, x2, x3

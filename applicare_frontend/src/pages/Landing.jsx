@@ -6,6 +6,8 @@ import { useAuth } from '../context/auth/AuthContext';
 import styles from '../css/Landing.module.css';
 import { FaGithub, FaLinkedin, FaSun, FaMoon, FaChevronDown, FaGlobe } from 'react-icons/fa';
 
+// landing page for the app,  its the first page the potential user sees.
+
 function Landing() {
     const { user } = useAuth();
     const navigate = useNavigate();

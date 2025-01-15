@@ -14,7 +14,7 @@ const { Option } = Select;
 const { Title } = Typography;
 
 const Settings = () => {
-  const { user, logout, cleanupAndRedirect } = useAuth();
+  const { user, cleanupAndRedirect } = useAuth();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [selectedKey, setSelectedKey] = useState('profile');
@@ -22,6 +22,7 @@ const Settings = () => {
   const { message, modal } = App.useApp();
   const { theme, setTheme } = useTheme();
 
+  // this function is called when the user submits the profile update form
   const handleProfileUpdate = async (values) => {
     setLoading(true);
     try {
@@ -44,6 +45,7 @@ const Settings = () => {
     }
   };
 
+  // this function is called when the user submits the password update form
   const handlePasswordUpdate = async (values) => {
     setLoading(true);
     try {
@@ -66,6 +68,7 @@ const Settings = () => {
     }
   };
 
+  // this function is called when the user clicks the delete account button
   const showDeleteConfirm = () => {
     modal.confirm({
       title: 'Are you sure you want to delete your account?',
@@ -86,11 +89,13 @@ const Settings = () => {
     });
   };
 
+  // this function is called when the user changes the theme preference
   const handleThemeChange = (value) => {
     setTheme(value);
     message.success('Theme preference updated');
   };
 
+  // menu items for the settings page
   const menuItems = [
     {
       key: 'profile',
@@ -109,6 +114,7 @@ const Settings = () => {
     },
   ];
 
+  // renders the content based on the selected menu item
   const renderContent = () => {
     switch (selectedKey) {
       case 'profile':
@@ -244,6 +250,7 @@ const Settings = () => {
     }
   };
 
+  // render the overall settings page
   return (
     <div className={styles.settings}>
       <div className={styles.settingsHeader}>

@@ -40,7 +40,7 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
             // when editing add existing data
             form.setFieldsValue(initialData);
         } else {
-            // annoying but when creating a new form set empty values
+            // when creating a new form set empty values
             form.setFieldsValue({
                 companyName: '',
                 jobTitle: '',
@@ -58,6 +58,7 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
         }
     }, [form, initialData]);
 
+    // handle form submission
     async function handleSubmit(values) {
         setError(null);
         setLoading(true);
@@ -81,6 +82,7 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
         }
     }
 
+    // render the form 
     return (
         <div className={styles.form}>
             <Title level={4}>{initialData ? 'Edit Application' : 'New Application'}</Title>

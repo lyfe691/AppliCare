@@ -1,5 +1,6 @@
 import { Input } from 'antd';
 
+// doesnt allow spaces in the password input
 const PasswordInput = ({ placeholder, ...props }) => {
   return (
     <Input.Password

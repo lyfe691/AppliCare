@@ -58,6 +58,7 @@ function Dashboard() {
         fetchTasks();
     }, [user]);
 
+    // fetch applications
     async function fetchApplications() {
         try {
             const data = await api.get('/applications');
@@ -70,6 +71,7 @@ function Dashboard() {
         }
     }
 
+    // fetch tasks
     async function fetchTasks() {
         try {
             const data = await api.get('/tasks');
@@ -79,6 +81,7 @@ function Dashboard() {
         }
     }
 
+    // handles the task submission
     const handleTaskSubmit = async (values) => {
         setSubmitting(true);
         try {
@@ -106,6 +109,7 @@ function Dashboard() {
         }
     };
 
+    // handle task toggle
     const handleTaskToggle = async (taskId) => {
         try {
             await api.patch(`/tasks/${taskId}/toggle`);
@@ -115,6 +119,7 @@ function Dashboard() {
         }
     };
 
+    // handles task deletion
     const handleTaskDelete = async (taskId) => {
         try {
             await api.delete(`/tasks/${taskId}`);
@@ -125,6 +130,7 @@ function Dashboard() {
         }
     };
 
+    // edit the task
     const handleEditTask = (task) => {
         setEditingTask(task);
         taskForm.setFieldsValue({
@@ -135,6 +141,7 @@ function Dashboard() {
     };
 
     // stats calculations
+    // acc = accumulator, app = current application
     const stats = useMemo(() => {
         const total = applications.length;
         const active = applications.filter(app => !['REJECTED', 'ACCEPTED'].includes(app.status)).length;
@@ -150,13 +157,14 @@ function Dashboard() {
             return acc;
         }, {});
 
-        // applications over time
+        // applications over time   
         const applicationsByDate = applications.reduce((acc, app) => {
             const date = new Date(app.appliedDate).toLocaleDateString();
             acc[date] = (acc[date] || 0) + 1;
             return acc;
         }, {});
 
+        // return the stats
         return {
             total,
             active,
@@ -180,21 +188,21 @@ function Dashboard() {
         }));
     }, [stats.applicationsByDate]);
 
-    // Add pagination state for tasks
+    // add pagination for tasks
     const [tasksPagination, setTasksPagination] = useState({
         current: 1,
         pageSize: 5,
         total: 0
     });
 
-    // Get paginated tasks
+    // get paginated tasks
     const getPaginatedTasks = () => {
         const start = (tasksPagination.current - 1) * tasksPagination.pageSize;
         const end = start + tasksPagination.pageSize;
         return tasks.slice(start, end);
     };
 
-    // Handle tasks pagination change
+    // handle tasks pagination change
     const handleTasksPaginationChange = (page, pageSize) => {
         setTasksPagination(prev => ({
             ...prev,
@@ -211,6 +219,7 @@ function Dashboard() {
         }));
     }, [tasks]);
 
+    // menu items
     const menuItems = [
         {
             key: 'overview',
@@ -224,6 +233,7 @@ function Dashboard() {
         }
     ];
 
+    // big long code to render all the content
     const renderContent = () => {
         switch (activeTab) {
             case 'overview':

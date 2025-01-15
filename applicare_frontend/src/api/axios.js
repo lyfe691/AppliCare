@@ -4,7 +4,7 @@ import axios from 'axios';
 // meaning that all requests made with this instance will have the same base url, headers, and other configurations.
 // it also adds a request interceptor to add the auth tok
 
-// exmaple usage: api.get('/users') will make a GET request to '/api/users' with the auth token in the headers
+// exmaple: api.get('/users') will make a GET request to '/api/users' with the auth token in the headers
 
 // creates axios instance with default config
 const api = axios.create({

@@ -57,4 +57,4 @@
 5. [ ] add remember me to login
 5. [ ] notifications
 5. [ ] cerate min. 5 unit tests for frontend and backend.
-5. [ ] clean up x1, x2, x3
+5. [ ] clean up x1, x2, x3, x4, x5, x6

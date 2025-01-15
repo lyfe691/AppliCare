@@ -4,6 +4,7 @@ const ThemeContext = createContext();
 
 function getInitialTheme() {
     // tries to get the theme from local storage, default to system if not found
+    // might have been set in the landing page already
     return localStorage.getItem('theme') || 'system';
 }
 
@@ -20,7 +21,7 @@ export const ThemeProvider = ({ children }) => {
         localStorage.setItem('theme', theme);
     }, [theme]);
 
-    // Listen for system theme changes
+    // listen for system theme changes
     useEffect(() => {
         if (theme === 'system') {
             const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');

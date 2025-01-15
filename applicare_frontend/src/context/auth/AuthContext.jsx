@@ -5,6 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { App } from 'antd';
 import api from '../../api/axios';
 
+// This context provides authentication related functionalities such as login, 
+// registration, password reset, and logout. It uses reacts context api to 
+// share the authentication state and functions across the application.
+// example: useAuth hook to access the user object and authentication functions etc
+
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {

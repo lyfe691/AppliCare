@@ -1,1 +1,1 @@
-# linganguliguliguliwachalingangulingangu, linganguliguliguliwachalingangulingangu
+This is the frontend of AppliCare.

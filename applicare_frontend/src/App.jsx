@@ -17,6 +17,9 @@ import AppConfigProvider from "./components/ConfigProvider";
 import "./App.css";
 import "./index.css";
 
+// this is the main app component that sets up the routes and renders the layout
+// its called AppComponent to avoid confusion with the App function from Ant Design in main.jsx
+
 export default function AppComponent() {
   return (
     <Router>

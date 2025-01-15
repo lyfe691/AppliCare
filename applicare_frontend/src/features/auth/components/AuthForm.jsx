@@ -5,6 +5,8 @@ import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import styles from "../../../css/Auth.module.css";
 import PasswordInput from './PasswordInput';
 
+// this component is used to render the auth forms for the auth pages 
+
 const { Title, Text } = Typography;
 
 function AuthForm({
@@ -50,6 +52,7 @@ function AuthForm({
     }
   };
 
+  // renders the form for the pages, jst needs to get called
   return (
     <div className={styles.authPage}>
       <div className={styles.authContainer}>

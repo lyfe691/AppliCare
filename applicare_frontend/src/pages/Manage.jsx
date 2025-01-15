@@ -6,6 +6,8 @@ import { EditOutlined, DeleteOutlined, SearchOutlined, PlusOutlined, Loading3Qua
 import styles from '../css/Manage.module.css';
 import api from '../api/axios';
 
+// this is the page where the user can manage their applications
+
 const { Title, Text } = Typography;
 const { Option } = Select;
 
@@ -52,6 +54,7 @@ function Manage() {
         fetchApplications();
     }, [user]);
 
+    // fetch applications
     async function fetchApplications() {
         try {
             if (initialLoading) setInitialLoading(true);
@@ -66,6 +69,7 @@ function Manage() {
         }
     }
 
+    // update application status
     async function handleUpdateStatus(applicationId, newStatus) {
         try {
             await api.patch(`/applications/${applicationId}/status?status=${newStatus}`);
@@ -77,6 +81,7 @@ function Manage() {
         }
     }
 
+    // delete application
     async function handleDelete(applicationId) {
         try {
             await api.delete(`/applications/${applicationId}`);
@@ -88,11 +93,13 @@ function Manage() {
         }
     }
 
+    // edit application
     function handleEdit(application) {
         setEditingApplication(application);
         setShowNewApplicationForm(true);
     }
 
+    // handles table change, sorting
     const handleTableChange = (pagination, filters, sorter) => {
         const sortedData = [...applications];
         if (sorter.field) {
@@ -114,6 +121,7 @@ function Manage() {
         });
     };
 
+    // shows the applications that matches the search 
     const getFilteredApplications = () => {
         return applications.filter(app => 
             app.companyName.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -229,6 +237,7 @@ function Manage() {
         </div>
     );
 
+    // render the page
     return (
         <div className={styles.manage}>
             <div className={styles.header}>

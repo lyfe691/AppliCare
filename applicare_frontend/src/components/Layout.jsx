@@ -5,6 +5,8 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import "../css/Layout.css";
 
+// this layout component is used to wrap the entire app
+
 export default function Layout() {
   return (
     <div className="layout">

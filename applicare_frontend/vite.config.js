@@ -12,7 +12,8 @@ export default defineConfig({
     setupFiles: ['./src/setupTests.js'],
   },
   server: {
-    host: '0.0.0.0', 
+    host: 'localhost',
+    port: 5173,
     proxy: {
       '/api': 'http://localhost:8080' // conntect to the backend through the port. Although i have to make sure that i allow the origin. 
     }

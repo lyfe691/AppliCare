@@ -26,7 +26,7 @@
 2. [Inhaltsverzeichnis](#2-inhaltsverzeichnis)
 3. [Projektidee](#3-projektidee)
 4. [Anforderungskatalog](#4-anforderungskatalog)
-5. [Technologie-Stack](#5-technologie-stack)
+5. [Tech-Stack](#5-tech-stack)
 6. [Klassendiagramm](#6-klassendiagramm)
 7. [Storyboard & Screen-Mockups](#7-storyboard--screen-mockups)
 8. [REST-Schnittstellen](#8-rest-schnittstellen)

@@ -414,13 +414,14 @@ AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 
 - Java (min. jdk 21) - [Download](https://www.oracle.com/java/technologies/downloads/#java21)
 - Maven - [Download](https://maven.apache.org/download.cgi)
-- MongoDB compass (falls sie die datenbank ansehen möchten, ist jedoch nicht notwending da die datenbank in der cloud ist (Atlas)) - [Download](https://www.mongodb.com/try/download/community)
+- MongoDB compass (falls sie die datenbank ansehen möchten, ist jedoch nicht notwendig da die datenbank in der cloud ist (Atlas)) - [Download](https://www.mongodb.com/try/download/community)
 
 #### Installationsschritte
 
 1. In `applicare_backend/` wechseln
 2. `mvn clean install`
 3. `mvn spring-boot:run`
+4. laeuft auf http://localhost:8080
 
 #### Datenbank
 

@@ -31,8 +31,9 @@
 7. [REST-Schnittstellen](#7-rest-schnittstellen)
 8. [Testplan &amp; Testdurchführung](#8-testplan--testdurchführung)
 9. [Installationsanleitung](#9-installationsanleitung)
-10. [Hilfestellungen](#10-hilfestellungen)
-11. [Repository & Entwicklungshistorie](#11-repository--entwicklungshistorie)
+10. [Repository & Commit history](#10-repository--commit-history)
+11. [Hilfestellungen](#11-hilfestellungen)
+
 
 ---
 
@@ -49,9 +50,11 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
 #### Authentication & Profile
 - Als **neuer Benutzer** möchte ich mich registrieren können, damit ich die App nutzen kann
 - Als **registrierter Benutzer** möchte ich mich einloggen können, um auf meine Daten zuzugreifen
-- Als **Benutzer** möchte ich mein Passwort zurücksetzen können, falls ich es vergesse
-- Als **Benutzer** möchte ich mein Profil (Username/E-Mail) bearbeiten können
-- Als **Benutzer** möchte ich das Theme (Light/Dark/System) anpassen können
+- Als **registrierter Benutzer** möchte ich mein Passwort zurücksetzen können, falls ich es vergesse
+- Als **eingeloggter Benutzer** möchte ich mein Profil (Username/E-Mail) bearbeiten können
+- Als **eingeloggter Benutzer** möchte ich mein Passwort ändern können
+- Als **eingeloggter Benutzer** möchte ich mein Account löschen können
+- Als **eingeloggter Benutzer** möchte ich das Theme (Light/Dark/System) anpassen können
 
 #### Bewerbungsverwaltung
 - Als **Bewerber** möchte ich neue Bewerbungen erfassen können mit Details wie:
@@ -59,7 +62,9 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
   - Kontaktperson & Kontaktdaten
   - Bewerbungsstatus
   - Gehalt & Remote-Option
-- Als **Bewerber** möchte ich den Status meiner Bewerbungen aktualisieren können (APPLIED → SCREENING → INTERVIEWING etc.)
+  - Bewerbungslink
+  - Kontaktperson & Kontaktdaten
+- Als **Bewerber** möchte ich den Status meiner Bewerbungen aktualisieren können (APPLIED -> SCREENING -> INTERVIEWING etc.)
 - Als **Bewerber** möchte ich meine Bewerbungen aktualisieren können
 - Als **Bewerber** möchte ich meine Bewerbungen löschen können
 - Als **Bewerber** möchte ich meine Bewerbungen filtern und sortieren können
@@ -82,10 +87,27 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
 
 ### Zentrale Nutzenargumentation
 
-- Einfache Statusübersicht (Bewerbungsphase, Interview, Angebot etc.)
-- Tasks erinnern an Folgeaktivitäten (z. B. „Follow up per email etc")
-- Zwei-Komponenten-System mit React-Frontend (M294) und Spring-Boot-Backend (M295) zur Datenhaltung in MongoDB
-- Einfache und intuitive Bedienung
+AppliCare bietet Bewerbenden folgende zentrale Vorteile:
+
+- **Zentralisierte Bewerbungsverwaltung**
+  - Alle Bewerbungen an einem Ort
+  - Klare Übersicht über den aktuellen Status jeder Bewerbung
+
+- **Strukturierte Taskverwaltung**
+  - Direkte Verknüpfung von Tasks mit spezifischen Bewerbungen
+  - Priorisierung wichtiger Aktivitäten
+  - Deadline für zeitkritische Aufgaben
+
+- **Settings**
+  - Theme (Light/Dark/System)
+  - Profilpflege (Username/E-Mail)
+  - Passwort ändern
+  - Account löschen (alle Daten)
+
+- **Technische Vorteile**
+  - Moderne, responsive Benutzeroberfläche dank React und Ant Design
+  - Zuverlässige Datenspeicherung in der Cloud (MongoDB Atlas)
+  - Hohe Sicherheitsstandards durch JWT-Authentifizierung
 
 ---
 
@@ -265,7 +287,7 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
   "contactPerson": "Hans Muster",
   "contactEmail": "hans.muster@gmail.com",
   "contactPhone": "+41 12 123 12 12",
-  "notes": "Remote möglich?",
+  "notes": "awesome pay lol",
   "salary": 120000,
   "salaryPeriod": "YEARLY",
   "remote": true
@@ -331,16 +353,15 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
 
 #### Voraussetzungen
 
-- Java (min. jdk 21)
-- Maven
-- MongoDB
+- Java (min. jdk 21) - [Download](https://www.oracle.com/java/technologies/downloads/#java21)
+- Maven - [Download](https://maven.apache.org/download.cgi)
+- MongoDB compass (falls sie die datenbank ansehen möchten, ist jedoch nicht notwending da die datenbank in der cloud ist (Atlas)) - [Download](https://www.mongodb.com/try/download/community)
 
 #### Installationsschritte
 
 1. In `applicare_backend/` wechseln
 2. `mvn clean install`
 3. `mvn spring-boot:run`
-4. laeuft auf http://localhost:8080
 
 #### Datenbank
 
@@ -351,18 +372,7 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
 
 
 ---
-
-## 10. Hilfestellungen
-
-- [Spring Boot Docs](https://docs.spring.io/spring-boot/docs/current/reference/html/)
-- [React + Vite](https://vitejs.dev/guide/)
-- [Ant Design](https://ant.design/)
-- [MongoDB Dokumentation](https://docs.mongodb.com/)
-- [ChatGPT](https://chatgpt.com/)
-
----
-
-## 11. Repository & Commit history
+## 10. Repository & Commit history
 
 ### Repository
 
@@ -373,3 +383,13 @@ Das Projekt gesamte ist auf GitHub verfügbar:
 
 Die gesamte Commit history ist auf GitHub verfügbar:
 - [AppliCare](https://github.com/lyfe691/AppliCare/commits/main)
+
+## 11. Hilfestellungen
+
+- [Spring Boot Docs](https://docs.spring.io/spring-boot/docs/current/reference/html/)
+- [React + Vite](https://vitejs.dev/guide/)
+- [Ant Design](https://ant.design/)
+- [MongoDB Dokumentation](https://docs.mongodb.com/)
+- [ChatGPT](https://chatgpt.com/)
+
+---

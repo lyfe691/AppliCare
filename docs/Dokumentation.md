@@ -12,8 +12,8 @@
 <div style="text-align: left; margin: 20px 0;">
   <strong>Projekt:</strong> AppliCare<br>
   <strong>Module:</strong>
-  - M294 (Frontend-Entwicklung mit React)
-  - M295 (Backend-Entwicklung mit Spring Boot)<br>
+  - M294 (Frontend Entwicklung mit React + Vite)
+  - M295 (Backend Entwicklung mit Spring Boot)<br>
   <strong>Autor:</strong> Yanis Sebastian Zürcher<br>
   <strong>Abgabedatum:</strong> 15.01.25
 </div>

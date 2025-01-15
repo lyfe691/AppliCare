@@ -26,13 +26,14 @@
 2. [Inhaltsverzeichnis](#2-inhaltsverzeichnis)
 3. [Projektidee](#3-projektidee)
 4. [Anforderungskatalog](#4-anforderungskatalog)
-5. [Klassendiagramm](#5-klassendiagramm)
-6. [Storyboard &amp; Screen-Mockups](#6-storyboard--screen-mockups)
-7. [REST-Schnittstellen](#7-rest-schnittstellen)
-8. [Testplan &amp; Testdurchführung](#8-testplan--testdurchführung)
-9. [Installationsanleitung](#9-installationsanleitung)
-10. [Repository & Commit history](#10-repository--commit-history)
-11. [Hilfestellungen](#11-hilfestellungen)
+5. [Technologie-Stack](#5-technologie-stack)
+6. [Klassendiagramm](#6-klassendiagramm)
+7. [Storyboard & Screen-Mockups](#7-storyboard--screen-mockups)
+8. [REST-Schnittstellen](#8-rest-schnittstellen)
+9. [Testplan & Testdurchführung](#9-testplan--testdurchführung)
+10. [Installationsanleitung](#10-installationsanleitung)
+11. [Repository & Commit history](#11-repository--commit-history)
+12. [Hilfestellungen](#12-hilfestellungen)
 
 
 ---
@@ -153,17 +154,65 @@ AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 - REST-API, (min. 5 Unit-Tests)
 - Validierung, Exception-Handling
 - JWT-Authentifizierung, BCrypt-Hashing
+
+## 5. Tech-Stack
+
+### Frontend
+- **React + Vite**
+  - Moderne, performante Frontend-Entwicklung
+  - Hot Module Replacement für schnelles Development
+  - Einfache Konfiguration und schnelle Build-Zeiten
+
+- **Ant Design (antd)**
+  - Umfangreiches UI-Component-Library
+  - Professionelles Look & Feel
+  - Responsive Design out of the box
+  - Gute Dokumentation und aktive Community
+
+### Backend
+- **Spring Boot**
+  - Industry Standard für Java-Backend-Entwicklung
+  - Umfangreiche Security-Features
+  - Einfache REST-API-Entwicklung
+  - Gute Integration mit anderen Technologien
+
+- **MongoDB Atlas**
+  - Cloud-basierte Datenbank-Lösung
+  - Flexible Dokumentenstruktur für agile Entwicklung
+  - Skalierbarkeit und hohe Verfügbarkeit
+  - Kostenlose Tier für Entwicklung und kleine Projekte, (M0)
+
+### Authentifizierung & Sicherheit
+- **JWT (JSON Web Tokens)**
+  - Stateless Authentication
+  - Gute Performance und Skalierbarkeit
+  - Breite Unterstützung in verschiedenen Frameworks
+
+- **BCrypt**
+  - Sicheres Password-Hashing
+  - Industry Standard für Passwort-Verschlüsselung
+  - Integrierte Salt-Generierung
+
+### Development Tools
+- **Git & GitHub**
+  - Versionskontrolle
+
+- **VS Code**
+  - Leichtgewichtiger, aber mächtiger Editor
+  - Gute Extension-Unterstützung
+  - Integriertes Terminal und Git-Support
+
 ---
 
-## 5. Klassendiagramm
+## 6. Klassendiagramm
 
 ![Klassendiagramm](images/class_diagram.png)
 
 ---
 
-## 6. Storyboard & Screen-Mockups
+## 7. Storyboard & Screen-Mockups
 
-### 6.1 Storyboard
+### 7.1 Storyboard
 
 #### Landing Page
 
@@ -198,7 +247,7 @@ AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 - Account löschen (alle daten werden auch gelöscht)
 - Theme umstellen (Light / Dark / System)
 
-### 6.2 Screen-Mockups
+### 7.2 Screen-Mockups
 
 <div>
 <em>Die folgenden Mockups zeigen das geplante Design der Anwendung:</em>
@@ -231,9 +280,9 @@ AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 
 ---
 
-## 7. REST-Schnittstellen
+## 8. REST-Schnittstellen
 
-### 7.1 Backend-Endpunkte
+### 8.1 Backend-Endpunkte
 
 #### Auth-Endpoints
 
@@ -273,7 +322,7 @@ AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 | PATCH   | `/api/tasks/{id}/toggle` | Task completed/uncompleted umschalten |
 | DELETE  | `/api/tasks/{id}`        | Task löschen                         |
 
-### 7.2 Datentypen (JSON-Format)
+### 8.2 Datentypen (JSON-Format)
 
 #### JobApplication (POST/PUT-Beispiel)
 
@@ -309,33 +358,43 @@ AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 
 ---
 
-## 8. Testplan & Testdurchführung
+## 9. Testplan & Testdurchführung
 
-### 8.1 Frontend-Testfälle
+### 9.1 Frontend-Testfälle
 
-| Testfall              | Vorgehen                                                     | Erwartetes Ergebnis                                                         |
-| --------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| 1. Registrierung      | „Register" -> Felder (Username, Email, Passwort) -> Submit  | Meldung „User registered successfully", Weiterleitung                      |
-| 2. Login              | Seite Login, gültige Creds, Absenden                        | Token im LocalStorage, Weiterleitung Dashboard                              |
-| 3. Neue Bewerbung     | „Manage" -> „New Application", Formular -> Submit          | Bewerbung erscheint in Tabelle, Meldung „Application created successfully" |
-| 4. Bewerbung löschen | In Tabelle Delete-Button -> Bestätigen                      | Bewerbung verschwindet, Meldung „Application deleted successfully"         |
-| 5. Password Update    | „Settings" -> „Security", altes + neues Passwort -> Submit | Meldung „Password updated successfully"                                    |
+| Testfall | Vorgehen | Erwartetes Ergebnis |
+| -------- | -------- | ------------------- |
+| 1. Registrierung | „Register" -> Felder (Username, Email, Passwort) -> Submit | Meldung „User registered successfully", Weiterleitung |
+| 2. Login | Seite Login, gültige Creds, Absenden | Token im LocalStorage, Weiterleitung Dashboard |
+| 3. Neue Bewerbung | „Manage" -> „New Application", Formular -> Submit | Bewerbung erscheint in Tabelle, Meldung „Application created successfully" |
+| 4. Bewerbung löschen | In Tabelle Delete-Button -> Bestätigen | Bewerbung verschwindet, Meldung „Application deleted successfully" |
+| 5. Password Update | „Settings" -> „Security", altes + neues Passwort -> Submit | Meldung „Password updated successfully" |
+| 6. Theme Wechsel | Settings -> Theme -> Dark/Light/System | UI aktualisiert sich entsprechend der Theme-Wahl |
+| 7. Bewerbung filtern | Manage -> Suchfeld -> "Google" eingeben | Nur Bewerbungen mit "Google" werden angezeigt |
+| 8. Task erstellen | Dashboard -> New Task -> Formular ausfüllen | Task erscheint in der Liste, Erfolgsmeldung |
+| 9. Task Status Toggle | Dashboard -> Task Checkbox klicken | Task wird als erledigt/unerledigt markiert |
+| 10. Logout | Nav -> Logout -> Bestätigen | Token wird gelöscht, Redirect zu Landing Page |
 
-### 8.2 Backend-Testfälle
+### 9.2 Backend-Testfälle
 
-| Testfall                      | Methode/Endpoint                      | Erwartetes Ergebnis                                       |
-| ----------------------------- | ------------------------------------- | --------------------------------------------------------- |
-| 1. POST /auth/register        | Duplicate E-Mail => 400               | Fehlertext „Email already in use"                        |
-| 2. POST /auth/login           | korrekte Daten => 200, falsche => 400 | JSON mit token; bei falschen Daten => 400 + Fehlermeldung |
-| 3. GET /api/applications      | Mit gültigem JWT => 200              | JSON-Array aller Bewerbungen                              |
-| 4. PUT /api/applications/{id} | Felder aktualisieren                  | 200 + geändertes Objekt                                  |
-| 5. DELETE /api/user/account   | Mit JWT => Account löschen           | 200 + „Account deleted successfully"                     |
+| Testfall | Methode/Endpoint | Erwartetes Ergebnis |
+| -------- | --------------- | ------------------- |
+| 1. POST /auth/register | Duplicate E-Mail => 400 | Fehlertext „Email already in use" |
+| 2. POST /auth/login | korrekte Daten => 200, falsche => 400 | JSON mit token; bei falschen Daten => 400 + Fehlermeldung |
+| 3. GET /api/applications | Mit gültigem JWT => 200 | JSON-Array aller Bewerbungen |
+| 4. PUT /api/applications/{id} | Felder aktualisieren | 200 + geändertes Objekt |
+| 5. DELETE /api/user/account | Mit JWT => Account löschen | 200 + „Account deleted successfully" |
+| 6. POST /api/tasks | Task ohne applicationId | 201 + Task-Objekt ohne Zuordnung |
+| 7. PATCH /api/tasks/{id}/toggle | Task Status umschalten | 200 + aktualisiertes Task-Objekt |
+| 8. GET /api/applications?status=INTERVIEWING | Filter nach Status | 200 + gefilterte Bewerbungen |
+| 9. PUT /api/user/profile | Ungültige Email | 400 + Validierungsfehler |
+| 10. POST /auth/forgot-password | Existierende Email | 200 + "Reset email sent" |
 
 ---
 
-## 9. Installationsanleitung
+## 10. Installationsanleitung
 
-### 9.1 Frontend (M294)
+### 10.1 Frontend (M294)
 
 #### Voraussetzungen
 
@@ -349,7 +408,7 @@ AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 3. `npm run dev`
 4. http://localhost:5173
 
-### 9.2 Backend (M295)
+### 10.2 Backend (M295)
 
 #### Voraussetzungen
 
@@ -372,11 +431,11 @@ AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 
 
 ---
-## 10. Repository & Commit history
+## 11. Repository & Commit history
 
 ### Repository
 
-Das Projekt gesamte ist auf GitHub verfügbar:
+Das gesamte Projekt ist auf GitHub verfügbar:
 - [AppliCare](https://github.com/lyfe691/AppliCare)
 
 ### Commit history
@@ -384,12 +443,13 @@ Das Projekt gesamte ist auf GitHub verfügbar:
 Die gesamte Commit history ist auf GitHub verfügbar:
 - [AppliCare](https://github.com/lyfe691/AppliCare/commits/main)
 
-## 11. Hilfestellungen
+## 12. Hilfestellungen
 
 - [Spring Boot Docs](https://docs.spring.io/spring-boot/docs/current/reference/html/)
 - [React + Vite](https://vitejs.dev/guide/)
 - [Ant Design](https://ant.design/)
 - [MongoDB Dokumentation](https://docs.mongodb.com/)
 - [ChatGPT](https://chatgpt.com/)
+- [Stack Overflow](https://stackoverflow.com/)
 
 ---

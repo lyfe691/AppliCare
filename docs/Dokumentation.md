@@ -123,13 +123,14 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
 
 - React-Routing (Landing, Login, Register, Dashboard, Manage, Settings)
 - Komponentenstruktur, Fehlerhandling, min. 5 Unit-Tests
+- UI-Framework: Ant Design (antd) für konsistentes, modernes Design und vorgefertigte Komponenten
 
 ### Backend-spezifische Anforderungen (M295)
 
 - Spring Boot, MongoDB
 - REST-API, (min. 5 Unit-Tests)
 - Validierung, Exception-Handling
-
+- JWT-Authentifizierung, BCrypt-Hashing
 ---
 
 ## 5. Klassendiagramm
@@ -343,10 +344,10 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
 
 #### Datenbank
 
-- MongoDB ATLAS muss erreichbar sein; WISS NETZWERK BLOCKIERT ATLAS, DAHER MUSS MAN HOTSPOT BENUTZEN.
+- MongoDB Atlas Cloud-Datenbank muss erreichbar sein. Hinweis: Das WISS-Netzwerk blockiert MongoDB Atlas-Verbindungen. Bitte verwenden Sie einen mobilen Hotspot oder eine alternative Netzwerkverbindung.
 - Falls sie die datenbank in MongoDB compass ansehen möchten, können sie diesen connection string verwenden: `mongodb+srv://lyfe691:lyfe691@applicare.c8gi7.mongodb.net/`:
 
-![MongoDB Compass](images/mongodb_compass.png)
+![MongoDB Compass connection image](images/mongodb_compass.png)
 
 
 ---

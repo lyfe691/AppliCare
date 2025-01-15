@@ -32,6 +32,7 @@
 8. [Testplan &amp; Testdurchführung](#8-testplan--testdurchführung)
 9. [Installationsanleitung](#9-installationsanleitung)
 10. [Hilfestellungen](#10-hilfestellungen)
+11. [Repository & Entwicklungshistorie](#11-repository--entwicklungshistorie)
 
 ---
 
@@ -354,14 +355,17 @@ classDiagram
 #### Installationsschritte
 
 1. In `applicare_backend/` wechseln
-2. `.env` datei anlegen (inhalt gebe ich)
-3. `mvn clean install`
-4. `mvn spring-boot:run`
-5. laeuft auf http://localhost:8080
+2. `mvn clean install`
+3. `mvn spring-boot:run`
+4. laeuft auf http://localhost:8080
 
 #### Datenbank
 
 - MongoDB ATLAS muss erreichbar sein; WISS NETZWERK BLOCKIERT ATLAS, DAHER MUSS MAN HOTSPOT BENUTZEN.
+- Falls sie die datenbank in MongoDB compass ansehen möchten, können sie diesen connection string verwenden: `mongodb+srv://lyfe691:lyfe691@applicare.c8gi7.mongodb.net/`:
+
+![MongoDB Compass](images/mongodb_compass.png)
+
 
 ---
 
@@ -372,3 +376,17 @@ classDiagram
 - [Ant Design](https://ant.design/)
 - [MongoDB Dokumentation](https://docs.mongodb.com/)
 - [ChatGPT](https://chatgpt.com/)
+
+---
+
+## 11. Repository & Commit history
+
+### Repository
+
+Das Projekt gesamte ist auf GitHub verfügbar:
+- [AppliCare](https://github.com/lyfe691/AppliCare)
+
+### Commit history
+
+Die gesamte Commit history ist auf GitHub verfügbar:
+- [AppliCare](https://github.com/lyfe691/AppliCare/commits/main)

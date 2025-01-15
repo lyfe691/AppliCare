@@ -44,12 +44,48 @@
 AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Applications). User können Bewerbungen (Job Applications) anlegen und deren Status (applied, screening, interviewing usw.) verwalten. Zusätzlich lassen sich Tasks (Aufgaben) erfassen, die entweder allgemein sind oder einer bestimmten Bewerbung zugeordnet werden.
 </div>
 
+### User Stories
+
+#### Authentication & Profile
+- Als **neuer Benutzer** möchte ich mich registrieren können, damit ich die App nutzen kann
+- Als **registrierter Benutzer** möchte ich mich einloggen können, um auf meine Daten zuzugreifen
+- Als **Benutzer** möchte ich mein Passwort zurücksetzen können, falls ich es vergesse
+- Als **Benutzer** möchte ich mein Profil (Username/E-Mail) bearbeiten können
+- Als **Benutzer** möchte ich das Theme (Light/Dark/System) anpassen können
+
+#### Bewerbungsverwaltung
+- Als **Bewerber** möchte ich neue Bewerbungen erfassen können mit Details wie:
+  - Firma, Position, Standort
+  - Kontaktperson & Kontaktdaten
+  - Bewerbungsstatus
+  - Gehalt & Remote-Option
+- Als **Bewerber** möchte ich den Status meiner Bewerbungen aktualisieren können (APPLIED → SCREENING → INTERVIEWING etc.)
+- Als **Bewerber** möchte ich meine Bewerbungen aktualisieren können
+- Als **Bewerber** möchte ich meine Bewerbungen löschen können
+- Als **Bewerber** möchte ich meine Bewerbungen filtern und sortieren können
+- Als **Bewerber** möchte ich eine Übersicht über alle meine Bewerbungen in Tabellenform sehen
+
+#### Aufgabenverwaltung
+- Als **Benutzer** möchte ich Aufgaben (Tasks) erstellen können mit:
+  - Titel & Beschreibung
+  - Deadline & Priorität
+  - Optional: Zuordnung zu einer Bewerbung
+- Als **Benutzer** möchte ich Tasks als erledigt/unerledigt markieren können
+- Als **Benutzer** möchte ich Tasks bearbeiten und löschen können
+
+#### Dashboard & Statistiken
+- Als **Benutzer** möchte ich auf dem Dashboard sehen:
+  - Aktuelle Bewerbungsstatistiken
+  - Tasks
+  - Erfolgsquote meiner Bewerbungen
+  - Bewerbungsstatus
+
 ### Zentrale Nutzenargumentation
 
-- Alle Bewerbungen und zugehörige Aufgaben an einem Ort
 - Einfache Statusübersicht (Bewerbungsphase, Interview, Angebot etc.)
-- Tasks erinnern an Folgeaktivitäten (z. B. „Lebenslauf aktualisieren")
+- Tasks erinnern an Folgeaktivitäten (z. B. „Follow up per email etc")
 - Zwei-Komponenten-System mit React-Frontend (M294) und Spring-Boot-Backend (M295) zur Datenhaltung in MongoDB
+- Einfache und intuitive Bedienung
 
 ---
 
@@ -100,18 +136,17 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
 
 ```mermaid
 classDiagram
+    direction TB
 
-    %% Domänenklassen
+    %% ================ DOMAIN-KLASSEN =================
     class User {
       +String id
       +String username
       +String email
       +String password
       +String passwordResetToken
-      --
-      +getter/setter...
+      --getter/setter--
     }
-
     class JobApplication {
       +String id
       +String userId
@@ -130,10 +165,8 @@ classDiagram
       +Double salary
       +String salaryPeriod
       +Boolean remote
-      --
-      +getter/setter...
+      --getter/setter--
     }
-
     class Task {
       +String id
       +String title
@@ -144,14 +177,151 @@ classDiagram
       +String userId
       +String applicationId
       +LocalDate createdAt
-      --
-      +getter/setter...
+      --getter/setter--
     }
 
-    %% Beziehungen
-    User "1" -- "0..*" JobApplication : "has"
-    User "1" -- "0..*" Task : "creates"
-    JobApplication "1" -- "0..*" Task : "references"
+    %% ================ REPOSITORIES =================
+    class UserRepository {
+      <<interface>>
+      +findByUsername(String) : Optional<User>
+      +findByEmail(String) : Optional<User>
+      +findByPasswordResetToken(String) : Optional<User>
+      +save(User) : User
+      +deleteById(String)
+      +deleteByUserId(String)
+      ...
+    }
+    class JobApplicationRepository {
+      <<interface>>
+      +findByUserId(String) : List<JobApplication>
+      +findByUserIdAndStatus(String, String) : List<JobApplication>
+      +save(JobApplication) : JobApplication
+      +deleteByUserId(String)
+      +deleteById(String)
+      ...
+    }
+    class TaskRepository {
+      <<interface>>
+      +findByUserIdOrderByDeadlineAsc(String) : List<Task>
+      +findByUserIdAndCompletedOrderByDeadlineAsc(String, boolean) : List<Task>
+      +findByApplicationIdOrderByDeadlineAsc(String) : List<Task>
+      +save(Task) : Task
+      +deleteByUserId(String)
+      +deleteById(String)
+      ...
+    }
+
+    %% ================ SERVICES =================
+    class AuthService {
+      +login(usernameOrEmail, password)
+      +register(username, email, password)
+      +forgotPassword(email)
+      +resetPassword(token, newPassword)
+      ...
+    }
+    class UserService {
+      +updateProfile(userId, username, email)
+      +updatePassword(userId, currentPW, newPW)
+      +deleteAccount(userId)
+      ...
+    }
+    class JobApplicationService {
+      +createApplication(application, userId)
+      +updateApplication(id, application, userId)
+      +deleteApplication(id, userId)
+      +getApplication(id, userId)
+      +getAllApplications(userId)
+      +getApplicationsByStatus(userId, status)
+      +updateStatus(id, newStatus, userId)
+      ...
+    }
+    class TaskService {
+      +getUserTasks(userId)
+      +getUserTasksByStatus(userId, completed)
+      +getApplicationTasks(applicationId)
+      +createTask(task, userId)
+      +updateTask(taskId, task, userId)
+      +toggleTaskCompletion(taskId, userId)
+      +deleteTask(taskId, userId)
+      ...
+    }
+    class MailService {
+      +sendResetLink(String toEmail, String token)
+      ...
+    }
+
+    %% ================ CONTROLLER =================
+    class AuthController {
+      +login(...)
+      +register(...)
+      +forgotPassword(...)
+      +resetPassword(...)
+    }
+    class UserController {
+      +updateProfile(...)
+      +updatePassword(...)
+      +deleteAccount(...)
+    }
+    class JobApplicationController {
+      +createApplication(...)
+      +updateApplication(...)
+      +deleteApplication(...)
+      +getApplication(...)
+      +getAllApplications(...)
+      +getApplicationsByStatus(...)
+      +updateStatus(...)
+    }
+    class TaskController {
+      +getUserTasks(...)
+      +getUserTasksByStatus(...)
+      +getApplicationTasks(...)
+      +createTask(...)
+      +updateTask(...)
+      +toggleTaskCompletion(...)
+      +deleteTask(...)
+    }
+
+    %% ================ UTILS/FILTER =================
+    class JwtAuthenticationFilter {
+      +doFilterInternal(...)
+      ...
+    }
+    class JwtUtil {
+      +generateToken(...)
+      +validateToken(...)
+      +getUsernameFromToken(...)
+      +extractUserId(...)
+      ...
+    }
+
+    %% ================ RELATIONEN =================
+
+    %% Domain-Verknuepfungen
+    User "1" -- "0..*" JobApplication : "owns"
+    User "1" -- "0..*" Task : "owns"
+    JobApplication "1" -- "0..*" Task : "optional link"
+
+    %% Repo zu Domain
+    UserRepository <.. User : "manages"
+    JobApplicationRepository <.. JobApplication : "manages"
+    TaskRepository <.. Task : "manages"
+
+    %% Services -> Repositories
+    AuthService o-- MailService
+    AuthService o-- UserRepository
+    UserService o-- UserRepository
+    JobApplicationService o-- JobApplicationRepository
+    TaskService o-- TaskRepository
+
+    %% Controller -> Services
+    AuthController o-- AuthService
+    UserController o-- UserService
+    JobApplicationController o-- JobApplicationService
+    TaskController o-- TaskService
+
+    %% Filter -> Util
+    JwtAuthenticationFilter o-- JwtUtil
+
 ```
 
 ---

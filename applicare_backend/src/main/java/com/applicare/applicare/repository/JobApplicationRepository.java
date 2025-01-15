@@ -4,6 +4,7 @@ package com.applicare.applicare.repository;
 
 import com.applicare.applicare.model.JobApplication;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
 import java.util.List;
 
 /**

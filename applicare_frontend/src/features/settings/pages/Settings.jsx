@@ -10,6 +10,12 @@ import { useTheme } from '../../../context/theme/ThemeContext';
 import styles from './Settings.module.css';
 import api from '../../../api/axios';
 
+// there is a current fast refresh issue with the AuthContext,
+// itll need to get fixed.
+// it causes the username to not update in the frontend after refreshing the page
+// however, the username is updated in the backend.
+// but it can cause confussion for the user.
+
 const { Option } = Select;
 const { Title } = Typography;
 
@@ -92,7 +98,8 @@ const Settings = () => {
   // this function is called when the user changes the theme preference
   const handleThemeChange = (value) => {
     setTheme(value);
-    message.success('Theme preference updated');
+     // remove message for now.
+     // message.success('Theme preference updated');
   };
 
   // menu items for the settings page

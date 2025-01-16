@@ -27,7 +27,7 @@ function ForgotPassword() {
   }
 
   const fields = [
-    { name: "email", type: "email", placeholder: "Enter your email", required: true }
+    { name: "email", type: "email", placeholder: "Email", required: true }
   ];
 
   return (

@@ -33,9 +33,16 @@ export function AuthProvider({ children }) {
         }
       });
       
-      // The response is already unwrapped by the axios interceptor
-      if (!response || !response.token || !response.username || !response.email) {
-        throw new Error('Invalid response data received from server');
+      console.log('Login response:', response); // Debug log
+      
+      if (typeof response !== 'object') {
+        console.error('Response is not an object:', response);
+        throw new Error('Invalid response format from server');
+      }
+
+      if (!response.token || !response.username || !response.email) {
+        console.error('Missing required fields in response:', response);
+        throw new Error('Missing required fields in server response');
       }
 
       const newUser = {
@@ -48,6 +55,7 @@ export function AuthProvider({ children }) {
       localStorage.setItem("appliCareUser", JSON.stringify(newUser));
       navigate("/dashboard"); 
     } catch (error) {
+      console.error('Login error:', error);
       throw error;
     }
   }

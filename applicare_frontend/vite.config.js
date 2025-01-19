@@ -2,6 +2,7 @@
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import { API_URL } from './src/config/urls'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +16,7 @@ export default defineConfig({
     host: 'localhost',
     port: 5173,
     proxy: {
-      '/api': 'http://localhost:8080' // conntect to the backend through the port. Although i have to make sure that i allow the origin. 
+      '/api': API_URL // conntect to the backend through the port. Although i have to make sure that i allow the origin. 
     }
   }
 })

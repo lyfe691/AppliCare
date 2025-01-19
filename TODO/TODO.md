@@ -39,7 +39,7 @@
 3. [X] fix: when logged out and logged in in different browser tabs it should wither be that action that was made latest, example: if the user logged in and in the other tab is still in the reset password that the user should be logged in on that tab aswell on refresh. Same thing the other way around, if the user is logged in in one tab and logges out in another, on refresh the user shouls also be logged out.
 3. [X] Add pagination to mobile too.
 3. [X] fix: Warning: [antd: Modal] Static function can not consume context like dynamic theme. Please use 'App' component instead.
-4. [ ] no longer use hardcoded urls
+4. [X] no longer use hardcoded urls
 4. [ ] fix: Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
 4. [X] fix: password regex validation should also apply to reset password page. (or everywhere) its important that its the same everywhere.
 4. [ ] implement Oauth 2 with github and google
@@ -56,5 +56,5 @@
 5. [X] fix landing theme issue
 5. [ ] add remember me to login
 5. [ ] notifications
-5. [ ] cerate min. 5 unit tests for frontend and backend.
-5. [ ] clean up x1, x2, x3, x4, x5, x6
+5. [X] cerate min. 5 unit tests for frontend and backend.
+5. [X] clean up x1, x2, x3, x4, x5, x6

@@ -10,7 +10,7 @@ import { API_URL, APP_ENV } from '../config/urls';
 // creates axios instance with default config
 const api = axios.create({
   // Use proxy in development, full URL in production
-  baseURL: APP_ENV === 'development' ? '/api' : API_URL,
+  baseURL: APP_ENV === 'development' ? '/api' : `${API_URL}/api`,
   headers: {
     'Content-Type': 'application/json'
   },

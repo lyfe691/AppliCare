@@ -27,21 +27,15 @@ export function AuthProvider({ children }) {
       formData.append("usernameOrEmail", username);
       formData.append("password", password);
     
-      const response = await api.post("/auth/login", formData.toString(), {
+      const response = await api.post("/auth/login", formData, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json'
         }
       });
       
-      
-      if (typeof response !== 'object') {
-        console.error('Response is not an object:', response);
-        throw new Error('Invalid response format from server');
-      }
-
-      if (!response.token || !response.username || !response.email) {
-        console.error('Missing required fields in response:', response);
-        throw new Error('Missing required fields in server response');
+      if (!response || !response.token || !response.username || !response.email) {
+        throw new Error('Invalid response data received from server');
       }
 
       const newUser = {

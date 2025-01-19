@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -17,17 +19,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    private static final Logger logger = LoggerFactory.getLogger(WebConfig.class);
+
     @Value("${FRONTEND_URL}")
     private String frontendUrl;
 
     @Override
     public void addCorsMappings(@NonNull CorsRegistry registry) {
-        registry.addMapping("/**")  // all endpoints
-                .allowedOrigins(frontendUrl)  // frontend URL
+        logger.info("Configuring CORS with frontend URL: {}", frontendUrl);
+        
+        registry.addMapping("/**")
+                .allowedOrigins(frontendUrl)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                 .allowedHeaders("*")
+                .exposedHeaders("*")
                 .allowCredentials(true)
-                .exposedHeaders("Authorization")
-                .maxAge(3600); // 1 hour
+                .maxAge(3600);
     }
 }

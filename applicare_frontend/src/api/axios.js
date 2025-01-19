@@ -9,8 +9,7 @@ import { API_URL, APP_ENV } from '../config/urls';
 
 // creates axios instance with default config
 const api = axios.create({
-  // In development, use relative URL to work with Vite's proxy
-  // In production, use the full API URL
+  // Use proxy in development, full URL in production
   baseURL: APP_ENV === 'development' ? '/api' : API_URL,
   headers: {
     'Content-Type': 'application/json'
@@ -37,16 +36,27 @@ api.interceptors.response.use(
   (response) => response.data,
   (error) => {
     if (error.response) {
+      console.error('Response Error:', {
+        status: error.response.status,
+        data: error.response.data,
+        headers: error.response.headers,
+        url: error.config.url
+      });
+      
       const message = error.response.data || 'An error occurred';
-      if (error.response.status === 403) {
+      // Only redirect for auth errors on non-login endpoints
+      if ((error.response.status === 403 || error.response.status === 401) && 
+          !error.config.url.endsWith('/auth/login')) {
         localStorage.removeItem('appliCareUser');
         window.location.href = '/login';
         return Promise.reject(new Error('Session expired. Please login again.'));
       }
       return Promise.reject(new Error(message));
     } else if (error.request) {
+      console.error('No response received:', error.request);
       return Promise.reject(new Error('No response received from server'));
     } else {
+      console.error('Request setup error:', error.message);
       return Promise.reject(new Error('Error setting up the request'));
     }
   }

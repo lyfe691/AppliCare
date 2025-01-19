@@ -33,16 +33,15 @@ export function AuthProvider({ children }) {
         }
       });
       
-      const { token, username: responseUsername, email } = response;
-      
-      if (!token || !responseUsername || !email) {
+      // The response is already unwrapped by the axios interceptor
+      if (!response || !response.token || !response.username || !response.email) {
         throw new Error('Invalid response data received from server');
       }
 
       const newUser = {
-        username: responseUsername,
-        email: email,
-        token: token,
+        username: response.username,
+        email: response.email,
+        token: response.token,
       };
       
       setUser(newUser);

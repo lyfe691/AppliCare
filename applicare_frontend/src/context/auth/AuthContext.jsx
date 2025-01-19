@@ -33,7 +33,6 @@ export function AuthProvider({ children }) {
         }
       });
       
-      console.log('Login response:', response); // Debug log
       
       if (typeof response !== 'object') {
         console.error('Response is not an object:', response);

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_URL, APP_ENV } from '../config/urls';
 
 // this file creates an axios instance with default config
 // meaning that all requests made with this instance will have the same base url, headers, and other configurations.
@@ -8,7 +9,9 @@ import axios from 'axios';
 
 // creates axios instance with default config
 const api = axios.create({
-  baseURL: '/api',
+  // In development, use relative URL to work with Vite's proxy
+  // In production, use the full API URL
+  baseURL: APP_ENV === 'development' ? '/api' : API_URL,
   headers: {
     'Content-Type': 'application/json'
   },

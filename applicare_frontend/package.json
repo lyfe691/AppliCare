@@ -9,7 +9,10 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "build:prod": "vite build",
+    "preview:prod": "vite preview --port 4173",
+    "analyze": "vite build --mode analyze"
   },
   "dependencies": {
     "@ant-design/plots": "^2.3.3",

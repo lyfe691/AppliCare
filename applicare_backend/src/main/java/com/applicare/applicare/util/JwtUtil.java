@@ -24,11 +24,15 @@ import java.util.function.Function;
 public class JwtUtil {
 
     private final Key signingKey; //openssl rand -base64 numbofbytes
-    private final long EXPIRATION_MS = 3600000; // 1 hour
+    private final long expirationMs;
 
-    public JwtUtil(@Value("${JWT_SECRET}") String secret) {
+    public JwtUtil(
+        @Value("${JWT_SECRET}") String secret,
+        @Value("${JWT_EXPIRATION}") long expirationMs
+    ) {
         byte[] decodedKey = Base64.getDecoder().decode(secret);
         this.signingKey = Keys.hmacShaKeyFor(decodedKey);
+        this.expirationMs = expirationMs;
     }
 
     public String generateToken(String username, String userId) {
@@ -36,7 +40,7 @@ public class JwtUtil {
                 .setSubject(username)
                 .claim("userId", userId)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MS))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
                 .signWith(signingKey, SignatureAlgorithm.HS256)
                 .compact();
     }

@@ -80,7 +80,10 @@ function Landing() {
 
             <main className={styles.main}>
                 <div className={styles.heroContent}>
-                    <h1>AppliCare</h1>
+                    <h1>
+                        AppliCare
+                        <span className={styles.betaTag}>beta</span>
+                    </h1>
                     <p className={styles.subtitle}>
                         Manage your job applications with ease
                     </p>

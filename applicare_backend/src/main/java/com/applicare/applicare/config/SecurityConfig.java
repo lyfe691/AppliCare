@@ -74,7 +74,8 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(Arrays.asList(
             frontendUrl,
             "http://localhost:5173",
-            "https://applicare-frontend.onrender.com"
+            "https://applicare-frontend.onrender.com",
+            "https://applicare.app"
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));

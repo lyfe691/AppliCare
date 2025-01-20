@@ -118,7 +118,7 @@ export function AuthProvider({ children }) {
       onOk() {
         setUser(null);
         localStorage.removeItem("appliCareUser");
-        navigate("/login");
+        navigate("/");
       }
     });
   }
@@ -127,7 +127,7 @@ export function AuthProvider({ children }) {
   function cleanupAndRedirect() {
     setUser(null);
     localStorage.removeItem("appliCareUser");
-    navigate("/login");
+    navigate("/");
   }
 
   const value = {

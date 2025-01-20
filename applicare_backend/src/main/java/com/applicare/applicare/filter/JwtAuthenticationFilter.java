@@ -18,7 +18,6 @@ import java.util.ArrayList;
  * 
  * @author Yanis Sebastian Zürcher
  * 
- * @description This class is used to filter the requests and check if the token is valid
  */
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {

@@ -11,7 +11,8 @@ function ProtectedRoute({ children }) {
     const { user } = useAuth();
     
     if (!user) {
-      return <Navigate to="/login" />;
+      // goto landing page if user is not authenticated
+      return <Navigate to="/" />;
     }
     
     return children;

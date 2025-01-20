@@ -244,7 +244,13 @@ function Dashboard() {
                             <Col xs={12} sm={12} lg={6}>
                                 <Card bordered={false} className={styles.statCard}>
                                     <Statistic
-                                        title="Total Applications"
+                                        // fix text overlap on mobile
+                                        title={
+                                            <>
+                                                <span className={styles.desktopOnly}>Total Applications</span>
+                                                <span className={styles.mobileOnly}>Total Appli's</span>
+                                            </>
+                                        }   
                                         value={stats.total}
                                         prefix={<TeamOutlined />}
                                         valueStyle={{ color: '#1890ff' }}

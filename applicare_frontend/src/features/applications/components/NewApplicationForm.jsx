@@ -107,7 +107,7 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
                     <Col span={12}>
                         <Form.Item
                             name="companyName"
-                            label="Company Name"
+                            label="Company"
                             rules={[{ required: true, message: 'Please enter the company name' }]}
                         >
                             <Input />

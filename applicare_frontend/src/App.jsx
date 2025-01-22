@@ -14,6 +14,7 @@ import ForgotPassword from "./features/auth/pages/ForgotPassword";
 import ResetPassword from "./features/auth/pages/ResetPassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AppConfigProvider from "./components/ConfigProvider";
+import NoticeBar from "./components/notice/NoticeBar";
 import "./App.css";
 import "./index.css";
 
@@ -26,6 +27,7 @@ export default function AppComponent() {
       <AuthProvider>
         <ThemeProvider>
           <AppConfigProvider>
+            <NoticeBar />
             <Routes>
               {/* Public Landing Page */}
               <Route path="/" element={<Landing />} />

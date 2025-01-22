@@ -4,7 +4,6 @@ const ThemeContext = createContext();
 
 function getInitialTheme() {
     // tries to get the theme from local storage, default to system if not found
-    // might have been set in the landing page already
     return localStorage.getItem('theme') || 'system';
 }
 

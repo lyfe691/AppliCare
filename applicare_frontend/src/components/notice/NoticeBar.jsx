@@ -21,7 +21,7 @@ const NoticeBar = () => {
             <Alert
                 message="Notice"
                 type="info"
-                description="I am using a free backend instance, so please be patient if the app is slow to load. Thank you! You can close this message by clicking the x on the top right."
+                description="I am using a free backend instance, so please be patient if the app takes time to load. Thank you! You can close this message by clicking the 'x' in the top right corner."
                 banner
                 showIcon    
                 closable

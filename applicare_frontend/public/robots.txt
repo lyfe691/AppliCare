@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /settings
+Disallow: /manage
+Disallow: /dashboard
+Sitemap: https://applicare.app/sitemap.xml

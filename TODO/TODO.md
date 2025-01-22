@@ -57,3 +57,4 @@
 5. [X] cerate min. 5 unit tests for frontend and backend.
 5. [X] clean up x1, x2, x3, x4, x5, x6
 5. [X] get production ready & prepare for deployment
+5. [X] implement skeleton loading.

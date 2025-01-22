@@ -3,14 +3,14 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '../context/auth/AuthContext';
 import { Card, Row, Col, Typography, Statistic, Progress, Timeline, List, Tag, Menu, Button, 
-    Tooltip, Checkbox, Modal, Form, Input, DatePicker, Select, Popconfirm, App } from 'antd';
+    Tooltip, Checkbox, Modal, Form, Input, DatePicker, Select, Popconfirm, App,  Skeleton  } from 'antd';
 import { Area } from '@ant-design/plots';
 import { 
     RiseOutlined, FallOutlined, ClockCircleOutlined, 
     TeamOutlined, CalendarOutlined, FireOutlined,
     TrophyOutlined, LineChartOutlined, BarChartOutlined,
     PlusOutlined, CheckOutlined, UnorderedListOutlined,
-    DeleteOutlined, EditOutlined, LoadingOutlined
+    DeleteOutlined, EditOutlined,
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -469,9 +469,10 @@ function Dashboard() {
         }
     };
 
+    // now using skeleton loading
     if (loading) return (
         <div className={styles.loading}>
-             <LoadingOutlined /> 
+            <Skeleton active />
         </div>
     );
 

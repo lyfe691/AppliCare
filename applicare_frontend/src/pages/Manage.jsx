@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/auth/AuthContext';
 import NewApplicationForm from '../features/applications/components/NewApplicationForm';
-import { Table, Button, Typography, Space, Modal, Select, Popconfirm, Input, Tag, message, App } from 'antd';
+import { Table, Button, Typography, Space, Modal, Select, Popconfirm, Input, Tag, message, App, Skeleton } from 'antd';
 import { EditOutlined, DeleteOutlined, SearchOutlined, PlusOutlined, Loading3QuartersOutlined, LoadingOutlined } from '@ant-design/icons';
 import styles from '../css/Manage.module.css';
 import api from '../api/axios';
@@ -225,9 +225,10 @@ function Manage() {
         },
     ];
 
+    // now using skeleton for loading 
     if (initialLoading) return (
         <div className={styles.loading}>
-            <LoadingOutlined /> {/*jst a loading icon */}
+            <Skeleton active />
         </div>
     );
 

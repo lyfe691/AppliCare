@@ -16,6 +16,7 @@ const { Option } = Select;
 // application statuses
 const APPLICATION_STATUSES = [
     'APPLIED',
+    'PENDING',
     'SCREENING',
     'INTERVIEWING',
     'OFFER',

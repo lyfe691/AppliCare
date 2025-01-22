@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
  * 
  */
 
+ // TODO: use the more advanced mail thing instad of SimpleMailMessage
 @Service
 public class MailService {
 

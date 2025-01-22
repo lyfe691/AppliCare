@@ -147,6 +147,10 @@
 .statusSelect.applied :global(.ant-select-selector) {
     border-color: #76a4e4 !important;
 }
+
+.statusSelect.pending :global(.ant-select-selector) {
+    border-color: #768191 !important;
+}
     
 .statusSelect.screening :global(.ant-select-selector) {
     border-color: #faad14 !important;

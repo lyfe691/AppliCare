@@ -24,7 +24,8 @@ const { TextArea } = Input;
 // status colors matching the colors in manage.module.css
 const STATUS_COLORS = {
     APPLIED: { color: '#76a4e4', tag: 'processing' }, 
-    SCREENING: { color: '#faad14', tag: 'warning' }, 
+    SCREENING: { color: '#faad14', tag: 'warning' },
+    PENDING: { color: '#768191', tag: 'warning' }, 
     INTERVIEWING: { color: '#c5c73f', tag: 'default' }, 
     OFFER: { color: '#714897', tag: 'success' }, 
     REJECTED: { color: '#f5222d', tag: 'error' }, 

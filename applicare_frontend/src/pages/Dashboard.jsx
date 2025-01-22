@@ -525,8 +525,14 @@ function Dashboard() {
                     <Form.Item
                         name="description"
                         label="Description"
+                        rules={[{ max: 30, message: 'No more than 30 chars.' }]}
                     >
-                        <TextArea rows={4} />
+                        <TextArea
+                         rows={4}
+                         count={{
+                            max: 30,
+                            show: true
+                         }} />
                     </Form.Item>
 
                     <Form.Item

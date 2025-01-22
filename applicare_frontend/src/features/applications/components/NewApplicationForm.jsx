@@ -225,8 +225,14 @@ function NewApplicationForm({ onClose, onSubmit, initialData }) {
                 <Form.Item
                     name="notes"
                     label="Notes"
+                    rules={[{ max: 500, message: 'No more than 500 chars.' }]}
                 >
-                    <TextArea rows={4} />
+                    <TextArea
+                     rows={4}
+                     count={{
+                        max: 500,
+                        show: true
+                     }} />
                 </Form.Item>
 
                 <Form.Item>

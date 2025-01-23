@@ -12,7 +12,8 @@ const NoticeBar = () => {
     }, []);
 
     const handleClose = () => {
-        setVisible(false);
+        // to make sure that antd notice closes first.
+        setTimeout(() => setVisible(false), 3000);
         sessionStorage.setItem('noticeClosed', 'true');
     };
 

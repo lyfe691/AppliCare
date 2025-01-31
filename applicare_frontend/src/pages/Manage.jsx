@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/auth/AuthContext';
 import NewApplicationForm from '../features/applications/components/NewApplicationForm';
-import { Table, Button, Typography, Space, Modal, Select, Popconfirm, Input, Tag, message, App, Skeleton } from 'antd';
+import { Table, Button, Typography, Space, Modal, Select, Popconfirm, Input, Tag, message, App, Skeleton, Tooltip } from 'antd';
 import { EditOutlined, DeleteOutlined, SearchOutlined, PlusOutlined, Loading3QuartersOutlined, LoadingOutlined } from '@ant-design/icons';
 import styles from '../css/Manage.module.css';
 import api from '../api/axios';
@@ -203,23 +203,27 @@ function Manage() {
             width: '15%',
             render: (_, record) => (
                 <Space>
-                    <Button
-                        type="text"
-                        icon={<EditOutlined />}
-                        onClick={() => handleEdit(record)}
-                    />
-                    <Popconfirm
-                        title="Delete application"
-                        description="Are you sure you want to delete this application?"
-                        onConfirm={() => handleDelete(record.id)}
-                        okText="Yes"
-                        cancelText="No"
-                    >
+                    <Tooltip title="Edit">
                         <Button
                             type="text"
-                            danger
-                            icon={<DeleteOutlined />}
+                            icon={<EditOutlined />}
+                            onClick={() => handleEdit(record)}
                         />
+                    </Tooltip>
+                        <Popconfirm
+                            title="Delete this application"
+                            description="Are you sure you want to delete this application?"
+                            onConfirm={() => handleDelete(record.id)}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                        <Tooltip title="Delete">
+                            <Button
+                                type="text"
+                                danger
+                                icon={<DeleteOutlined />}
+                            />
+                        </Tooltip>
                     </Popconfirm>
                 </Space>
             ),

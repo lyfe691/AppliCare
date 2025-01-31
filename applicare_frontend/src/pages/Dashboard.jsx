@@ -407,12 +407,15 @@ function Dashboard() {
                                                 <Tag color={PRIORITY_COLORS[task.priority]} className={styles.taskPriority}>
                                                     {task.priority}
                                                 </Tag>,
+                                                <Tooltip title="Edit">
                                                 <Button
                                                     type="text"
                                                     icon={<EditOutlined />}
                                                     onClick={() => handleEditTask(task)}
                                                     className={styles.taskAction}
-                                                />,
+                                                />
+                                                </Tooltip>,
+                                                <Tooltip title="Delete">
                                                 <Popconfirm
                                                     title="Delete task"
                                                     description="Are you sure you want to delete this task?"
@@ -420,13 +423,17 @@ function Dashboard() {
                                                     okText="Yes"
                                                     cancelText="No"
                                                 >
+                                                    
                                                     <Button
                                                         type="text"
                                                         danger
                                                         icon={<DeleteOutlined />}
                                                         className={styles.taskAction}
                                                     />
+                                                    
                                                 </Popconfirm>
+                                                
+                                                </Tooltip>
                                             ]}
                                         >
                                             <List.Item.Meta

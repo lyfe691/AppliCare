@@ -28,13 +28,12 @@
 4. [Anforderungskatalog](#4-anforderungskatalog)
 5. [Tech-Stack](#5-tech-stack)
 6. [Klassendiagramm](#6-klassendiagramm)
-7. [Storyboard & Screen-Mockups](#7-storyboard--screen-mockups)
+7. [Storyboard &amp; Screen-Mockups](#7-storyboard--screen-mockups)
 8. [REST-Schnittstellen](#8-rest-schnittstellen)
-9. [Testplan & Testdurchführung](#9-testplan--testdurchführung)
+9. [Testplan &amp; Testdurchführung](#9-testplan--testdurchführung)
 10. [Installationsanleitung](#10-installationsanleitung)
-11. [Repository & Commit history](#11-repository--commit-history)
+11. [Repository &amp; Commit history](#11-repository--commit-history)
 12. [Hilfestellungen](#12-hilfestellungen)
-
 
 ---
 
@@ -49,6 +48,7 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
 ### User Stories
 
 #### Authentication & Profile
+
 - Als **neuer Benutzer** möchte ich mich registrieren können, damit ich die App nutzen kann
 - Als **registrierter Benutzer** möchte ich mich einloggen können, um auf meine Daten zuzugreifen
 - Als **registrierter Benutzer** möchte ich mein Passwort zurücksetzen können, falls ich es vergesse
@@ -58,6 +58,7 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
 - Als **eingeloggter Benutzer** möchte ich das Theme (Light/Dark/System) anpassen können
 
 #### Bewerbungsverwaltung
+
 - Als **Bewerber** möchte ich neue Bewerbungen erfassen können mit Details wie:
   - Firma, Position, Standort
   - Kontaktperson & Kontaktdaten
@@ -72,6 +73,7 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
 - Als **Bewerber** möchte ich eine Übersicht über alle meine Bewerbungen in Tabellenform sehen
 
 #### Aufgabenverwaltung
+
 - Als **Benutzer** möchte ich Aufgaben (Tasks) erstellen können mit:
   - Titel & Beschreibung
   - Deadline & Priorität
@@ -80,6 +82,7 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
 - Als **Benutzer** möchte ich Tasks bearbeiten und löschen können
 
 #### Dashboard & Statistiken
+
 - Als **Benutzer** möchte ich auf dem Dashboard sehen:
   - Aktuelle Bewerbungsstatistiken
   - Tasks
@@ -91,21 +94,22 @@ AppliCare ist eine Full-Stack Anwendung zur Verwaltung von Job-Bewerbungen (Appl
 AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 
 - **Zentralisierte Bewerbungsverwaltung**
+
   - Alle Bewerbungen an einem Ort
   - Klare Übersicht über den aktuellen Status jeder Bewerbung
-
 - **Strukturierte Taskverwaltung**
+
   - Direkte Verknüpfung von Tasks mit spezifischen Bewerbungen
   - Priorisierung wichtiger Aktivitäten
   - Deadline für zeitkritische Aufgaben
-
 - **Settings**
+
   - Theme (Light/Dark/System)
   - Profilpflege (Username/E-Mail)
   - Passwort ändern
   - Account löschen (alle Daten)
-
 - **Technische Vorteile**
+
   - Moderne, responsive Benutzeroberfläche dank React und Ant Design
   - Zuverlässige Datenspeicherung in der Cloud (MongoDB Atlas)
   - Hohe Sicherheitsstandards durch JWT-Authentifizierung
@@ -158,46 +162,54 @@ AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 ## 5. Tech-Stack
 
 ### Frontend
+
 - **React + Vite**
+
   - Moderne, performante Frontend-Entwicklung
   - Hot Module Replacement für schnelles Development
   - Einfache Konfiguration und schnelle Build-Zeiten
-
 - **Ant Design (antd)**
+
   - Umfangreiches UI-Component-Library
   - Professionelles Look & Feel
   - Responsive Design out of the box
   - Gute Dokumentation und aktive Community
 
 ### Backend
+
 - **Spring Boot**
+
   - Industry Standard für Java-Backend-Entwicklung
   - Umfangreiche Security-Features
   - Einfache REST-API-Entwicklung
   - Gute Integration mit anderen Technologien
-
 - **MongoDB Atlas**
+
   - Cloud-basierte Datenbank-Lösung
   - Flexible Dokumentenstruktur für agile Entwicklung
   - Skalierbarkeit und hohe Verfügbarkeit
   - Kostenlose Tier für Entwicklung und kleine Projekte, (M0)
 
 ### Authentifizierung & Sicherheit
+
 - **JWT (JSON Web Tokens)**
+
   - Stateless Authentication
   - Gute Performance und Skalierbarkeit
   - Breite Unterstützung in verschiedenen Frameworks
-
 - **BCrypt**
+
   - Sicheres Password-Hashing
   - Industry Standard für Passwort-Verschlüsselung
   - Integrierte Salt-Generierung
 
 ### Development Tools
-- **Git & GitHub**
-  - Versionskontrolle
 
+- **Git & GitHub**
+
+  - Versionskontrolle
 - **VS Code**
+
   - Leichtgewichtiger, aber mächtiger Editor
   - Gute Extension-Unterstützung
   - Integriertes Terminal und Git-Support
@@ -273,10 +285,6 @@ AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 *Settings*
 
 ![Settings](images/mockups/Settings_Mockup.png)
-
-
-
-
 
 ---
 
@@ -362,33 +370,33 @@ AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 
 ### 9.1 Frontend-Testfälle
 
-| Testfall | Vorgehen | Erwartetes Ergebnis |
-| -------- | -------- | ------------------- |
-| 1. Registrierung | „Register" -> Felder (Username, Email, Passwort) -> Submit | Meldung „User registered successfully", Weiterleitung |
-| 2. Login | Seite Login, gültige Creds, Absenden | Token im LocalStorage, Weiterleitung Dashboard |
-| 3. Neue Bewerbung | „Manage" -> „New Application", Formular -> Submit | Bewerbung erscheint in Tabelle, Meldung „Application created successfully" |
-| 4. Bewerbung löschen | In Tabelle Delete-Button -> Bestätigen | Bewerbung verschwindet, Meldung „Application deleted successfully" |
-| 5. Password Update | „Settings" -> „Security", altes + neues Passwort -> Submit | Meldung „Password updated successfully" |
-| 6. Theme Wechsel | Settings -> Theme -> Dark/Light/System | UI aktualisiert sich entsprechend der Theme-Wahl |
-| 7. Bewerbung filtern | Manage -> Suchfeld -> "Google" eingeben | Nur Bewerbungen mit "Google" werden angezeigt |
-| 8. Task erstellen | Dashboard -> New Task -> Formular ausfüllen | Task erscheint in der Liste, Erfolgsmeldung |
-| 9. Task Status Toggle | Dashboard -> Task Checkbox klicken | Task wird als erledigt/unerledigt markiert |
-| 10. Logout | Nav -> Logout -> Bestätigen | Token wird gelöscht, Redirect zu Landing Page |
+| Testfall              | Vorgehen                                                     | Erwartetes Ergebnis                                                         |
+| --------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| 1. Registrierung      | „Register" -> Felder (Username, Email, Passwort) -> Submit  | Meldung „User registered successfully", Weiterleitung                      |
+| 2. Login              | Seite Login, gültige Creds, Absenden                        | Token im LocalStorage, Weiterleitung Dashboard                              |
+| 3. Neue Bewerbung     | „Manage" -> „New Application", Formular -> Submit          | Bewerbung erscheint in Tabelle, Meldung „Application created successfully" |
+| 4. Bewerbung löschen | In Tabelle Delete-Button -> Bestätigen                      | Bewerbung verschwindet, Meldung „Application deleted successfully"         |
+| 5. Password Update    | „Settings" -> „Security", altes + neues Passwort -> Submit | Meldung „Password updated successfully"                                    |
+| 6. Theme Wechsel      | Settings -> Theme -> Dark/Light/System                       | UI aktualisiert sich entsprechend der Theme-Wahl                            |
+| 7. Bewerbung filtern  | Manage -> Suchfeld -> "Google" eingeben                      | Nur Bewerbungen mit "Google" werden angezeigt                               |
+| 8. Task erstellen     | Dashboard -> New Task -> Formular ausfüllen                 | Task erscheint in der Liste, Erfolgsmeldung                                 |
+| 9. Task Status Toggle | Dashboard -> Task Checkbox klicken                           | Task wird als erledigt/unerledigt markiert                                  |
+| 10. Logout            | Nav -> Logout -> Bestätigen                                 | Token wird gelöscht, Redirect zu Landing Page                              |
 
 ### 9.2 Backend-Testfälle
 
-| Testfall | Methode/Endpoint | Erwartetes Ergebnis |
-| -------- | --------------- | ------------------- |
-| 1. POST /auth/register | Duplicate E-Mail => 400 | Fehlertext „Email already in use" |
-| 2. POST /auth/login | korrekte Daten => 200, falsche => 400 | JSON mit token; bei falschen Daten => 400 + Fehlermeldung |
-| 3. GET /api/applications | Mit gültigem JWT => 200 | JSON-Array aller Bewerbungen |
-| 4. PUT /api/applications/{id} | Felder aktualisieren | 200 + geändertes Objekt |
-| 5. DELETE /api/user/account | Mit JWT => Account löschen | 200 + „Account deleted successfully" |
-| 6. POST /api/tasks | Task ohne applicationId | 201 + Task-Objekt ohne Zuordnung |
-| 7. PATCH /api/tasks/{id}/toggle | Task Status umschalten | 200 + aktualisiertes Task-Objekt |
-| 8. GET /api/applications?status=INTERVIEWING | Filter nach Status | 200 + gefilterte Bewerbungen |
-| 9. PUT /api/user/profile | Ungültige Email | 400 + Validierungsfehler |
-| 10. POST /auth/forgot-password | Existierende Email | 200 + "Reset email sent" |
+| Testfall                                     | Methode/Endpoint                      | Erwartetes Ergebnis                                       |
+| -------------------------------------------- | ------------------------------------- | --------------------------------------------------------- |
+| 1. POST /auth/register                       | Duplicate E-Mail => 400               | Fehlertext „Email already in use"                        |
+| 2. POST /auth/login                          | korrekte Daten => 200, falsche => 400 | JSON mit token; bei falschen Daten => 400 + Fehlermeldung |
+| 3. GET /api/applications                     | Mit gültigem JWT => 200              | JSON-Array aller Bewerbungen                              |
+| 4. PUT /api/applications/{id}                | Felder aktualisieren                  | 200 + geändertes Objekt                                  |
+| 5. DELETE /api/user/account                  | Mit JWT => Account löschen           | 200 + „Account deleted successfully"                     |
+| 6. POST /api/tasks                           | Task ohne applicationId               | 201 + Task-Objekt ohne Zuordnung                          |
+| 7. PATCH /api/tasks/{id}/toggle              | Task Status umschalten                | 200 + aktualisiertes Task-Objekt                          |
+| 8. GET /api/applications?status=INTERVIEWING | Filter nach Status                    | 200 + gefilterte Bewerbungen                              |
+| 9. PUT /api/user/profile                     | Ungültige Email                      | 400 + Validierungsfehler                                  |
+| 10. POST /auth/forgot-password               | Existierende Email                    | 200 + "Reset email sent"                                  |
 
 ---
 
@@ -426,22 +434,24 @@ AppliCare bietet Bewerbenden folgende zentrale Vorteile:
 #### Datenbank
 
 - MongoDB Atlas Cloud-Datenbank muss erreichbar sein. Hinweis: Das WISS-Netzwerk blockiert MongoDB Atlas-Verbindungen. Bitte verwenden Sie einen mobilen Hotspot oder eine alternative Netzwerkverbindung.
-- Falls sie die datenbank in MongoDB compass ansehen möchten, können sie diesen connection string verwenden: `mongodb+srv://lyfe691:lyfe691@applicare.c8gi7.mongodb.net/`:
+- Falls sie die datenbank in MongoDB compass ansehen möchten, können sie diesen connection string verwenden: `mongodb+srv://lyfe691:sameasusername@applicare.c8gi7.mongodb.net/`:
 
 ![MongoDB Compass connection image](images/mongodb_compass.png)
 
-
 ---
+
 ## 11. Repository & Commit history
 
 ### Repository
 
 Das gesamte Projekt ist auf GitHub verfügbar:
+
 - [AppliCare](https://github.com/lyfe691/AppliCare)
 
 ### Commit history
 
 Die gesamte Commit history ist auf GitHub verfügbar:
+
 - [AppliCare](https://github.com/lyfe691/AppliCare/commits/main)
 
 ## 12. Hilfestellungen

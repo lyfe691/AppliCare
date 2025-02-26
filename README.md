@@ -3,7 +3,7 @@
 **Manage your job applications with ease.**  
 AppliCare is a full-stack web application that helps you track and organize all your job applications in one place. It provides an intuitive dashboard for quick insights, a “Manage” page with advanced filtering/sorting, and a built-in task management system so you never miss a follow-up.
 
-To see tests etc. you can read the dokumentation [here](./docs/Dokumentation.md)
+To see tests or a more detailed apporach you can read the dokumentation [here](./docs/Dokumentation.md)
 
 ---
 
@@ -15,10 +15,8 @@ To see tests etc. you can read the dokumentation [here](./docs/Dokumentation.md)
    - [Frontend Setup (M294)](#frontend-setup-m294)  
    - [Backend Setup (M295)](#backend-setup-m295)  
    - [Environment Variables](#environment-variables)  
-4. [Usage](#usage)  
-5. [Project Structure](#project-structure)  
-6. [Tests](#tests)  
-7. [License](#license)  
+4. [Usage](#usage)    
+5. [License](#license)  
 
 ---
 
@@ -112,7 +110,49 @@ To see tests etc. you can read the dokumentation [here](./docs/Dokumentation.md)
    ```bash
    mvn spring-boot:run
    ```
-4. The backend will run on `http://localhost:8080` by default.  
+4. The backend will run on `http://localhost:8080` by default.
+
+### Environment Variables
+
+For the app to run locally you must create a .env file with your own credentials.
+
+1. Create a .env file in `applicare_backend/` and `applicare_backend/`
+- The backend .env must be structured like this: 
+   ```
+   # Development Environment Configuration (create a .env.production for production)
+
+   # Server Configuration
+   SERVER_PORT=8080
+   FRONTEND_URL=http://localhost:5173
+   
+   # MongoDB Configuration
+   MONGODB_URI=your-uri
+   MONGODB_DATABASE=your-database
+   
+   # JWT Configuration
+   JWT_SECRET=your-secret
+   JWT_EXPIRATION=-your-expiration in ms
+   
+   # Mail Configuration
+   MAIL_HOST=
+   MAIL_PORT=
+   MAIL_USERNAME=
+   MAIL_PASSWORD=
+   MAIL_SMTP_AUTH=
+   MAIL_SMTP_STARTTLS=
+   
+   # Password Reset Configuration
+   APP_RESET_PASSWORD_URL=http://localhost:5173/reset-password
+
+   ```
+
+- The frontend .env must be structured like this:
+  ```
+  # Development Environment Variables (create a .env.production for production)
+   VITE_API_URL=http://localhost:8080
+   VITE_APP_URL=http://localhost:5173
+   VITE_APP_ENV=development 
+  ```
 
 ---
 

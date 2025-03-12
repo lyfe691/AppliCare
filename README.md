@@ -180,7 +180,7 @@ This project is licensed under the **Apache License 2.0**. You can view the full
 ---
 
 **Contact & Repository**  
-- Contact: [ysz.life](https://ysz.life)
+- Contact: [ysz.life](https://sola.ysz.life/contact)
 - Author: Yanis Sebastian Zürcher  
 
 Enjoy using **AppliCare**!

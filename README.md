@@ -1,5 +1,11 @@
 # AppliCare
 
+![GitHub issues](https://img.shields.io/github/issues/lyfe691/AppliCare?style=flat-square&color=green)
+![GitHub last commit](https://img.shields.io/github/last-commit/lyfe691/AppliCare?style=flat-square&color=purple)
+![GitHub repo size](https://img.shields.io/github/repo-size/lyfe691/AppliCare?style=flat-square&color=orange)
+![GitHub](https://img.shields.io/github/license/lyfe691/AppliCare?style=flat-square&color=yellow)
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=lyfe691.AppliCare&style=flat-square&color=teal)
+
 **Manage your job applications with ease.**  
 AppliCare is a full-stack web application that helps you track and organize all your job applications in one place. It provides an intuitive dashboard for quick insights, a “Manage” page with advanced filtering/sorting, and a built-in task management system so you never miss a follow-up.
 
